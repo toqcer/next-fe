@@ -1,4 +1,4 @@
-import { Card, Footer } from "@components/molecules";
+import { Form, Footer } from "@components/molecules";
 import { AuthLink, Input, Button } from "@components/atoms";
 import Head from "next/head";
 import { useState, useEffect } from 'react';
@@ -33,7 +33,7 @@ function Login() {
                 <h1 className="text-orange font-bold text-4xl my-14">ToqCer</h1>
                 {/* Form */}
                 <div className="max-w-md w-full">
-                    <Card title="Sign In">
+                    <Form title="Sign In">
                         <Input
                             label="email"
                             placeholder="Email"
@@ -45,7 +45,7 @@ function Login() {
                             type="password"
                             onChange={e => setPassword(e.target.value)} />
                         <Button>Sign in</Button>
-                    </Card>
+                    </Form>
                     <div className="flex justify-between text-sm px-2 py-3">
                         <AuthLink href='#forgot' title='Forgot password ?' />
                         <AuthLink href='./register' title='Create new account' />

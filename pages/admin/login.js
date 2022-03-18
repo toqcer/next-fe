@@ -1,28 +1,47 @@
 import { AuthLink, Input, Button, Gap } from "@components/atoms";
-import { Card, Footer } from "@components/molecules";
+import { Form, Footer } from "@components/molecules";
 import Head from "next/head";
 import { useState, useEffect } from 'react';
 import axios from "axios";
 import { useRouter } from "next/router";
+import ErrorMessage from "@components/molecules/ErrorMessage/ErrorMessage";
 
 function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [isNotValidate, setIsNotValidate] = useState({});
     const router = useRouter();
 
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (email !== "" && password !== "") {
+            return login();
+        }
+        const dummy = {
+            'email': email === '',
+            'password': password === '',
+        }
+        return setIsNotValidate(dummy);
+    }
     const login = () => {
         axios.post('http://103.150.60.157:6969/v1/admin/login', {
             password,
             email,
         }).then(res => {
-            console.log(res);
             router.push("./dashboard");
         }).catch(err => {
-            console.log(`message : ${err}`);
+            setPassword('');
+            if (err.response.status === 500) {
+                router.push("../internalservererror");
+            }
+            setIsNotValidate(true)
+            console.log(`message : ${err.response.status}`);
         })
+
     }
 
     return (
+        // TODO Styling tag SPAN if request status 403
         <div className="h-screen bg-primary text-white overflow-hidden flex flex-col">
             <Head>
                 <title>Toqcer | login</title>
@@ -33,20 +52,26 @@ function Login() {
                 <h1 className="text-orange font-bold text-4xl my-14">ToqCer</h1>
                 {/* Form */}
                 <div className="max-w-md w-full">
-                    <Card title="Sign In">
+                    <Form onSubmit={handleSubmit} title="Sign In">
+                        {/* styling error input in component Input*/}
                         <Input
                             label="email"
                             placeholder="Email"
-                            type="email"
-                            onChange={e => setEmail(e.target.value)} />
+                            type="text"
+                            onChange={e => setEmail(e.target.value)}
+                        />
+                        {isNotValidate.email && <ErrorMessage msg="isi Email Bang" />}
+                        <Gap height={8} />
                         <Input
                             label="password"
                             placeholder="Password"
                             type="password"
-                            onChange={e => setPassword(e.target.value)} />
-                        <Gap height={5} />
-                        <Button onClick={login}>Sign in</Button>
-                    </Card>
+                            onChange={e => setPassword(e.target.value)}
+                        />
+                        {isNotValidate.password && <ErrorMessage msg="isi Password Bang" />}
+                        <Gap height={28} />
+                        <Button className="rounded-lg" type="submit">Sign in</Button>
+                    </Form>
                     <div className="flex justify-between text-sm px-2 py-3 text-muted ">
                         <AuthLink href="#forgot" title="Forgot password ?" />
                     </div>

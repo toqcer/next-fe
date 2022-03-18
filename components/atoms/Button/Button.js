@@ -1,6 +1,6 @@
-function Button({ children, ...rest }) {
+function Button({ children, className, ...rest }) {
     return (
-        <button className='uppercase w-full font-bold bg-orange py-3 rounded-md hover:shadow-md hover:bg-amber-500' {...rest}>
+        <button className={`uppercase w-full font-bold bg-orange py-4 px-4 hover:shadow-md hover:bg-amber-500 ${className}`} {...rest}>
             {children}
         </button>
     )
