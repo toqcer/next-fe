@@ -1,6 +1,6 @@
 import Card from "@components/Card";
 import Input from "@components/Input";
-import Button from "@components/Button";
+import Button from "@components/atoms/Button/Button";
 import Footer from "@components/Footer";
 import Link from "next/link";
 import Head from "next/head"

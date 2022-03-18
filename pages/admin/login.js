@@ -1,8 +1,5 @@
-import Footer from "@components/Footer";
-import Input from "@components/Input";
-import Button from "@components/Button";
-import Card from "@components/Card";
-import Link from "next/link";
+import { AuthLink, Input, Button, Gap } from "@components/atoms";
+import { Card, Footer } from "@components/molecules";
 import Head from "next/head";
 import { useState, useEffect } from 'react';
 import axios from "axios";
@@ -47,12 +44,11 @@ function Login() {
                             placeholder="Password"
                             type="password"
                             onChange={e => setPassword(e.target.value)} />
+                        <Gap height={5} />
                         <Button onClick={login}>Sign in</Button>
                     </Card>
                     <div className="flex justify-between text-sm px-2 py-3 text-muted ">
-                        <Link href='#forgot' passHref>
-                            <a className="hover:text-white">Forgot password ?</a>
-                        </Link>
+                        <AuthLink href="#forgot" title="Forgot password ?" />
                     </div>
                 </div>
                 {/* Form End */}
