@@ -1,5 +1,5 @@
 import { Button, Input } from '@components/atoms';
-import { FiSearch } from 'react-icons/fi';
+import { BiSearch } from 'react-icons/bi';
 
 function Search() {
     return (
@@ -7,7 +7,7 @@ function Search() {
             <Input placeholder="Search Input" className="flex-1" />
             <div>
                 <Button>
-                    <FiSearch color="white" />
+                    <BiSearch color="white" />
                 </Button>
             </div>
         </div>
