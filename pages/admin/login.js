@@ -1,7 +1,7 @@
 import { AuthLink, Input, Button, Gap } from "@components/atoms";
 import { Form, Footer } from "@components/molecules";
 import Head from "next/head";
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import axios from "axios";
 import { useRouter } from "next/router";
 import ErrorMessage from "@components/molecules/ErrorMessage/ErrorMessage";
@@ -9,37 +9,36 @@ import ErrorMessage from "@components/molecules/ErrorMessage/ErrorMessage";
 function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [isNotValidate, setIsNotValidate] = useState({});
+    const [errorMsg, setErrorMsg] = useState('');
     const router = useRouter();
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (email !== "" && password !== "") {
-            return login();
-        }
-        const dummy = {
-            'email': email === '',
-            'password': password === '',
-        }
-        return setIsNotValidate(dummy);
+        const validate = email !== '' && password !== '';
+        if (validate) return login();
+        return setErrorMsg('Email atau Password harus diisi!')
     }
     const login = () => {
         axios.post('http://103.150.60.157:6969/v1/admin/login', {
             password,
             email,
         }).then(res => {
+            console.log(res)
             router.push("./dashboard");
         }).catch(err => {
-            setPassword('');
-            if (err.response.status === 500) {
-                router.push("../internalservererror");
+            const errorResponse = err.response;
+            if (errorResponse) {
+                if (errorResponse.status === 403) {
+                    setErrorMsg('Email atau Password anda salah !')
+                    setEmail('');
+                    setPassword('');
+                }
             }
-            setIsNotValidate(true)
-            console.log(`message : ${err.response.status}`);
+            // else {
+            //     router.push("../internalservererror");
+            // }
         })
-
     }
-
     return (
         // TODO Styling tag SPAN if request status 403
         <div className="h-screen bg-primary text-white overflow-hidden flex flex-col">
@@ -57,20 +56,21 @@ function Login() {
                         <Input
                             label="email"
                             placeholder="Email"
+                            value={email}
                             type="text"
                             onChange={e => setEmail(e.target.value)}
                         />
-                        {isNotValidate.email && <ErrorMessage msg="isi Email Bang" />}
                         <Gap height={8} />
                         <Input
                             label="password"
                             placeholder="Password"
+                            value={password}
                             type="password"
                             onChange={e => setPassword(e.target.value)}
                         />
-                        {isNotValidate.password && <ErrorMessage msg="isi Password Bang" />}
                         <Gap height={28} />
                         <Button className="rounded-lg" type="submit">Sign in</Button>
+                        {errorMsg && <ErrorMessage msg={errorMsg} />}
                     </Form>
                     <div className="flex justify-between text-sm px-2 py-3 text-muted ">
                         <AuthLink href="#forgot" title="Forgot password ?" />
