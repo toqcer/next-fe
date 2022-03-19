@@ -1,4 +1,5 @@
 import { SidebarLink } from "@components/atoms";
+import { DropdownContainer } from "@components/molecules"
 import { BiDesktop, BiCog, BiKey, BiUser } from "react-icons/bi";
 
 import MenuStyle from '/styles/Menu.module.scss'
@@ -12,15 +13,16 @@ function Sidebar() {
                 <SidebarLink text="dashboard" href='#1' Icon={<BiDesktop />} active />
                 <SidebarLink text="setting" href='#2' Icon={<BiCog />} />
                 <SidebarLink text="admin" href='#3' Icon={<BiKey />} />
-                <SidebarLink text="user" href='#4' Icon={<BiUser />} onClick={(e) => {
-                    e.target.classList.toggle(MenuStyle['dropdown-close']);
-                    console.log(e.target)
-                }}>
-                    <ul className={`ml-0 mt-2 transition-all duration-300 overflow-hidden`}>
+                <SidebarLink text="user" href='#4' Icon={<BiUser />}
+                    onClick={(e) => {
+                        e.currentTarget.classList.toggle(MenuStyle['dropdown-close']);
+                        console.log(e.currentTarget)
+                    }}>
+                    <DropdownContainer>
                         <SidebarLink text="Dshbor" href='#4' Icon={<BiUser />} active />
                         <SidebarLink text="SSSS" href='#4' Icon={<BiUser />} />
                         <SidebarLink text="DSSD" href='#4' Icon={<BiUser />} />
-                    </ul>
+                    </DropdownContainer>
                 </SidebarLink>
             </div>
         </aside >
