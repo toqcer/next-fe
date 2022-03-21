@@ -22,7 +22,7 @@ function SidebarLink({ text, href, Icon, children }) {
     return (
         <>
             {children ? (
-                <li ref={refEl} className={`uppercase font-semibold rounded-sm list-none flex space-x-2 ${children && "flex-col"} 
+                <li ref={refEl} className={`uppercase font-semibold text-dark-gray rounded-sm list-none flex space-x-2 ${children && "flex-col"} 
                  `}>
                     <a className={`${MenuStyle['sidebar-link']} ${isOpen && MenuStyle['dropdown-close']} w-full px-4 py-3 cursor-pointer inline-flex gap-x-2 items-center hover:text-orange hover:bg-gray/30 `} onClick={() => setIsOpen(!isOpen)}>
                         {Icon}

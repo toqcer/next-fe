@@ -1,25 +1,31 @@
 import { SidebarLink, SidebarSection } from "@components/atoms";
 import { DropdownContainer } from "@components/molecules"
-import { BiDesktop, BiCog, BiKey, BiUser, BiPackage, BiStore } from "react-icons/bi";
+import { BiDesktop, BiCog, BiKey, BiUser, BiPackage, BiStore, BiCart, BiQuestionMark } from "react-icons/bi";
 
 function Sidebar() {
+    const [isOpen, setIsOpen] = useState(false);
     const sidebarProps = [
         {
             border: true,
             children: [{
                 text: "dashboard",
-                href: "/admin/profile",
+                href: "/admin/dashboard",
                 icon: () => <BiDesktop />,
             },
             {
                 text: "profile",
                 href: "/admin/profile",
-                icon: () => <BiUser />,
+                icon: () => <BiCog />,
             },
             {
                 text: "Admin",
                 href: "/admin/admin",
                 icon: () => <BiKey />,
+            },
+            {
+                text: "user",
+                href: "/admin/user",
+                icon: () => <BiUser />,
             },
             ]
         },
@@ -31,7 +37,7 @@ function Sidebar() {
                 children: [
                     {
                         text: "profile",
-                        href: "/admin/dashboard",
+                        href: "/admin/profile",
                         icon: () => <BiUser />,
                     },
                     {
@@ -44,13 +50,25 @@ function Sidebar() {
             {
                 text: "marketplace",
                 href: "/admin/marketplace",
-                icon: () => <BiStore />
+                icon: () => <BiStore />,
+            },]
+        },
+        {
+            children: [{
+                text: "order management",
+                href: "admin/order",
+                icon: () => <BiCart />,
+            },
+            {
+                text: "faq management",
+                href: "admin/faq",
+                icon: () => <BiQuestionMark />,
             },]
         }
 
     ]
     return (
-        <aside className="max-w-xs w-full py-8 px-6 h-full overflow-y-scroll">
+        <aside className="max-w-md lg:max-w-xs w-[90vw] py-8 px-6 h-full bg-white overflow-y-scroll z-50 absolute lg:relative lg:block">
             <h1 className="text-4xl font-bold text-orange text-center pb-12 border-b-2 border-muted">ToqCer</h1>
             <div className="select-none">
                 {sidebarProps.map((sidebarProp, index) => (
