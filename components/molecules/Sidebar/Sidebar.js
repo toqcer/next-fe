@@ -1,5 +1,6 @@
 import { SidebarLink, SidebarSection } from "@components/atoms";
 import { DropdownContainer } from "@components/molecules"
+import { useState } from 'react'
 import { BiDesktop, BiCog, BiKey, BiUser, BiPackage, BiStore, BiCart, BiQuestionMark } from "react-icons/bi";
 
 function Sidebar() {
@@ -9,7 +10,7 @@ function Sidebar() {
             border: true,
             children: [{
                 text: "dashboard",
-                href: "/admin/dashboard",
+                href: "/admin/a",
                 icon: () => <BiDesktop />,
             },
             {
@@ -37,7 +38,7 @@ function Sidebar() {
                 children: [
                     {
                         text: "profile",
-                        href: "/admin/profile",
+                        href: "/admin/dashboard",
                         icon: () => <BiUser />,
                     },
                     {

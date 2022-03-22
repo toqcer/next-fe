@@ -1,8 +1,9 @@
 import { AuthLink, Input, Button, Gap } from "@components/atoms";
 import { Form, Footer } from "@components/molecules";
 import Head from "next/head";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import axios from "axios";
+import Cookie from 'js-cookie';
 import { useRouter } from "next/router";
 import ErrorMessage from "@components/molecules/ErrorMessage/ErrorMessage";
 
@@ -24,7 +25,7 @@ function Login() {
             email,
         }).then(res => {
             console.log(res)
-            router.push("./dashboard");
+            // Cookie.set('tokenAdmin', 'Adsdm12io3', { expires: 7 });
         }).catch(err => {
             const errorResponse = err.response;
             if (errorResponse) {
@@ -83,3 +84,11 @@ function Login() {
     )
 }
 export default Login
+
+// export async function getServerSideProps(context) {
+//     console.log(context, context.req.cookie)
+//     return {
+//         props: {
+//         },
+//     };
+// }
