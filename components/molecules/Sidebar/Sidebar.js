@@ -3,6 +3,8 @@ import { DropdownContainer } from "@components/molecules"
 import { useState } from 'react'
 import { BiDesktop, BiCog, BiKey, BiUser, BiPackage, BiStore, BiCart, BiQuestionMark } from "react-icons/bi";
 
+import { useState } from 'react'
+
 function Sidebar() {
     const [isOpen, setIsOpen] = useState(false);
     const sidebarProps = [
@@ -20,7 +22,7 @@ function Sidebar() {
             },
             {
                 text: "Admin",
-                href: "/admin/admin",
+                href: "/admin/manage",
                 icon: () => <BiKey />,
             },
             {
@@ -57,19 +59,19 @@ function Sidebar() {
         {
             children: [{
                 text: "order management",
-                href: "admin/order",
+                href: "order",
                 icon: () => <BiCart />,
             },
             {
                 text: "faq management",
-                href: "admin/faq",
+                href: "faq",
                 icon: () => <BiQuestionMark />,
             },]
         }
 
     ]
     return (
-        <aside className="max-w-md lg:max-w-xs w-[90vw] py-8 px-6 h-full bg-white overflow-y-scroll z-50 absolute lg:relative lg:block">
+        <aside className="max-w-md lg:max-w-xs w-[90vw] py-8 px-6 h-full bg-white overflow-y-auto z-50 absolute lg:relative lg:block border-r border-gray-300">
             <h1 className="text-4xl font-bold text-orange text-center pb-12 border-b-2 border-muted">ToqCer</h1>
             <div className="select-none">
                 {sidebarProps.map((sidebarProp, index) => (
