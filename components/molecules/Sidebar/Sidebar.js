@@ -3,8 +3,6 @@ import { DropdownContainer } from "@components/molecules"
 import { useState } from 'react'
 import { BiDesktop, BiCog, BiKey, BiUser, BiPackage, BiStore, BiCart, BiQuestionMark } from "react-icons/bi";
 
-import { useState } from 'react'
-
 function Sidebar() {
     const [isOpen, setIsOpen] = useState(false);
     const sidebarProps = [

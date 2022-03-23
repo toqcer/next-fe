@@ -3,7 +3,6 @@ import { Form, Footer } from "@components/molecules";
 import Head from "next/head";
 import { useState, useEffect } from 'react';
 import axios from "axios";
-import Cookie from 'js-cookie';
 import { useRouter } from "next/router";
 import ErrorMessage from "@components/molecules/ErrorMessage/ErrorMessage";
 
@@ -20,11 +19,19 @@ function Login() {
         return setErrorMsg('Email atau Password harus diisi!')
     }
     const login = () => {
-        axios.post('http://103.150.60.157:6969/v1/admin/login', {
+        axios.post('https://staging-api.toqcer.uloy.dev/v1/admin/login', {
             password,
             email,
         }).then(res => {
-            console.log(res)
+            const { token, refresh_token } = res.data.data;
+            axios('../api/login', {
+                method: 'post',
+                data: {
+                    token,
+                    tokenAdmin: refresh_token,
+                    expires: 3600
+                }
+            }).then(res => router.reload());
             // Cookie.set('tokenAdmin', 'Adsdm12io3', { expires: 7 });
         }).catch(err => {
             const errorResponse = err.response;
@@ -35,10 +42,7 @@ function Login() {
                     setPassword('');
                 }
             }
-            // else {
-            //     router.push("../internalservererror");
-            // }
-        })
+        });
     }
     return (
         // TODO Styling tag SPAN if request status 403
@@ -84,11 +88,3 @@ function Login() {
     )
 }
 export default Login
-
-// export async function getServerSideProps(context) {
-//     console.log(context, context.req.cookie)
-//     return {
-//         props: {
-//         },
-//     };
-// }
