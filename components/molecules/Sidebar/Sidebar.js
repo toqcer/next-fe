@@ -69,7 +69,7 @@ function Sidebar() {
 
     ]
     return (
-        <aside className="max-w-md lg:max-w-xs w-[90vw] py-8 px-6 h-full bg-white overflow-y-auto z-50 absolute lg:relative lg:block border-r border-gray-300">
+        <aside className="max-w-md lg:max-w-xs w-[90vw] py-8 px-6 h-full bg-white overflow-y-auto z-50 absolute hidden lg:relative lg:block border-r border-gray-300">
             <h1 className="text-4xl font-bold text-orange text-center pb-12 border-b-2 border-muted">ToqCer</h1>
             <div className="select-none">
                 {sidebarProps.map((sidebarProp, index) => (

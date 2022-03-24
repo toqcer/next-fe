@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 
 export async function middleware(req) {
     const { tokenAdmin, refreshAdmin } = req.cookies;
+    console.log(req.headers)
     let response = NextResponse.next();
     const url = req.nextUrl.clone();
 
@@ -25,13 +26,12 @@ export async function middleware(req) {
         const { token, refresh_token } = data.data;
         const setCookie = [
             response.cookie("tokenAdmin", token, {
-                httpOnly: true,
                 secure: process.env.NODE_ENV !== "development",
                 maxAge: 3600,
                 sameSite: "strict",
                 path: "/",
             }),
-            response.cookie("tokenAdmin", refresh_token, {
+            response.cookie("refreshAdmin", refresh_token, {
                 httpOnly: true,
                 secure: process.env.NODE_ENV !== "development",
                 maxAge: 3600,
