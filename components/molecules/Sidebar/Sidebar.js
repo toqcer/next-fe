@@ -1,73 +1,11 @@
 import { SidebarLink, SidebarSection } from "@components/atoms";
-import { DropdownContainer } from "@components/molecules"
-import { useState } from 'react'
-import { BiDesktop, BiCog, BiKey, BiUser, BiPackage, BiStore, BiCart, BiQuestionMark } from "react-icons/bi";
+import { DropdownContainer } from "@components/molecules";
+import { useState } from 'react';
+import sidebarProps from "consts/dashboard";
 
 function Sidebar() {
     const [isOpen, setIsOpen] = useState(false);
-    const sidebarProps = [
-        {
-            border: true,
-            children: [{
-                text: "dashboard",
-                href: "/admin/a",
-                icon: () => <BiDesktop />,
-            },
-            {
-                text: "profile",
-                href: "/admin/profile",
-                icon: () => <BiCog />,
-            },
-            {
-                text: "Admin",
-                href: "/admin/manage",
-                icon: () => <BiKey />,
-            },
-            {
-                text: "user",
-                href: "/admin/user",
-                icon: () => <BiUser />,
-            },
-            ]
-        },
-        {
-            border: true,
-            children: [{
-                text: "product",
-                icon: () => <BiPackage />,
-                children: [
-                    {
-                        text: "profile",
-                        href: "/admin/dashboard",
-                        icon: () => <BiUser />,
-                    },
-                    {
-                        text: "Admin",
-                        href: "/admin/admin",
-                        icon: () => <BiKey />,
-                    }
-                ]
-            },
-            {
-                text: "marketplace",
-                href: "/admin/marketplace",
-                icon: () => <BiStore />,
-            },]
-        },
-        {
-            children: [{
-                text: "order management",
-                href: "order",
-                icon: () => <BiCart />,
-            },
-            {
-                text: "faq management",
-                href: "faq",
-                icon: () => <BiQuestionMark />,
-            },]
-        }
 
-    ]
     return (
         <aside className="max-w-md lg:max-w-xs w-[90vw] py-8 px-6 h-full bg-white overflow-y-auto z-50 absolute hidden lg:relative lg:block border-r border-gray-300">
             <h1 className="text-4xl font-bold text-orange text-center pb-12 border-b-2 border-muted">ToqCer</h1>

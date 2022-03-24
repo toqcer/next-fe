@@ -7,8 +7,9 @@ import Cookie from "js-cookie";
 
 function Dashboard() {
     const router = useRouter();
+    const [isLoading, setIsLoading] = useState(true);
     const [data, setData] = useState([]);
-    // }
+
     useEffect(async () => {
         const token = Cookie.get('tokenAdmin');
         try {
@@ -18,6 +19,9 @@ function Dashboard() {
                 }
             });
             setData(response.data.data);
+            setTimeout(() => {
+                setIsLoading(false)
+            }, 2000)
             console.log(data);
         } catch (e) {
             const status = e.response.status;
@@ -34,15 +38,31 @@ function Dashboard() {
                 <section className="bg-primary px-14">
                     <Header title='dashboard' />
                     <div className="flex flex-wrap py-24 justify-center gap-4">
+                        {/* {isLoading ?
+                            (
+                                <>
+                                    <DashboardCard />
+                                    <DashboardCard />
+                                    <DashboardCard />
+                                    <DashboardCard />
+                                </>
+                            ) : (
+                                <>
+                                    <DashboardCard title="total order" value={data.total_order} />
+                                    <DashboardCard title="total sales" value={data.total_sales} />
+                                    <DashboardCard title="total user" value={data.total_user} />
+                                    <DashboardCard title="order completed" value={data.total_order_completed} />
+                                </>
+                            )
+                        } */}
                         <DashboardCard title="total order" value={data.total_order} />
-                        <DashboardCard title="total product" value={data.total_sales} />
+                        <DashboardCard title="total sales" value={data.total_sales} />
                         <DashboardCard title="total user" value={data.total_user} />
                         <DashboardCard title="order completed" value={data.total_order_completed} />
                     </div>
                 </section>
                 <div>
-                    {/* {order_completed_last_week}
-                    {order_last_week} */}
+                    chart
                 </div>
                 <Gap height={1000} />
             </main>
@@ -52,11 +72,11 @@ function Dashboard() {
 
 export default Dashboard
 
-function getDataSummary() {
-    return axios.get('https://staging-api.toqcer.uloy.dev/v1/admin/summary')
-        .then(res => res.data)
-        .catch(e => { throw e });
-}
+// function getDataSummary() {
+//     return axios.get('https://staging-api.toqcer.uloy.dev/v1/admin/summary')
+//         .then(res => res.data)
+//         .catch(e => { throw e });
+// }
 
 // export async function getServerSideProps(ctx) {
 //     const cookie = ctx.req ? ctx.req.cookies.tokenAdmin : null;

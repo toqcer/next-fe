@@ -2,7 +2,6 @@ import { NextResponse } from "next/server";
 
 export async function middleware(req) {
     const { tokenAdmin, refreshAdmin } = req.cookies;
-    console.log(req.headers)
     let response = NextResponse.next();
     const url = req.nextUrl.clone();
 
@@ -13,7 +12,7 @@ export async function middleware(req) {
         }
     }
     //If user dont have a access cookie
-    //Then get a new access cookie and refresh cookie with previous refresh Cookie
+    //Then get a new access cookie and refresh cookie using previous refresh Cookie
     else if (refreshAdmin) {
         const fetchResponse = await fetch("https://staging-api.toqcer.uloy.dev/v1/token/refresh", {
             method: 'POST',

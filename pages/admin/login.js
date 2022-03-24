@@ -70,7 +70,7 @@ function Login() {
                         {errorMsg && <ErrorMessage msg={errorMsg} />}
                     </Form>
                     <div className="flex justify-between text-sm px-2 py-3 text-muted ">
-                        <AuthLink href="#forgot" title="Forgot password ?" />
+                        <AuthLink href="/" title="Forgot password ?" />
                     </div>
                 </div>
                 {/* Form End */}
