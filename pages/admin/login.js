@@ -18,31 +18,23 @@ function Login() {
         if (validate) return login();
         return setErrorMsg('Email atau Password harus diisi!')
     }
-    const login = () => {
-        axios.post('https://staging-api.toqcer.uloy.dev/v1/admin/login', {
-            password,
-            email,
-        }).then(res => {
-            const { token, refresh_token } = res.data.data;
-            axios('../api/login', {
-                method: 'post',
-                data: {
-                    token,
-                    tokenAdmin: refresh_token,
-                    expires: 3600
-                }
-            }).then(res => router.reload());
-            // Cookie.set('tokenAdmin', 'Adsdm12io3', { expires: 7 });
-        }).catch(err => {
-            const errorResponse = err.response;
-            if (errorResponse) {
-                if (errorResponse.status === 403) {
-                    setErrorMsg('Email atau Password anda salah !')
-                    setEmail('');
-                    setPassword('');
-                }
+    const login = async () => {
+        const credentials = { email, password }
+        try {
+            // Get Token From API
+            const response = await axios.post('https://staging-api.toqcer.uloy.dev/v1/admin/login', credentials);
+            const { token, refresh_token } = response.data.data;
+            const data = {
+                token,
+                refresh_token,
+                expires: 3600
             }
-        });
+            // Set Cookie to httpOnly
+            const setCookie = await axios.post('http://localhost:3000/api/login', data);
+            router.reload();
+        } catch (e) {
+            console.log(e);
+        }
     }
     return (
         // TODO Styling tag SPAN if request status 403

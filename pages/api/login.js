@@ -10,7 +10,7 @@ export default (req, res) => {
       sameSite: "strict",
       path: "/",
     }),
-    cookie.serialize("refreshAdmin", req.body.tokenAdmin, {
+    cookie.serialize("refreshAdmin", req.body.refresh_token, {
       httpOnly: true,
       secure: process.env.NODE_ENV !== "development",
       maxAge: req.body.expires,

@@ -1,5 +1,6 @@
 import { Gap } from "@components/atoms";
 import axios from "axios";
+
 import { Header, Sidebar } from "@components/molecules";
 import { useEffect } from "react";
 import { useRouter } from 'next/router'
@@ -12,27 +13,26 @@ function Dashboard(
         total_user,
         total_order_completed,
         sales_last_week,
-        refreshAdmin,
     }) {
     const router = useRouter();
 
     useEffect(() => {
-        if (refreshAdmin) {
-            axios.post('https://staging-api.toqcer.uloy.dev/v1/token/refresh',
-                { refresh_token: refreshAdmin })
-                .then(res => {
-                    const { token, refresh_token } = res.data.data;
-                    axios('../api/login', {
-                        method: 'post',
-                        data: {
-                            token,
-                            tokenAdmin: refresh_token,
-                            expires: 3600
-                        }
-                    }).then(res => router.reload());
-                })
-                .catch(e => console.log(e))
-        }
+        // if (refreshAdmin) {
+        //     axios.post('https://staging-api.toqcer.uloy.dev/v1/token/refresh',
+        //         { refresh_token: refreshAdmin })
+        //         .then(res => {
+        //             const { token, refresh_token } = res.data.data;
+        //             axios('../api/login', {
+        //                 method: 'post',
+        //                 data: {
+        //                     token,
+        //                     tokenAdmin: refresh_token,
+        //                     expires: 3600
+        //                 }
+        //             }).then(res => router.reload());
+        //         })
+        //         .catch(e => console.log(e))
+        // }
     }, []);
 
     return (
@@ -101,7 +101,7 @@ export async function getServerSideProps(ctx) {
     else {
         return {
             props: {
-                refreshAdmin,
+
             }
         }
         // throw new Error('Error nih boss');
