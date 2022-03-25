@@ -38,14 +38,24 @@ function DashboardCard({ title, value }) {
                     onMouseEnter={() => setIsShown(true)}
                     onMouseLeave={() => setIsShown(false)}>
                     {formatter(value)}
+                    {/* Tooltip */}
                     <div
-                        className={`absolute ${isShown ? 'opacity-100 visible' : 'opacity-0 invisible'} transition-opacity ease-in-out delay-150 w-max h-max px-2 py-1 z-10  text-xs font-medium text-orange bg-primary rounded-sm`}>
-                        {tooltipFormatter(value)}
+                        before=""
+                        className={`absolute ${isShown ? 'opacity-100 visible' : 'opacity-0 invisible'} 
+                        transition-opacity ease-in-out font-normal delay-150 w-max h-max px-2 py-1 z-10 
+                        text-xs border-muted border-2 text-black bg-white rounded-md 
+                        before:-top-[5.5px] before:left-2 before:w-1.5 before:h-1.5 before:bg-white 
+                        before:border-t-muted before:border-t-2 before:border-l-2 
+                        before:border-l-muted before:rotate-45 before:z-20 before:absolute 
+                         before:rounded-tl-sm`}>
+                        <span className='z-30'>
+                            {tooltipFormatter(value)}
+                        </span>
                     </div>
                 </span>
                 <div className='space-x-2 flex items-center'>
                     <span className="text-success text-sm flex items-center">
-                        <BxChevronUp className={`-ml-1 scale-75 fill-success ${isShown && '!fill-transparent'} transition-colors delay-150`} />
+                        <BxChevronUp className={`-ml-1 scale-75 fill-success ${isShown && 'scale-0'} transition-all ease-in-out delay-75`} />
                         <span>3596</span>
                     </span>
                     <span className='text-muted text-xs'>Last 7 days</span>
