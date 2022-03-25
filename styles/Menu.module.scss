@@ -1,18 +1,24 @@
-.sidebar-link.dropdown-close {
-    + ul {
-        max-height: 100vh;
-        visibility: visible;
+.sidebar-link {
+    &.dropdown-close {
+        + ul {
+            max-height: 100vh;
+            visibility: visible;
+        }
+
+        .arrow-dropdown {
+            transform: rotate(90deg);
+        }
     }
 
-    .arrow-dropdown {
-        transform: rotate(90deg);
+    &:not(.dropdown-close) {
+        + ul {
+            max-height: 0;
+            visibility: hidden;
+        }
+        
     }
-}
 
-.sidebar-link:not(.dropdown-close) {
     + ul {
-        max-height: 0;
-        visibility: hidden;
+        padding-left: 1rem;
     }
-    
 }

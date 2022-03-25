@@ -1,0 +1,15 @@
+.pagination {
+    &__item {
+        width: 40px;
+        height: 40px;
+        @apply rounded-full flex items-center justify-center border border-orange-500 text-orange-500 transition-all duration-300 cursor-pointer;
+
+        &:hover {
+            @apply bg-orange-500 text-white;
+        }
+
+        &--active {
+            @apply bg-orange-500 text-white;
+        }
+    }
+}

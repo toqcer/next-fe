@@ -1,9 +1,5 @@
-function SidebarSection({ children, border }) {
-    return (
-        <ul className={`py-4 ${border && 'border-b-2 border-muted'}`}>
-            {children}
-        </ul>
-    )
+function SidebarSection({ children, border, className }) {
+	return <ul className={`py-4 ${border && ""} ${className}`}>{children}</ul>;
 }
 
-export default SidebarSection
+export default SidebarSection;

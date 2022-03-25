@@ -3,8 +3,9 @@
 @tailwind utilities;
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap');
 
-
-.active {@apply text-orange}
+.active {
+  @apply text-orange;
+}
 
 * {
   box-sizing: border-box;
@@ -24,6 +25,12 @@ a {
   text-decoration: none;
 }
 
-svg,img{
+svg, img{
   display: inline-block;
+}
+
+.container {
+  @media screen and (min-width: 1536px) {
+    max-width: 1280px;
+  }
 }
