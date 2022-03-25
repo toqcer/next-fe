@@ -32,15 +32,25 @@ const sidebarProps = [
             icon: () => <BiPackage />,
             children: [
                 {
-                    text: "profile",
+                    text: "List",
                     href: "/admin/dashboard",
                     icon: () => <BiUser />,
                 },
                 {
-                    text: "Admin",
+                    text: "Show",
                     href: "/admin/admin",
                     icon: () => <BiKey />,
-                }
+                },
+                {
+                    text: "Create",
+                    href: "/admin/admin",
+                    icon: () => <BiKey />,
+                },
+                {
+                    text: "Update",
+                    href: "/admin/admin",
+                    icon: () => <BiKey />,
+                },
             ]
         },
         {

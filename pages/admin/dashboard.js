@@ -35,30 +35,16 @@ function Dashboard() {
         <div className="flex h-screen relative">
             <Sidebar />
             <main className="flex-1 overflow-y-scroll h-screen">
-                <section className="bg-primary px-14">
-                    <Header title='dashboard' />
-                    <div className="flex flex-wrap py-24 justify-center gap-4">
-                        {/* {isLoading ?
-                            (
-                                <>
-                                    <DashboardCard />
-                                    <DashboardCard />
-                                    <DashboardCard />
-                                    <DashboardCard />
-                                </>
-                            ) : (
-                                <>
-                                    <DashboardCard title="total order" value={data.total_order} />
-                                    <DashboardCard title="total sales" value={data.total_sales} />
-                                    <DashboardCard title="total user" value={data.total_user} />
-                                    <DashboardCard title="order completed" value={data.total_order_completed} />
-                                </>
-                            )
-                        } */}
-                        <DashboardCard title="total order" value={data.total_order} />
-                        <DashboardCard title="total sales" value={data.total_sales} />
-                        <DashboardCard title="total user" value={data.total_user} />
-                        <DashboardCard title="order completed" value={data.total_order_completed} />
+                <section className="bg-primary">
+                    {/* <div className="custom-container mx-auto"> */}
+                    <div className="container px-10 mx-auto">
+                        <Header title='dashboard' />
+                        <div className="flex flex-wrap py-24 justify-center gap-4">
+                            <DashboardCard title="total order" value={data.total_order} />
+                            <DashboardCard title="total sales" value={data.total_sales} />
+                            <DashboardCard title="total user" value={data.total_user} />
+                            <DashboardCard title="order completed" value={data.total_order_completed} />
+                        </div>
                     </div>
                 </section>
                 <div>

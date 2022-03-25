@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import MenuStyle from '/styles/Menu.module.scss'
 import { useRouter } from "next/router";
 
-function SidebarLink({ text, href, Icon, children }) {
+function SidebarLink({ text, href, Icon, children, className }) {
     const refEl = useRef(null);
     const router = useRouter();
     const [isActive, setIsActive] = useState(() => {
@@ -34,7 +34,7 @@ function SidebarLink({ text, href, Icon, children }) {
             ) : (
                 <Link href={href} passHref>
                     <li className={`${MenuStyle['sidebar-link']} uppercase font-semibold ${isActive ? 'active' : 'text-dark-gray '} rounded-sm list-none flex space-x-2 `}>
-                        <span className='w-full space-x-2 px-4 py-3 cursor-pointer inline-flex gap-x-2 items-center hover:text-orange hover:bg-gay/30'>{Icon}{text}</span>
+                        <span className={`w-full space-x-2 px-4 ${className} cursor-pointer inline-flex gap-x-2 items-center hover:text-orange hover:bg-gay/30`}>{Icon}{text}</span>
                     </li>
                 </Link>
             )

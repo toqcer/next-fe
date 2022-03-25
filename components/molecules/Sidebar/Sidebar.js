@@ -1,5 +1,4 @@
-import { SidebarLink, SidebarSection } from "@components/atoms";
-import { DropdownContainer } from "@components/molecules";
+import { Gap, SidebarLink, SidebarSection } from "@components/atoms";
 import { useState } from 'react';
 import sidebarProps from "consts/dashboard";
 
@@ -7,7 +6,7 @@ function Sidebar() {
     const [isOpen, setIsOpen] = useState(false);
 
     return (
-        <aside className="max-w-md lg:max-w-xs w-[90vw] py-8 px-6 h-full bg-white overflow-y-auto z-50 absolute hidden lg:relative lg:block border-r border-gray-300">
+        <aside className="max-w-md w-[90vw] lg:max-w-[300px] lg:w-full py-8 px-4 h-full bg-white overflow-y-auto z-50 absolute hidden lg:relative lg:block border-r border-gray-300">
             <h1 className="text-4xl font-bold text-orange text-center pb-12 border-b-2 border-muted">ToqCer</h1>
             <div className="select-none">
                 {sidebarProps.map((sidebarProp, index) => (
@@ -15,13 +14,23 @@ function Sidebar() {
                         {sidebarProp.children.map(level1 => (
                             level1?.children ?
                                 (<SidebarLink key={Math.random} text={level1.text} href={level1.href} Icon={level1.icon()}>
-                                    <DropdownContainer key={Math.random()}>
+                                    <ul className={`m-0 transition-all duration-300 overflow-hidden`} key={Math.random()}>
                                         {level1.children.map(level2 => (
-                                            <SidebarLink text={level2.text} key={Math.random()} href={level2.href} Icon={level2.icon()} />
+                                            <SidebarLink
+                                                text={level2.text}
+                                                key={Math.random()}
+                                                href={level2.href}
+                                                Icon={level2.icon()}
+                                                className="py-[5.5px]" />
                                         ))}
-                                    </DropdownContainer>
+                                    </ul>
                                 </SidebarLink>) : (
-                                    <SidebarLink text={level1.text} key={Math.random()} href={level1.href} Icon={level1.icon()} />
+                                    <SidebarLink
+                                        text={level1.text}
+                                        key={Math.random()}
+                                        href={level1.href}
+                                        Icon={level1.icon()}
+                                        className="py-3" />
                                 ))
                         )}
                     </SidebarSection>)
