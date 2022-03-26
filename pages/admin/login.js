@@ -30,7 +30,7 @@ function Login() {
                 expires: 3600
             }
             // Set Cookie to httpOnly
-            const setCookie = await axios.post('http://localhost:3000/api/login', data);
+            const setCookie = await axios.post('http://localhost:3000/api/auth/admin/login', data);
             router.reload();
         } catch (e) {
             console.log(e);

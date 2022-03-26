@@ -35,21 +35,24 @@ const sidebarProps = [
 			},
 		],
 	},
+
+	// Product
 	{
 		border: true,
 		children: [
 			{
 				text: "product",
+				href: "/admin/product",
 				icon: () => <BiPackage />,
 				children: [
 					{
 						text: "List",
-						href: "/admin/dashboard",
+						href: "/admin/product/list",
 						icon: () => <BiUser />,
 					},
 					{
 						text: "Show",
-						href: "/admin/admin",
+						href: "/admin/pruduct/show",
 						icon: () => <BiKey />,
 					},
 					{

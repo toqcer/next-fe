@@ -56,6 +56,7 @@ function DashboardCard({ title, value }) {
                     </span>
                     {/* Right */}
                 </div>
+                {/* Icons */}
                 <div className='ml-auto'>kanan</div>
             </div>
             <div className='flex items-center'>

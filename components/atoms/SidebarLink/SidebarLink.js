@@ -5,15 +5,16 @@ import MenuStyle from "/styles/Menu.module.scss";
 import { useRouter } from "next/router";
 
 function SidebarLink({ text, href, Icon, children, className }) {
-	const refEl = useRef(null);
+	// const refEl = useRef(null);
 	const router = useRouter();
-	const [isActive, setIsActive] = useState(() => {
-		return router.pathname === href;
-	});
+	const pathName = router.pathname;
+	// const [isActive, setIsActive] = useState(() => {
+	// 	return
+	// });
 	const [isOpen, setIsOpen] = useState(false);
 	useEffect(() => {
 		try {
-			refEl.current?.querySelector(".active") && setIsOpen(true);
+			pathName.includes(href) && setIsOpen(true);
 		} catch (e) {
 			console.error(e);
 		}
@@ -23,16 +24,13 @@ function SidebarLink({ text, href, Icon, children, className }) {
 		<>
 			{children ? (
 				<li
-					ref={refEl}
-					className={`uppercase font-semibold text-dark-gray rounded-sm list-none flex ${
-						children && "flex-col"
-					}
+					className={`uppercase font-semibold text-dark-gray rounded-sm list-none flex ${children && "flex-col"
+						}
                  `}
 				>
 					<a
-						className={`${MenuStyle["sidebar-link"]} ${
-							isOpen && MenuStyle["dropdown-close"]
-						} w-full px-6 py-3 cursor-pointer inline-flex gap-x-2 items-center hover:text-orange hover:bg-gay/30 `}
+						className={`${MenuStyle["sidebar-link"]} ${isOpen && MenuStyle["dropdown-close"]
+							} w-full px-6 py-3 cursor-pointer inline-flex gap-x-2 items-center hover:text-orange hover:bg-gay/30 `}
 						onClick={() => setIsOpen(!isOpen)}
 					>
 						{Icon}
@@ -48,11 +46,9 @@ function SidebarLink({ text, href, Icon, children, className }) {
 			) : (
 				<Link href={href} passHref>
 					<li
-						className={`${
-							MenuStyle["sidebar-link"]
-						} uppercase font-semibold ${
-							isActive ? "active" : "text-dark-gray "
-						} rounded-sm list-none flex space-x-2`}
+						className={`${MenuStyle["sidebar-link"]
+							} uppercase font-semibold ${pathName === href ? "active" : "text-dark-gray "
+							} rounded-sm list-none flex space-x-2`}
 					>
 						<span
 							className={`w-full space-x-2 px-6 ${className} cursor-pointer inline-flex gap-x-2 items-center hover:text-orange hover:bg-gay/30`}
