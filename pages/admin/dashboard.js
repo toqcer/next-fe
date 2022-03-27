@@ -7,8 +7,7 @@ import Cookie from "js-cookie";
 import Pagination from "@components/molecules/Pagination/Pagination";
 import PaginationItem from "@components/molecules/Pagination/PaginationItem";
 import { BiChevronsLeft, BiChevronsRight } from "react-icons/bi";
-
-const Chart = require("chart.js");
+import MyChart from "lib/ChartJs";
 
 function Dashboard() {
 	const router = useRouter();
@@ -32,7 +31,7 @@ function Dashboard() {
 			}, 2000);
 			console.log(data);
 		} catch (e) {
-			const status = e.response.status;
+			const status = e.response?.status;
 			if (status === 403) {
 				router.reload();
 			}
@@ -69,8 +68,23 @@ function Dashboard() {
 
 				<section>
 					<div className="container">
-						<div className="bg-midnight-blue lg:px-10 lg:py-5 mb-6 -mt-8 rounded-lg"></div>
-						<div className="bg-gay lg:px-10 lg:py-5 mb-8 rounded-lg"></div>
+						<div className="bg-midnight-blue  p-4 lg:px-10 lg:py-5 mb-6 -mt-10 rounded-lg">
+							<MyChart
+								type="line"
+								tickColor="#FFFFFF"
+								datas={data.sales_chart}
+								title="Sales Chart"
+							/>
+						</div>
+						<div className="bg-gay lg:px-10 lg:py-5 mb-8 rounded-lg">
+							<MyChart
+								type="bar"
+								bgColor={{ y: "#14213D" }}
+								borderColor={{ y: "#14213D" }}
+								datas={data.order_chart}
+								title="Order Chart"
+							/>
+						</div>
 
 						<div>
 							<p className="font-bold text-primary text-2xl mb-3">
@@ -179,6 +193,9 @@ function Dashboard() {
 									</tr>
 								</tbody>
 							</table>
+							<div className="w-full">
+								<span className="text-center text-dark-gray">Show more</span>
+							</div>
 						</div>
 					</div>
 				</section>

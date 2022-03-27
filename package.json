@@ -22,6 +22,7 @@
     "sass": "^1.49.9"
   },
   "devDependencies": {
+    "@faker-js/faker": "^6.0.0",
     "autoprefixer": "^10.4.2",
     "eslint": "8.10.0",
     "eslint-config-next": "12.1.0",
