@@ -5,5 +5,6 @@ import Sidebar from "./Sidebar/Sidebar";
 import Search from "./Search/Search";
 import DropdownContainer from "./DropdownContainer/DropdownContainer";
 import DashboardCard from "./DashboardCard/DashboardCard";
+import Table from "./Table/Table";
 
-export { Form, Header, Footer, Sidebar, Search, DropdownContainer, DashboardCard }
+export { Form, Header, Footer, Sidebar, Search, DropdownContainer, DashboardCard, Table }

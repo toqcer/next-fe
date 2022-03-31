@@ -7,18 +7,41 @@ import { useRouter } from "next/router";
 import ErrorMessage from "@components/molecules/ErrorMessage/ErrorMessage";
 
 function Login() {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    // const [email, setEmail] = useState('');
+    // const [password, setPassword] = useState('');
+    const [field, setField] = useState({
+        email: '',
+        password: ''
+    });
     const [errorMsg, setErrorMsg] = useState('');
     const router = useRouter();
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        const { email, password } = field;
         const validate = email !== '' && password !== '';
-        if (validate) return login();
+        if (validate) {
+            return login(email, password);
+        }
         return setErrorMsg('Email atau Password harus diisi!')
     }
-    const login = async () => {
+
+    const handleChange = (e) => {
+        const data = e.target.getAttribute("data-field");
+        if (data === "email") {
+            setField({
+                ...field,
+                email: e.target.value
+            })
+        } else {
+            setField({
+                ...field,
+                password: e.target.value
+            })
+        }
+    }
+
+    const login = async (email, password) => {
         const credentials = { email, password }
         try {
             // Get Token From API
@@ -53,17 +76,19 @@ function Login() {
                         <Input
                             label="email"
                             placeholder="Email"
-                            value={email}
+                            value={field.email}
                             type="text"
-                            onChange={e => setEmail(e.target.value)}
+                            data-field="email"
+                            onChange={e => handleChange(e)}
                         />
                         <Gap height={8} />
                         <Input
                             label="password"
                             placeholder="Password"
-                            value={password}
+                            value={field.password}
                             type="password"
-                            onChange={e => setPassword(e.target.value)}
+                            data-field="password"
+                            onChange={e => handleChange(e)}
                         />
                         <Gap height={28} />
                         <Button className="rounded-lg" type="submit">Sign in</Button>

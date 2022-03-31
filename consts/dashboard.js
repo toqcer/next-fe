@@ -11,7 +11,6 @@ import {
 
 const sidebarProps = [
 	{
-		border: true,
 		children: [
 			{
 				text: "dashboard",
@@ -38,7 +37,6 @@ const sidebarProps = [
 
 	// Product
 	{
-		border: true,
 		children: [
 			{
 				text: "product",

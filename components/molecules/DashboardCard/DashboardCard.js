@@ -1,5 +1,6 @@
 import { BxChevronUp, BxChevronDown } from 'public/icons/';
 import { useState } from 'react';
+import { BiShow } from "react-icons/bi";
 
 const formatter = (num) => {
     if (num / 1e6 >= 1) return (`${(num / 1e6).toFixed(1)}M`).replace('.', ',');
@@ -33,6 +34,10 @@ function DashboardCard({ title, value }) {
                 <div className='flex flex-col items-start justify-between'>
                     <h3 className="text-muted text-sm font-bold uppercase">
                         {title}
+                        <BiShow
+                            className={`ml-4 lg:hidden ${isShown && 'fill-orange-500'} align-middle scale-105 cursor-pointer`}
+                            onClick={() => setIsShown(!isShown)}
+                        />
                     </h3>
                     <span
                         className="font-medium tracking-wider text-dark-gray text-3xl scale-y-110 scale-x-105 inline-block my-2 relative hover:cursor-context-menu"

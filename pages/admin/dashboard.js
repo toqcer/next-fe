@@ -1,13 +1,10 @@
-import { Gap } from "@components/atoms";
 import axios from "axios";
 import { Header, Sidebar, DashboardCard, Footer } from "@components/molecules";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Cookie from "js-cookie";
-import Pagination from "@components/molecules/Pagination/Pagination";
-import PaginationItem from "@components/molecules/Pagination/PaginationItem";
-import { BiChevronsLeft, BiChevronsRight } from "react-icons/bi";
 import MyChart from "lib/ChartJs";
+import styles from "styles/Dashboard.module.scss"
 
 function Dashboard() {
 	const router = useRouter();
@@ -25,10 +22,11 @@ function Dashboard() {
 					},
 				}
 			);
-			setData(response.data.data);
-			setTimeout(() => {
-				setIsLoading(false);
-			}, 2000);
+			const data = response.data.data;
+			setData(data);
+			// setTimeout(() => {
+			// 	setIsLoading(false);
+			// }, 2000);
 			console.log(data);
 		} catch (e) {
 			const status = e.response?.status;
@@ -43,9 +41,9 @@ function Dashboard() {
 			<Sidebar />
 			<main className="flex-1 overflow-y-auto h-screen">
 				<section className="bg-primary">
-					<div className="container">
+					<div className="container px-4">
 						<Header title="dashboard" />
-						<div className="flex flex-wrap py-24 justify-center gap-4">
+						<div className="flex flex-wrap py-24 gap-4">
 							<DashboardCard
 								title="total order"
 								value={data.total_order}
@@ -68,7 +66,7 @@ function Dashboard() {
 
 				<section>
 					<div className="container">
-						<div className="bg-midnight-blue  p-4 lg:px-10 lg:py-5 mb-6 -mt-10 rounded-lg">
+						<div className={` bg-midnight-blue shadow-md shadow-primary p-4 lg:px-10 lg:py-5 mb-6 -mt-10 rounded-lg`}>
 							<MyChart
 								type="line"
 								tickColor="#FFFFFF"
@@ -94,19 +92,6 @@ function Dashboard() {
 								<p className="font-bold text-lg">
 									Order Notifications
 								</p>
-								<Pagination>
-									<PaginationItem href="/">
-										<BiChevronsLeft color="#F59E0B" />
-									</PaginationItem>
-									<PaginationItem href="/" isActive={true}>
-										1
-									</PaginationItem>
-									<PaginationItem href="/">2</PaginationItem>
-									<PaginationItem href="/">3</PaginationItem>
-									<PaginationItem href="/">
-										<BiChevronsRight color="#F59E0B" />
-									</PaginationItem>
-								</Pagination>
 							</div>
 
 							<table className="mt-4 w-full">
@@ -193,8 +178,11 @@ function Dashboard() {
 									</tr>
 								</tbody>
 							</table>
-							<div className="w-full">
-								<span className="text-center text-dark-gray">Show more</span>
+							<div className="text-right">
+								<span className=" hover:text-dark-gray text-right text-muted cursor-pointer"
+									onClick={() => router.push('/admin/product/list')}>
+									Show More
+								</span>
 							</div>
 						</div>
 					</div>
@@ -207,55 +195,3 @@ function Dashboard() {
 }
 
 export default Dashboard;
-
-// function getDataSummary() {
-//     return axios.get('https://staging-api.toqcer.uloy.dev/v1/admin/summary')
-//         .then(res => res.data)
-//         .catch(e => { throw e });
-// }
-
-// export async function getServerSideProps(ctx) {
-//     const cookie = ctx.req ? ctx.req.cookies.tokenAdmin : null;
-//     if (cookie) {
-//         let config = {
-//             headers: {
-//                 'Authorization': 'Bearer ' + cookie
-//             }
-//         }
-//         const response = await getDataSummary(config)
-//         const {
-//             order_chart
-//             , order_completed_last_week
-//             , order_last_week
-//             , sales_chart
-//             , sales_last_week
-//             , total_order
-//             , total_order_completed
-//             , total_sales
-//             , total_user
-//             , user_last_week
-//         } = response.data
-//         return {
-//             props: {
-//                 order_chart
-//                 , order_completed_last_week
-//                 , order_last_week
-//                 , sales_chart
-//                 , sales_last_week
-//                 , total_order
-//                 , total_order_completed
-//                 , total_sales
-//                 , total_user
-//                 , user_last_week
-//             }, // will be passed to the page component as props
-//         }
-//     }
-//     else {
-//         return {
-//             props: {
-
-//             }
-//         }
-//         // throw new Error('Error nih boss');
-//     }
-// }

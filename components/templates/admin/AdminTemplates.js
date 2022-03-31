@@ -1,20 +1,19 @@
 import { Sidebar, Header, Footer } from '@components/molecules';
 
-export default function AdminTemplates({ children }) {
+export default function AdminTemplates({ title, children }) {
     return (
         <div className="flex h-screen relative">
             <Sidebar />
-            <main className="flex-1 overflow-y-auto h-screen">
-                <section className="bg-primary">
-                    <div className="container">
-                        <Header title="dashboard" />
-                        <div className="flex flex-wrap py-24 justify-center gap-4">
-
+            <main className="flex-1 flex flex-col overflow-y-auto h-screen">
+                <div className='flex-1 relative' >
+                    <div className='bg-primary absolute h-3/4 top-0 left-0 w-full -z-50'></div>
+                    <section className="container px-10">
+                        <Header title={title} />
+                        <div className="flex flex-wrap py-24 gap-4 text-white">
+                            {children}
                         </div>
-                    </div>
-                </section>
-
-                {children}
+                    </section>
+                </div>
 
                 <Footer />
             </main>
