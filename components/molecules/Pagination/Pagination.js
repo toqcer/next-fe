@@ -1,5 +1,5 @@
 const Pagination = ({ children, className }) => {
-	return <ul className={`${className} flex flex-wrap gap-2`}>{children}</ul>;
+	return <div className={`${className} flex flex-wrap gap-2`}>{children}</div>;
 };
 
 export default Pagination;

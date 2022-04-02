@@ -5,20 +5,90 @@ import Pagination from "@components/molecules/Pagination/Pagination";
 import PaginationItem from "@components/molecules/Pagination/PaginationItem";
 import {BiExpandAlt} from 'react-icons/bi'
 import { BiChevronsLeft, BiChevronsRight } from "react-icons/bi";
+import axios from 'axios'
+
+const getDataProduct = async(params,search,sort) =>{
+    try {
+        let {order_by,sort_type,page,size} = params;
+        search = `search=${search}&`
+        order_by = `order_by=${order_by}&`;
+        sort_type = `sort_type=${sort[sort_type]}&`;
+        const response = await axios.get(`v1/product/?${search}${order_by}${sort_type}page=${page}&size=${size}`,{
+            baseURL : 'https://staging-api.toqcer.uloy.dev/' 
+        })
+        const data = response.data;
+        return data
+    } catch (err) {
+        throw err;
+    }
+} 
 
 function ProductList() {
-    const [size,setSize] = useState(10);
+    const labels = ['title','id','code','stock','purchase','price','markup','supplier','description'];
+    const sort = ['ASC','DESC']
     const [search,setSearch] = useState('');
-    const labels = ['title','description','supplier','purchase','price','markup','code','stock','last update']
-    // useEffect(async() => {
-    //     try {
-    //         const response = await axios.get('https://staging-api.toqcer.uloy.dev/v1/product/',{
-
-    //         })
-    //     } catch (err) {
+    const [datas,setDatas] = useState([])
+    const [totalPage,setTotalPage] = useState(0)
+    const [params,setParams] = useState({
+        order_by : 'id',
+        sort_type : 0,
+        page : 1,
+        size : 10,
+    })
+    
+    const handdleChangeParams = (e) =>{
+        const dataSize = e.target.dataset.params;
+        const dataOrder = e.currentTarget.dataset.order;
+        const dataPagination = e.currentTarget.dataset.page;
+        if(dataSize === 'size'){
+            const value = e.target.value;
+            return setParams({
+                ...params,
+                page: 1,
+                size: value,
+            })
+        }
+        if(dataOrder){
+            let sort_type = params.sort_type;
+            if(dataOrder === 'purchase' || dataOrder=== 'markup'){
+                dataOrder += "_price";
+            }
+            if(params.order_by === dataOrder){
+                sort_type = Number(!sort_type);
+            }
+            return setParams({
+                ...params,
+                sort_type,
+                order_by : dataOrder,
+            })
+        }
+        if(dataPagination){
+            if(dataPagination === "prev"){
+                dataPagination = params.page-1;
+            }
+            if(dataPagination === "next"){
+                dataPagination = params.page+1;
+            }
+            return setParams({
+                ...params,
+                page : Number(dataPagination),
+            })
+        }
+    }
+    
+    useEffect(async() => {
+        try{
+            const json = await getDataProduct(params,search,sort);
+            const {total} = json.pagination;
+            const data = json.data;
+            setTotalPage(total/params.size);
+            setDatas(data)
+            // console.log(totalPage);
             
-    //     }
-    // }, []);
+        }catch(err){
+            console.log(err);
+        }
+    }, [params]);
 
     return (
         <AdminTemplates title="Product List">
@@ -28,8 +98,9 @@ function ProductList() {
                         <span>Show</span>
                         <select 
                         className="text-black mx-2 px-3 py-1 rounded" 
-                        value={size}
-                        onChange={(e)=>{setSize(e.target.value)}}>
+                        value={params.size}
+                        data-params="size"
+                        onChange={(e)=>{handdleChangeParams(e)}}>
                             <option value="10">10</option>
                             <option value="20">20</option>
                             <option value="50">50</option>
@@ -37,85 +108,114 @@ function ProductList() {
                         <span>entries</span>
                     </div>
                     <div>
-                      <Search value={search} onChange={(e)=>setSearch(e.target.value)}/>
+                      <Search 
+                        onChange={(e)=>{setSearch(e.target.value)}}
+                        onClick={async()=>{
+                            try{
+                                const json = await getDataProduct(params,search,sort);
+                                const {total} = json.pagination;
+                                const data = json.data;
+                                setTotalPage(total/params.size);
+                                setDatas(data)
+                                console.log(data);
+                            }catch(e){
+                                console.log(e)
+                            }
+                        }}
+                        />
                     </div>
                 </header>
                 <article className="bg-white px-8 py-4 mt-4 shadow-md rounded-lg shadow-gray-500">
                     <Table>
                         <thead>
                             <tr>
+                                <th className="py-4 pr-3 font-bold">No</th>
                                 {labels.map((label,index)=>(
-                                    <td key={index} className="py-2 pr-3 font-bold">
-                                        <div className="flex ">
-                                            <span className="capitalize">{label}</span>
-                                            <div className="ml-auto -rotate-45">
+                                    <th key={index}
+                                        className={`py-4 pr-3 font-bold ${index !== labels.length-1 && 'w-[10%]'}`}
+                                    >
+                                        <span className="capitalize float-left">{label}</span>
+                                        {(label !== 'supplier' && label !== 'description' && label !== 'code') &&
+                                            (<span 
+                                                data-order={label}
+                                                onClick={(e)=>handdleChangeParams(e)}
+                                                className="float-right -rotate-45 cursor-pointer">
                                                 <BiExpandAlt/>
-                                            </div>
-                                        </div>
-                                    </td>
+                                            </span>)
+                                        }
+                                    </th>
                                 ))}
                             </tr>
                         </thead>
                         <tbody>
-                            <tr className=" border-y-gray-300">
-                                <td className="py-4">
-                                    Asus TUF
-                                </td>
-                                <td className="font-bold py-4">
-                                    <span className="text-gray-400 font-normal">
-                                        Laptop
-                                    </span>
-                                </td>
-                                <td className="font-bold text-dark-gray py-4 ">
-                                    <span className="font-normal">
-                                        ASUS Indonesia 
-                                    </span>
-                                </td>
-                                <td className="font-bold text-dark-gray py-4">
-                                    <span className="font-normal">
-                                        $1,300 
-                                    </span>
-                                </td>
-                                <td className="font-bold text-dark-gray py-4">
-                                    <span className="font-normal">
-                                        $1,200 
-                                    </span>
-                                </td>
-                                <td className="font-bold text-dark-gray py-4">
-                                    <span className="font-normal">
-                                        $100
-                                    </span>
-                                </td>
-                                <td className="font-bold text-dark-gray py-4">
-                                    <span className="font-normal">
-                                       AX92FK038FF
-                                    </span>
-                                </td>
-                                <td className="font-bold text-dark-gray py-4">
-                                    <span className="font-normal">
-                                       143
-                                    </span>
-                                </td>
-                                <td className="font-bold text-dark-gray py-4">
-                                    <span className="font-normal">
-                                       19/3/2022
-                                    </span>
-                                </td>
-                            </tr>
+                            {datas.length !== 0 && (
+                                datas.map((data,index)=>(
+                                    <tr key={index} className="border-y-gray-300">
+                                        <td className="font-bold text-dark-gray py-4 px-1 align-baseline">
+                                            {(params.page-1)*params.size + (index + 1)}
+                                        </td>
+                                        <td className="font-bold text-dark-gray py-4 px-1 align-baseline">
+                                            <div className="h-24 overflow-y-hidden">
+                                                {data.title}
+                                            </div>
+                                        </td>
+                                        <td className="font-bold text-dark-gray py-4 px-1 align-baseline">
+                                            {data.id}
+                                        </td>
+                                        <td className="font-bold text-dark-gray py-4 px-1 align-baseline">
+                                            {data.code}
+                                        </td>
+                                        <td className="font-bold text-dark-gray py-4 px-1 align-baseline">
+                                            {data.stock}
+                                        </td>
+                                        <td className="font-bold text-dark-gray py-4 px-1 align-baseline">
+                                            {data.purchase_price}
+                                        </td>
+                                        <td className="font-bold text-dark-gray py-4 px-1 align-baseline">
+                                            {data.price}
+                                        </td>
+                                        <td className="font-bold text-dark-gray py-4 px-1 align-baseline">
+                                            {data.markup_price}
+                                        </td>
+                                        <td className="font-bold text-dark-gray py-4 px-1 align-baseline">
+                                            <a href={data.supplier_url} className="font-normal">
+                                                {data.supplier_url}
+                                            </a>
+                                        </td>
+                                        <td className="font-bold text-dark-gray py-4 px-1 h-6 align-baseline">
+                                            <div className="h-24 text-ellipsis overflow-y-hidden">
+                                                {data.description}
+                                            </div>
+                                        </td>
+                                    </tr>
+                                )) 
+                             )}
                         </tbody>
                     </Table>
                     <div className="flex justify-between items-center my-6">
-                        <h3 className="text-black font-bold text-lg">Showing page 1 from {size} pages</h3>
+                        <h3 className="text-black font-bold text-lg">Showing page {params.page} from {totalPage} pages</h3>
                         <Pagination>
-                            <PaginationItem href="/">
+                            <PaginationItem 
+                                disabled={params.page<=1}
+                                dataPage="prev"
+                                onClick={(e)=>handdleChangeParams(e)}
+                                >
                                 <BiChevronsLeft color="#F59E0B" />
                             </PaginationItem>
-                            <PaginationItem href="/" isActive={true}>
-                                1
-                            </PaginationItem>
-                            <PaginationItem href="/">2</PaginationItem>
-                            <PaginationItem href="/">3</PaginationItem>
-                            <PaginationItem href="/">
+                            {Array.from({length: totalPage},(item,index) =>(
+                                <PaginationItem
+                                    dataPage={index+1}
+                                    onClick={(e)=>handdleChangeParams(e)}
+                                    isActive={params.page === index+1}
+                                >
+                                    {index+1}
+                                </PaginationItem>
+                            ))}
+                            <PaginationItem 
+                                disabled={params.page>=totalPage}
+                                dataPage="next"
+                                onClick={(e)=>handdleChangeParams(e)}
+                            >
                                 <BiChevronsRight color="#F59E0B" />
                             </PaginationItem>
                         </Pagination>
