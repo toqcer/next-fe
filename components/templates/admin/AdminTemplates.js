@@ -6,12 +6,10 @@ export default function AdminTemplates({ title, children }) {
             <Sidebar />
             <main className="flex-1 flex flex-col overflow-y-auto h-screen">
                 <div className='flex-1 relative' >
-                    <div className='bg-primary absolute h-3/4 top-0 left-0 w-full -z-50'></div>
+                    <div className='bg-primary absolute h-screen sm:h-[80vh] top-0 left-0 w-full -z-50'></div>
                     <section className="container px-10">
                         <Header title={title} />
-                        <div className="flex flex-wrap py-24 gap-4 text-white">
-                            {children}
-                        </div>
+                        {children}
                     </section>
                 </div>
 
