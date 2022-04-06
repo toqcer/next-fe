@@ -75,113 +75,111 @@ function Dashboard() {
           valueLastWeek={data.order_completed_last_week}
         />
       </div>
-      <section>
-        <div className="container">
-          <div
-            className={` bg-midnight-blue shadow-md shadow-primary p-4 lg:px-10 lg:py-5 mb-6 rounded-lg`}
-          >
-            <MyChart
-              type="line"
-              tickColor="#FFFFFF"
-              datas={data.sales_chart}
-              title="Sales Chart"
-            />
-          </div>
-          <div className="bg-gay lg:px-10 lg:py-5 mb-8 rounded-lg">
-            <MyChart
-              type="bar"
-              bgColor={{ y: "#14213D" }}
-              borderColor={{ y: "#14213D" }}
-              datas={data.order_chart}
-              title="Order Chart"
-            />
+      <div className="">
+        <div
+          className={` bg-midnight-blue shadow-md shadow-primary p-4 lg:px-10 lg:py-5 mb-6 rounded-lg`}
+        >
+          <MyChart
+            type="line"
+            tickColor="#FFFFFF"
+            datas={data.sales_chart}
+            title="Sales Chart"
+          />
+        </div>
+        <div className="bg-gay shadow-md p-4 lg:px-10 lg:py-5 mb-8 rounded-lg">
+          <MyChart
+            type="bar"
+            bgColor={{ y: "#14213D" }}
+            borderColor={{ y: "#14213D" }}
+            datas={data.order_chart}
+            title="Order Chart"
+          />
+        </div>
+
+        <div>
+          <p className="font-bold text-primary text-2xl mb-3">OVERVIEW</p>
+          <div className="flex justify-between items-center">
+            <p className="font-bold text-lg">Order Notifications</p>
           </div>
 
-          <div>
-            <p className="font-bold text-primary text-2xl mb-3">OVERVIEW</p>
-            <div className="flex justify-between items-center">
-              <p className="font-bold text-lg">Order Notifications</p>
-            </div>
-
-            <table className="mt-4 w-full">
-              <tbody>
-                <tr className="border-y border-y-gray-300">
-                  <td className="py-4">toqcer@gmail.com</td>
-                  <td className="font-bold py-4">
-                    Bariq Dharmawan -
-                    <span className="text-gray-400 font-normal">
-                      Order ASUS ROG
-                    </span>
-                  </td>
-                  <td className="font-bold text-dark-gray py-4 text-right">
-                    <time>
-                      Minggu
-                      <span className="font-normal mx-3">19 Maret 2022</span>
-                      17.25
-                    </time>
-                  </td>
-                </tr>
-                <tr className=" border-y border-y-gray-300">
-                  <td className="py-4">toqcer@gmail.com</td>
-                  <td className="font-bold py-4">
-                    Bariq Dharmawan -
-                    <span className="text-gray-400 font-normal">
-                      Order ASUS ROG
-                    </span>
-                  </td>
-                  <td className="font-bold text-dark-gray py-4 text-right">
-                    <time>
-                      Minggu
-                      <span className="font-normal mx-3">19 Maret 2022</span>
-                      17.25
-                    </time>
-                  </td>
-                </tr>
-                <tr className=" border-y-gray-300">
-                  <td className="py-4">toqcer@gmail.com</td>
-                  <td className="font-bold py-4">
-                    Bariq Dharmawan -
-                    <span className="text-gray-400 font-normal">
-                      Order ASUS ROG
-                    </span>
-                  </td>
-                  <td className="font-bold text-dark-gray py-4 text-right">
-                    <time>
-                      Minggu
-                      <span className="font-normal mx-3">19 Maret 2022</span>
-                      17.25
-                    </time>
-                  </td>
-                </tr>
-                <tr className=" border-y-gray-300">
-                  <td className="py-4">toqcer@gmail.com</td>
-                  <td className="font-bold py-4">
-                    Bariq Dharmawan -
-                    <span className="text-gray-400 font-normal">
-                      Order ASUS ROG
-                    </span>
-                  </td>
-                  <td className="font-bold text-dark-gray py-4 text-right">
-                    <time>
-                      Minggu
-                      <span className="font-normal mx-3">19 Maret 2022</span>
-                      17.25
-                    </time>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-            <div className="text-right">
-              <span
-                className=" hover:text-dark-gray text-right text-muted cursor-pointer"
-                onClick={() => router.push("/admin/product/list")}
-              >
-                Show More
-              </span>
-            </div>
+          <table className="mt-4 w-full">
+            <tbody>
+              <tr className="border-y border-y-gray-300">
+                <td className="py-4">toqcer@gmail.com</td>
+                <td className="font-bold py-4">
+                  Bariq Dharmawan -
+                  <span className="text-gray-400 font-normal">
+                    Order ASUS ROG
+                  </span>
+                </td>
+                <td className="font-bold text-dark-gray py-4 text-right">
+                  <time>
+                    Minggu
+                    <span className="font-normal mx-3">19 Maret 2022</span>
+                    17.25
+                  </time>
+                </td>
+              </tr>
+              <tr className=" border-y border-y-gray-300">
+                <td className="py-4">toqcer@gmail.com</td>
+                <td className="font-bold py-4">
+                  Bariq Dharmawan -
+                  <span className="text-gray-400 font-normal">
+                    Order ASUS ROG
+                  </span>
+                </td>
+                <td className="font-bold text-dark-gray py-4 text-right">
+                  <time>
+                    Minggu
+                    <span className="font-normal mx-3">19 Maret 2022</span>
+                    17.25
+                  </time>
+                </td>
+              </tr>
+              <tr className=" border-y-gray-300">
+                <td className="py-4">toqcer@gmail.com</td>
+                <td className="font-bold py-4">
+                  Bariq Dharmawan -
+                  <span className="text-gray-400 font-normal">
+                    Order ASUS ROG
+                  </span>
+                </td>
+                <td className="font-bold text-dark-gray py-4 text-right">
+                  <time>
+                    Minggu
+                    <span className="font-normal mx-3">19 Maret 2022</span>
+                    17.25
+                  </time>
+                </td>
+              </tr>
+              <tr className=" border-y-gray-300">
+                <td className="py-4">toqcer@gmail.com</td>
+                <td className="font-bold py-4">
+                  Bariq Dharmawan -
+                  <span className="text-gray-400 font-normal">
+                    Order ASUS ROG
+                  </span>
+                </td>
+                <td className="font-bold text-dark-gray py-4 text-right">
+                  <time>
+                    Minggu
+                    <span className="font-normal mx-3">19 Maret 2022</span>
+                    17.25
+                  </time>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div className="text-right">
+            <span
+              className=" hover:text-dark-gray text-right text-muted cursor-pointer"
+              onClick={() => router.push("/admin/product/list")}
+            >
+              Show More
+            </span>
           </div>
         </div>
-      </section>
+      </div>
     </AdminTemplates>
   );
 }

@@ -1,11 +1,15 @@
 import AdminTemplates from "@components/templates/admin/AdminTemplates";
 import { Search, Table } from "@components/molecules/";
 import { useState, useEffect } from "react";
+import axios from "axios";
 import Pagination from "@components/molecules/Pagination/Pagination";
 import PaginationItem from "@components/molecules/Pagination/PaginationItem";
-import { BiExpandAlt } from "react-icons/bi";
-import { BiChevronsLeft, BiChevronsRight } from "react-icons/bi";
-import axios from "axios";
+import {
+  BiChevronsLeft,
+  BiChevronsRight,
+  BiChevronUp,
+  BiChevronDown,
+} from "react-icons/bi";
 
 const fetchDataProduct = async (params, search) => {
   const sortType = ["ASC", "DESC"];
@@ -14,7 +18,8 @@ const fetchDataProduct = async (params, search) => {
     search = `search=${search}&`;
     order_by = `order_by=${order_by}&`;
     sort_type = `sort_type=${sortType[sort_type]}&`;
-    const response = await axios.get(`v1/product/?${search}${order_by}${sort_type}page=${page}&size=${size}`,
+    const response = await axios.get(
+      `v1/product/?${search}${order_by}${sort_type}page=${page}&size=${size}`,
       {
         baseURL: "https://staging-api.toqcer.uloy.dev/",
       }
@@ -32,13 +37,17 @@ function ProductList() {
     "id",
     "code",
     "stock",
-    "purchase",
+    "purchase_price",
     "price",
-    "markup",
+    "markup_price",
     "supplier",
     "description",
   ];
-  const [search, setSearch] = useState("");
+  const labelConditions = ["supplier", "description", "code"];
+  const [search, setSearch] = useState({
+    current: "",
+    post: "",
+  });
   const [datas, setDatas] = useState([]);
   const [totalPage, setTotalPage] = useState(0);
   const [params, setParams] = useState({
@@ -50,7 +59,7 @@ function ProductList() {
 
   const getDataProduct = async () => {
     try {
-      const json = await fetchDataProduct(params, search);
+      const json = await fetchDataProduct(params, search.post);
       const { total } = json.pagination;
       const data = json.data;
       setTotalPage(total <= 0 ? 1 : Math.ceil(total / params.size));
@@ -73,12 +82,9 @@ function ProductList() {
       });
     }
     if (dataOrder) {
-      let sort_type = params.sort_type;
-      if (dataOrder === "purchase" || dataOrder === "markup") {
-        dataOrder += "_price";
-      }
+      let sort_type = 0;
       if (params.order_by === dataOrder) {
-        sort_type = Number(!sort_type);
+        sort_type = Number(!params.sort_type);
       }
       return setParams({
         ...params,
@@ -126,10 +132,19 @@ function ProductList() {
           </div>
           <div>
             <Search
+              value={search.current}
               onChange={(e) => {
-                setSearch(e.target.value);
+                setSearch({
+                  ...search,
+                  current: e.target.value,
+                });
               }}
               onClick={async () => {
+                let tempSearch = search.current;
+                setSearch({
+                  post: tempSearch,
+                  current: "",
+                });
                 setParams({
                   ...params,
                   page: 1,
@@ -140,75 +155,99 @@ function ProductList() {
           </div>
         </header>
         <article className="bg-white px-8 py-4 mt-4 shadow-md rounded-lg shadow-gray-500">
-          <Table>
-            <thead>
-              <tr>
-                <th className="py-4 pr-3 font-bold">No</th>
-                {labels.map((label, index) => (
-                  <th
-                    key={index}
-                    className={`py-4 pr-3 font-bold ${
-                      index !== labels.length - 1 && "w-[10%]"
-                    }`}
-                  >
-                    <span className="capitalize float-left">{label}</span>
-                    {label !== "supplier" &&
-                      label !== "description" &&
-                      label !== "code" && (
-                        <span
-                          data-order={label}
-                          onClick={(e) => handdleChangeParams(e)}
-                          className="float-right -rotate-45 cursor-pointer"
-                        >
-                          <BiExpandAlt />
+          {search.post !== "" && <span>Search by {search.post}</span>}
+          <div className="overflow-hidden overflow-x-scroll">
+            <Table>
+              <thead>
+                <tr>
+                  <th className="py-4 pr-3 font-bold text-sm w-[2%]">No</th>
+                  {labels.map((label, index) => (
+                    <th
+                      key={index}
+                      className={`py-4 pr-3 font-bold text-sm ${
+                        index === labels.length - 1 && "min-w-[12%]"
+                      }`}
+                    >
+                      <div className="flex items-center justify-between">
+                        <span className="capitalize">
+                          {label.replace("_price", "")}
                         </span>
-                      )}
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {datas.length !== 0 &&
-                datas.map((data, index) => (
-                  <tr key={index} className="border-y-gray-300">
-                    <td className="font-bold text-dark-gray py-4 px-1 align-baseline">
-                      {(params.page - 1) * params.size + (index + 1)}
-                    </td>
-                    <td className="font-bold text-dark-gray py-4 px-1 align-baseline">
-                      <div className="h-24 overflow-y-hidden">{data.title}</div>
-                    </td>
-                    <td className="font-bold text-dark-gray py-4 px-1 align-baseline">
-                      {data.id}
-                    </td>
-                    <td className="font-bold text-dark-gray py-4 px-1 align-baseline">
-                      {data.code}
-                    </td>
-                    <td className="font-bold text-dark-gray py-4 px-1 align-baseline">
-                      {data.stock}
-                    </td>
-                    <td className="font-bold text-dark-gray py-4 px-1 align-baseline">
-                      {data.purchase_price}
-                    </td>
-                    <td className="font-bold text-dark-gray py-4 px-1 align-baseline">
-                      {data.price}
-                    </td>
-                    <td className="font-bold text-dark-gray py-4 px-1 align-baseline">
-                      {data.markup_price}
-                    </td>
-                    <td className="font-bold text-dark-gray py-4 px-1 align-baseline">
-                      <a href={data.supplier_url} className="font-normal">
-                        {data.supplier_url}
-                      </a>
-                    </td>
-                    <td className="font-bold text-dark-gray py-4 px-1 h-6 align-baseline">
-                      <div className="h-24 text-ellipsis overflow-y-hidden">
-                        {data.description}
+                        {!labelConditions.some((el) => label.includes(el)) && (
+                          <div
+                            data-order={label}
+                            onClick={(e) => handdleChangeParams(e)}
+                            className="cursor-pointer flex flex-col"
+                          >
+                            <BiChevronUp
+                              size={18}
+                              className={`${
+                                params.order_by === label &&
+                                params.sort_type === 1
+                                  ? "text-orange"
+                                  : ""
+                              }`}
+                            />
+                            <BiChevronDown
+                              size={18}
+                              className={`-mt-2 ${
+                                params.order_by === label &&
+                                params.sort_type === 0
+                                  ? "text-orange"
+                                  : ""
+                              }`}
+                            />
+                          </div>
+                        )}
                       </div>
-                    </td>
-                  </tr>
-                ))}
-            </tbody>
-          </Table>
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {datas.length !== 0 &&
+                  datas.map((data, index) => (
+                    <tr key={index} className="border-y-gray-300">
+                      <td className="font-bold text-dark-gray text-sm py-4 px-1 align-baseline">
+                        {(params.page - 1) * params.size + (index + 1)}
+                      </td>
+                      <td className="font-bold text-dark-gray text-sm py-4 px-1 align-baseline">
+                        <div className="h-24 overflow-y-hidden">
+                          {data.title}
+                        </div>
+                      </td>
+                      <td className="font-bold text-dark-gray text-sm py-4 px-1 align-baseline">
+                        {data.id}
+                      </td>
+                      <td className="font-bold text-dark-gray text-sm py-4 px-1 align-baseline">
+                        {data.code}
+                      </td>
+                      <td className="font-bold text-dark-gray text-sm py-4 px-1 align-baseline">
+                        {data.stock}
+                      </td>
+                      <td className="font-bold text-dark-gray text-sm py-4 px-1 align-baseline">
+                        {data.purchase_price}
+                      </td>
+                      <td className="font-bold text-dark-gray text-sm py-4 px-1 align-baseline">
+                        {data.price}
+                      </td>
+                      <td className="font-bold text-dark-gray text-sm py-4 px-1 align-baseline">
+                        {data.markup_price}
+                      </td>
+                      <td className="font-bold text-dark-gray text-sm py-4 px-1 align-baseline">
+                        <a href={data.supplier_url} className="font-normal">
+                          {data.supplier_url}
+                        </a>
+                      </td>
+                      <td className="font-bold text-dark-gray text-sm py-4 px-1 h-6 align-baseline">
+                        <div className="h-24 overflow-y-hidden ">
+                          {data.description}
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+              </tbody>
+            </Table>
+          </div>
           <div className="flex justify-between items-center my-6">
             <h3 className="text-black font-bold text-lg">
               Showing page {params.page} from {totalPage} pages
