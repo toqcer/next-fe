@@ -33,7 +33,6 @@ const ProfileAdmin = (props) => {
       // setTimeout(() => {
       // 	setIsLoading(false);
       // }, 2000);
-      console.log(data);
     } catch (e) {
       const status = e.response?.status;
       if (status === 403) {
@@ -114,7 +113,7 @@ const ProfileAdmin = (props) => {
             </div>
           </div>
           <div className="w-1/3 relative">
-            <div className="absolute top-1/2 w-[420px] h-[420px] -translate-y-1/2 left-14">
+            <div className="absolute top-1/2 w-[420px] h-full -translate-y-1/2 left-14">
               <Image src="/dummy/avatar.svg" layout="fill" />
             </div>
           </div>

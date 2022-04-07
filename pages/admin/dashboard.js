@@ -75,25 +75,30 @@ function Dashboard() {
           valueLastWeek={data.order_completed_last_week}
         />
       </div>
-      <div className="">
-        <div
-          className={` bg-midnight-blue shadow-md shadow-primary p-4 lg:px-10 lg:py-5 mb-6 rounded-lg`}
-        >
-          <MyChart
-            type="line"
-            tickColor="#FFFFFF"
-            datas={data.sales_chart}
-            title="Sales Chart"
-          />
-        </div>
-        <div className="bg-gay shadow-md p-4 lg:px-10 lg:py-5 mb-8 rounded-lg">
-          <MyChart
-            type="bar"
-            bgColor={{ y: "#14213D" }}
-            borderColor={{ y: "#14213D" }}
-            datas={data.order_chart}
-            title="Order Chart"
-          />
+      <div className="w-full">
+        <div class="flex gap-4 flex-col xl:flex-row w-full">
+          <div
+            className={`bg-midnight-blue p-4 h-96 shadow-md shadow-primary md:h-[550px] xl:w-2/3 lg:px-10 lg:py-5 mb-6 rounded-lg`}
+          >
+            <MyChart
+              type="line"
+              tickColor="#FFFFFF"
+              datas={data.sales_chart}
+              title="Sales Chart"
+              gridColor="rgba(229, 229, 229, 0.5)"
+            />
+          </div>
+          <div className="bg-white p-4 h-96 shadow-md shadow-gray-500 md:h-[550px] xl:min-w-[33%] lg:px-10 lg:py-5 mb-8 rounded-lg">
+            <MyChart
+              type="bar"
+              tickColor="#000000"
+              bgColor={{ y: "#14213D" }}
+              borderColor={{ y: "#14213D" }}
+              datas={data.order_chart}
+              title="Order Chart"
+              gridColor="rgba(20, 33, 61, 0.5)"
+            />
+          </div>
         </div>
 
         <div>

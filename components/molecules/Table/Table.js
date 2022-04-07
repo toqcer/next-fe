@@ -1,9 +1,7 @@
-function Table({children,className}) {
+function Table({ children, className }) {
   return (
-        <table className={`mt-4 w-full text-black ${className}`}>
-            {children}
-        </table>
-  )
+    <table className={`mt-4 text-black ${className}`}>{children}</table>
+  );
 }
 
-export default Table
+export default Table;

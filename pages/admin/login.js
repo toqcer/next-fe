@@ -7,8 +7,6 @@ import { useRouter } from "next/router";
 import ErrorMessage from "@components/molecules/ErrorMessage/ErrorMessage";
 
 function Login() {
-  // const [email, setEmail] = useState('');
-  // const [password, setPassword] = useState('');
   const [field, setField] = useState({
     email: "",
     password: "",

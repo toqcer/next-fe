@@ -157,15 +157,19 @@ function ProductList() {
         <article className="bg-white px-8 py-4 mt-4 shadow-md rounded-lg shadow-gray-500">
           {search.post !== "" && <span>Search by {search.post}</span>}
           <div className="overflow-hidden overflow-x-scroll">
-            <Table>
+            <Table className="table-fixed w-[1524px] border-collapse">
               <thead>
                 <tr>
-                  <th className="py-4 pr-3 font-bold text-sm w-[2%]">No</th>
+                  <th className="p-4 font-bold text-sm w-[2%] align-middle">
+                    No
+                  </th>
                   {labels.map((label, index) => (
                     <th
                       key={index}
-                      className={`py-4 pr-3 font-bold text-sm ${
-                        index === labels.length - 1 && "min-w-[12%]"
+                      className={`p-4 font-bold text-sm ${
+                        index === 0 || index === labels.length - 1
+                          ? "w-[15%]"
+                          : "w-[10%]"
                       }`}
                     >
                       <div className="flex items-center justify-between">
@@ -179,21 +183,21 @@ function ProductList() {
                             className="cursor-pointer flex flex-col"
                           >
                             <BiChevronUp
-                              size={18}
+                              size={20}
                               className={`${
                                 params.order_by === label &&
                                 params.sort_type === 1
                                   ? "text-orange"
-                                  : ""
+                                  : "text-gay"
                               }`}
                             />
                             <BiChevronDown
-                              size={18}
-                              className={`-mt-2 ${
+                              size={20}
+                              className={`-mt-2.5 ${
                                 params.order_by === label &&
                                 params.sort_type === 0
                                   ? "text-orange"
-                                  : ""
+                                  : "text-gay"
                               }`}
                             />
                           </div>
@@ -206,40 +210,40 @@ function ProductList() {
               <tbody>
                 {datas.length !== 0 &&
                   datas.map((data, index) => (
-                    <tr key={index} className="border-y-gray-300">
-                      <td className="font-bold text-dark-gray text-sm py-4 px-1 align-baseline">
+                    <tr key={index}>
+                      <td className="font-bold text-dark-gray text-sm py-2 px-4 align-baseline border-gray-300/50 border-y-2">
                         {(params.page - 1) * params.size + (index + 1)}
                       </td>
-                      <td className="font-bold text-dark-gray text-sm py-4 px-1 align-baseline">
+                      <td className="font-bold text-dark-gray text-sm py-2 px-4 align-baseline border-gray-300/50 border-y-2">
                         <div className="h-24 overflow-y-hidden">
                           {data.title}
                         </div>
                       </td>
-                      <td className="font-bold text-dark-gray text-sm py-4 px-1 align-baseline">
+                      <td className="font-bold text-dark-gray text-sm py-3 px-4 align-baseline border-gray-300/50 border-y-2">
                         {data.id}
                       </td>
-                      <td className="font-bold text-dark-gray text-sm py-4 px-1 align-baseline">
+                      <td className="font-bold text-dark-gray text-sm py-3 px-4 align-baseline border-gray-300/50 border-y-2">
                         {data.code}
                       </td>
-                      <td className="font-bold text-dark-gray text-sm py-4 px-1 align-baseline">
+                      <td className="font-bold text-dark-gray text-sm py-3 px-4 align-baseline border-gray-300/50 border-y-2 ">
                         {data.stock}
                       </td>
-                      <td className="font-bold text-dark-gray text-sm py-4 px-1 align-baseline">
+                      <td className="font-bold text-dark-gray text-sm py-3 px-4 align-baseline border-gray-300/50 border-y-2">
                         {data.purchase_price}
                       </td>
-                      <td className="font-bold text-dark-gray text-sm py-4 px-1 align-baseline">
+                      <td className="font-bold text-dark-gray text-sm py-3 px-4 align-baseline border-gray-300/50 border-y-2">
                         {data.price}
                       </td>
-                      <td className="font-bold text-dark-gray text-sm py-4 px-1 align-baseline">
+                      <td className="font-bold text-dark-gray text-sm py-3 px-4 align-baseline border-gray-300/50 border-y-2">
                         {data.markup_price}
                       </td>
-                      <td className="font-bold text-dark-gray text-sm py-4 px-1 align-baseline">
-                        <a href={data.supplier_url} className="font-normal">
+                      <td className="font-bold text-dark-gray text-sm py-3 px-4 align-baseline border-gray-300/50 border-y-2 overflow-hidden text-ellipsis ">
+                        <a href={data.supplier_url} className="font-normal ">
                           {data.supplier_url}
                         </a>
                       </td>
-                      <td className="font-bold text-dark-gray text-sm py-4 px-1 h-6 align-baseline">
-                        <div className="h-24 overflow-y-hidden ">
+                      <td className="font-bold text-dark-gray text-sm py-3 px-4 align-baseline border-gray-300/50 border-y-2">
+                        <div className="h-24 overflow-y-hidden w-full">
                           {data.description}
                         </div>
                       </td>
