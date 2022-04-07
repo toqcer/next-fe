@@ -69,6 +69,20 @@ function ProductList() {
     }
   };
 
+  const handleOnSearch = () =>{
+    let tempSearch = search.current;
+              setSearch({
+                post: tempSearch,
+                current: "",
+              });
+              setParams({
+                ...params,
+                page: 1,
+              });
+              getDataProduct();
+            
+  }
+
   const handdleChangeParams = (e) => {
     const dataSize = e.target.dataset.params;
     const dataOrder = e.currentTarget.dataset.order;
@@ -106,15 +120,15 @@ function ProductList() {
     }
   };
 
-  useEffect(async () => {
-    await getDataProduct();
+  useEffect(() => {
+    getDataProduct();
   }, [params]);
 
   return (
     <AdminTemplates title="Product List">
-      <div className="my-20 ">
-        <header className="flex justify-between items-center">
-          <div className="text-sm text-white">
+      <div className="py-8 sm:py-20 ">
+        <header className="flex flex-col justify-between sm:flex-row sm:items-center gap-4">
+          <div className="text-sm text-white ">
             <span>Show</span>
             <select
               className="text-black mx-2 px-3 py-1 rounded"
@@ -130,31 +144,19 @@ function ProductList() {
             </select>
             <span>entries</span>
           </div>
-          <div>
-            <Search
-              value={search.current}
-              onChange={(e) => {
-                setSearch({
-                  ...search,
-                  current: e.target.value,
-                });
-              }}
-              onClick={async () => {
-                let tempSearch = search.current;
-                setSearch({
-                  post: tempSearch,
-                  current: "",
-                });
-                setParams({
-                  ...params,
-                  page: 1,
-                });
-                await getDataProduct();
-              }}
-            />
-          </div>
+          <Search
+            maxWidth="sm:max-w-[350px] xl:max-w-[450px] -order-1 sm:order-1"
+            value={search.current}
+            onChange={(e) => {
+              setSearch({
+                ...search,
+                current: e.target.value,
+              });
+            }}
+            onClick={handleOnSearch}
+          />
         </header>
-        <article className="bg-white px-8 py-4 mt-4 shadow-md rounded-lg shadow-gray-500">
+        <article className="bg-white px-6 py-2 mt-4 shadow-md rounded-lg shadow-gray-500">
           {search.post !== "" && <span>Search by {search.post}</span>}
           <div className="overflow-hidden overflow-x-scroll">
             <Table className="table-fixed w-[1524px] border-collapse">
@@ -252,11 +254,11 @@ function ProductList() {
               </tbody>
             </Table>
           </div>
-          <div className="flex justify-between items-center my-6">
+          <div className="flex flex-col justify-between lg:flex-row items-center py-4 md:py-8 gap-4">
             <h3 className="text-black font-bold text-lg">
               Showing page {params.page} from {totalPage} pages
             </h3>
-            <Pagination>
+            <Pagination className="grow-0 w-full justify-center md:w-max">
               <PaginationItem
                 disabled={params.page <= 1}
                 dataPage="prev"
@@ -264,16 +266,18 @@ function ProductList() {
               >
                 <BiChevronsLeft />
               </PaginationItem>
-              {Array.from({ length: totalPage }, (item, index) => (
-                <PaginationItem
-                  key={index}
-                  dataPage={index + 1}
-                  onClick={(e) => handdleChangeParams(e)}
-                  isActive={params.page === index + 1}
-                >
-                  {index + 1}
-                </PaginationItem>
-              ))}
+              <div className="flex overflow-hidden overflow-x-scroll md:overflow-x-auto gap-x-1">
+                {Array.from({ length: totalPage }, (item, index) => (
+                  <PaginationItem
+                    key={index}
+                    dataPage={index + 1}
+                    onClick={(e) => handdleChangeParams(e)}
+                    isActive={params.page === index + 1}
+                  >
+                    {index + 1}
+                  </PaginationItem>
+                ))}
+              </div>
               <PaginationItem
                 disabled={params.page >= totalPage}
                 dataPage="next"

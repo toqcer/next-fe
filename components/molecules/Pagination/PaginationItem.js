@@ -1,5 +1,5 @@
 import Link from "next/link";
-import PaginationStyle from "./../../../styles/Pagination.module.scss";
+import PaginationStyle from "styles/Pagination.module.scss";
 
 const PaginationItem = ({ className, isActive, children, onClick, dataPage,disabled }) => {
 	return (

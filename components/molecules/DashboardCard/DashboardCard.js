@@ -28,8 +28,8 @@ const tooltipFormatter = (num) => {
 function DashboardCard({ title, value, valueLastWeek, Icon, bgIcon }) {
   const [isShown, setIsShown] = useState(false);
   return (
-    <div className="w-full min-h-[120px] flex justify-between flex-col flex-shrink-0 basis-full flex-grow sm:basis-[calc(50%_-_10px)] xl:basis-0 bg-white shadow-lg shadow-gray px-6 py-4 rounded-lg">
-      <div className="flex flex-1">
+    <div className="w-full min-h-[120px] flex justify-between  flex-col flex-shrink-0 basis-full flex-grow sm:basis-[calc(50%_-_10px)] xl:basis-0 bg-white shadow-lg shadow-gray px-6 py-4 rounded-lg">
+      <div className="flex items-center flex-1">
         {/* left */}
         <div className="flex flex-col items-start justify-between">
           <h3 className="text-muted text-sm font-bold uppercase">
@@ -63,8 +63,8 @@ function DashboardCard({ title, value, valueLastWeek, Icon, bgIcon }) {
               <span className="z-30">{tooltipFormatter(value)}</span>
             </div>
           </span>
-          {/* Right */}
         </div>
+        {/* Right */}
         {/* Icons */}
         <div
           className={`ml-auto ${

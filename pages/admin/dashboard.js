@@ -106,75 +106,76 @@ function Dashboard() {
           <div className="flex justify-between items-center">
             <p className="font-bold text-lg">Order Notifications</p>
           </div>
-
-          <table className="mt-4 w-full">
-            <tbody>
-              <tr className="border-y border-y-gray-300">
-                <td className="py-4">toqcer@gmail.com</td>
-                <td className="font-bold py-4">
-                  Bariq Dharmawan -
-                  <span className="text-gray-400 font-normal">
-                    Order ASUS ROG
-                  </span>
-                </td>
-                <td className="font-bold text-dark-gray py-4 text-right">
-                  <time>
-                    Minggu
-                    <span className="font-normal mx-3">19 Maret 2022</span>
-                    17.25
-                  </time>
-                </td>
-              </tr>
-              <tr className=" border-y border-y-gray-300">
-                <td className="py-4">toqcer@gmail.com</td>
-                <td className="font-bold py-4">
-                  Bariq Dharmawan -
-                  <span className="text-gray-400 font-normal">
-                    Order ASUS ROG
-                  </span>
-                </td>
-                <td className="font-bold text-dark-gray py-4 text-right">
-                  <time>
-                    Minggu
-                    <span className="font-normal mx-3">19 Maret 2022</span>
-                    17.25
-                  </time>
-                </td>
-              </tr>
-              <tr className=" border-y-gray-300">
-                <td className="py-4">toqcer@gmail.com</td>
-                <td className="font-bold py-4">
-                  Bariq Dharmawan -
-                  <span className="text-gray-400 font-normal">
-                    Order ASUS ROG
-                  </span>
-                </td>
-                <td className="font-bold text-dark-gray py-4 text-right">
-                  <time>
-                    Minggu
-                    <span className="font-normal mx-3">19 Maret 2022</span>
-                    17.25
-                  </time>
-                </td>
-              </tr>
-              <tr className=" border-y-gray-300">
-                <td className="py-4">toqcer@gmail.com</td>
-                <td className="font-bold py-4">
-                  Bariq Dharmawan -
-                  <span className="text-gray-400 font-normal">
-                    Order ASUS ROG
-                  </span>
-                </td>
-                <td className="font-bold text-dark-gray py-4 text-right">
-                  <time>
-                    Minggu
-                    <span className="font-normal mx-3">19 Maret 2022</span>
-                    17.25
-                  </time>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+          <div className="overflow-hidden overflow-x-scroll">
+            <table className="table-fixed mt-4 w-full">
+              <tbody>
+                <tr className="border-y border-y-gray-300">
+                  <td className="py-4 w-48">toqcer@gmail.com</td>
+                  <td className="font-bold py-4 w-72">
+                    Bariq Dharmawan -
+                    <span className="text-gray-400 font-normal">
+                      Order ASUS ROG
+                    </span>
+                  </td>
+                  <td className="font-bold text-dark-gray py-4 text-right w-64">
+                    <time>
+                      Minggu
+                      <span className="font-normal mx-3">19 Maret 2022</span>
+                      17.25
+                    </time>
+                  </td>
+                </tr>
+                <tr className=" border-y border-y-gray-300">
+                  <td className="py-4">toqcer@gmail.com</td>
+                  <td className="font-bold py-4">
+                    Bariq Dharmawan -
+                    <span className="text-gray-400 font-normal">
+                      Order ASUS ROG
+                    </span>
+                  </td>
+                  <td className="font-bold text-dark-gray py-4 text-right">
+                    <time>
+                      Minggu
+                      <span className="font-normal mx-3">19 Maret 2022</span>
+                      17.25
+                    </time>
+                  </td>
+                </tr>
+                <tr className=" border-y-gray-300">
+                  <td className="py-4">toqcer@gmail.com</td>
+                  <td className="font-bold py-4">
+                    Bariq Dharmawan -
+                    <span className="text-gray-400 font-normal">
+                      Order ASUS ROG
+                    </span>
+                  </td>
+                  <td className="font-bold text-dark-gray py-4 text-right">
+                    <time>
+                      Minggu
+                      <span className="font-normal mx-3">19 Maret 2022</span>
+                      17.25
+                    </time>
+                  </td>
+                </tr>
+                <tr className=" border-y-gray-300">
+                  <td className="py-4">toqcer@gmail.com</td>
+                  <td className="font-bold py-4">
+                    Bariq Dharmawan -
+                    <span className="text-gray-400 font-normal">
+                      Order ASUS ROG
+                    </span>
+                  </td>
+                  <td className="font-bold text-dark-gray py-4 text-right">
+                    <time>
+                      Minggu
+                      <span className="font-normal mx-3">19 Maret 2022</span>
+                      17.25
+                    </time>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
           <div className="text-right">
             <span
               className=" hover:text-dark-gray text-right text-muted cursor-pointer"
