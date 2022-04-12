@@ -69,19 +69,31 @@ function ProductList() {
     }
   };
 
-  const handleOnSearch = () =>{
+  const handleOnSearch = () => {
     let tempSearch = search.current;
-              setSearch({
-                post: tempSearch,
-                current: "",
-              });
-              setParams({
-                ...params,
-                page: 1,
-              });
-              getDataProduct();
-            
-  }
+    setSearch({
+      ...search,
+      post: tempSearch,
+    });
+    setParams({
+      ...params,
+      page: 1,
+    });
+    getDataProduct();
+  };
+
+  const generatePaginationItems = (totalPage, initialValue = 1) => (
+    Array.from({ length: totalPage }, (_, index) => (
+      <PaginationItem
+        key={index}
+        dataPage={index + initialValue}
+        onClick={(e) => handdleChangeParams(e)}
+        isActive={params.page === index + initialValue}
+      >
+        {index + initialValue}
+      </PaginationItem>
+    ))
+  )
 
   const handdleChangeParams = (e) => {
     const dataSize = e.target.dataset.params;
@@ -157,7 +169,7 @@ function ProductList() {
           />
         </header>
         <article className="bg-white px-6 py-2 mt-4 shadow-md rounded-lg shadow-gray-500">
-          {search.post !== "" && <span>Search by {search.post}</span>}
+          {/* {search.post !== "" && <span>Search by {search.post}</span>} */}
           <div className="overflow-hidden overflow-x-scroll">
             <Table className="table-fixed w-[1524px] border-collapse">
               <thead>
@@ -168,11 +180,10 @@ function ProductList() {
                   {labels.map((label, index) => (
                     <th
                       key={index}
-                      className={`p-4 font-bold text-sm ${
-                        index === 0 || index === labels.length - 1
-                          ? "w-[15%]"
-                          : "w-[10%]"
-                      }`}
+                      className={`p-4 font-bold text-sm ${index === 0 || index === labels.length - 1
+                        ? "w-[15%]"
+                        : "w-[10%]"
+                        }`}
                     >
                       <div className="flex items-center justify-between">
                         <span className="capitalize">
@@ -186,21 +197,19 @@ function ProductList() {
                           >
                             <BiChevronUp
                               size={20}
-                              className={`${
-                                params.order_by === label &&
+                              className={`${params.order_by === label &&
                                 params.sort_type === 1
-                                  ? "text-orange"
-                                  : "text-gay"
-                              }`}
+                                ? "text-orange"
+                                : "text-gay"
+                                }`}
                             />
                             <BiChevronDown
                               size={20}
-                              className={`-mt-2.5 ${
-                                params.order_by === label &&
+                              className={`-mt-2.5 ${params.order_by === label &&
                                 params.sort_type === 0
-                                  ? "text-orange"
-                                  : "text-gay"
-                              }`}
+                                ? "text-orange"
+                                : "text-gay"
+                                }`}
                             />
                           </div>
                         )}
@@ -267,16 +276,64 @@ function ProductList() {
                 <BiChevronsLeft />
               </PaginationItem>
               <div className="flex overflow-hidden overflow-x-scroll md:overflow-x-auto gap-x-1">
-                {Array.from({ length: totalPage }, (item, index) => (
-                  <PaginationItem
-                    key={index}
-                    dataPage={index + 1}
-                    onClick={(e) => handdleChangeParams(e)}
-                    isActive={params.page === index + 1}
-                  >
-                    {index + 1}
-                  </PaginationItem>
-                ))}
+                {totalPage <= 6 ? (
+                  <>
+                    {generatePaginationItems(totalPage)}
+                  </>
+                ) : (
+                  <>
+                    {params.page <= 3 ? (
+                      <>
+                        {generatePaginationItems(4)}
+                        <PaginationItem disabled />
+                        <PaginationItem
+                          dataPage={totalPage}
+                          onClick={(e) => handdleChangeParams(e)}
+                          isActive={params.page === totalPage}
+                        >
+                          {totalPage}
+                        </PaginationItem>
+                      </>
+                    ) : (
+                      <>
+                        <PaginationItem
+                          dataPage={1}
+                          onClick={(e) => handdleChangeParams(e)}
+                          isActive={params.page === 1}
+                        >
+                          1
+                        </PaginationItem>
+                        <PaginationItem disabled />
+                        {totalPage - params.page < 4 ? (
+                          <>
+                            {generatePaginationItems(4, totalPage - 3)}
+                          </>
+                        ) : (
+                          <>
+                            {Array.from({ length: 3 }, (_, index) => (
+                              <PaginationItem
+                                key={index}
+                                dataPage={params.page - 1 + index}
+                                onClick={(e) => handdleChangeParams(e)}
+                                isActive={params.page === params.page - 1 + index}
+                              >
+                                {params.page - 1 + index}
+                              </PaginationItem>
+                            ))}
+                            <PaginationItem disabled />
+                            <PaginationItem
+                              dataPage={totalPage}
+                              onClick={(e) => handdleChangeParams(e)}
+                              isActive={params.page === totalPage}
+                            >
+                              {totalPage}
+                            </PaginationItem>
+                          </>
+                        )}
+                      </>
+                    )}
+                  </>
+                )}
               </div>
               <PaginationItem
                 disabled={params.page >= totalPage}
@@ -288,8 +345,8 @@ function ProductList() {
             </Pagination>
           </div>
         </article>
-      </div>
-    </AdminTemplates>
+      </div >
+    </AdminTemplates >
   );
 }
 
