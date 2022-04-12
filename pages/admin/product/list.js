@@ -3,10 +3,7 @@ import { Search, Table } from "@components/molecules/";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Pagination from "@components/molecules/Pagination/Pagination";
-import PaginationItem from "@components/molecules/Pagination/PaginationItem";
 import {
-  BiChevronsLeft,
-  BiChevronsRight,
   BiChevronUp,
   BiChevronDown,
 } from "react-icons/bi";
@@ -81,19 +78,6 @@ function ProductList() {
     });
     getDataProduct();
   };
-
-  const generatePaginationItems = (totalPage, initialValue = 1) => (
-    Array.from({ length: totalPage }, (_, index) => (
-      <PaginationItem
-        key={index}
-        dataPage={index + initialValue}
-        onClick={(e) => handdleChangeParams(e)}
-        isActive={params.page === index + initialValue}
-      >
-        {index + initialValue}
-      </PaginationItem>
-    ))
-  )
 
   const handdleChangeParams = (e) => {
     const dataSize = e.target.dataset.params;
@@ -267,82 +251,12 @@ function ProductList() {
             <h3 className="text-black font-bold text-lg">
               Showing page {params.page} from {totalPage} pages
             </h3>
-            <Pagination className="grow-0 w-full justify-center md:w-max">
-              <PaginationItem
-                disabled={params.page <= 1}
-                dataPage="prev"
-                onClick={(e) => handdleChangeParams(e)}
-              >
-                <BiChevronsLeft />
-              </PaginationItem>
-              <div className="flex overflow-hidden overflow-x-scroll md:overflow-x-auto gap-x-1">
-                {totalPage <= 6 ? (
-                  <>
-                    {generatePaginationItems(totalPage)}
-                  </>
-                ) : (
-                  <>
-                    {params.page <= 3 ? (
-                      <>
-                        {generatePaginationItems(4)}
-                        <PaginationItem disabled />
-                        <PaginationItem
-                          dataPage={totalPage}
-                          onClick={(e) => handdleChangeParams(e)}
-                          isActive={params.page === totalPage}
-                        >
-                          {totalPage}
-                        </PaginationItem>
-                      </>
-                    ) : (
-                      <>
-                        <PaginationItem
-                          dataPage={1}
-                          onClick={(e) => handdleChangeParams(e)}
-                          isActive={params.page === 1}
-                        >
-                          1
-                        </PaginationItem>
-                        <PaginationItem disabled />
-                        {totalPage - params.page < 4 ? (
-                          <>
-                            {generatePaginationItems(4, totalPage - 3)}
-                          </>
-                        ) : (
-                          <>
-                            {Array.from({ length: 3 }, (_, index) => (
-                              <PaginationItem
-                                key={index}
-                                dataPage={params.page - 1 + index}
-                                onClick={(e) => handdleChangeParams(e)}
-                                isActive={params.page === params.page - 1 + index}
-                              >
-                                {params.page - 1 + index}
-                              </PaginationItem>
-                            ))}
-                            <PaginationItem disabled />
-                            <PaginationItem
-                              dataPage={totalPage}
-                              onClick={(e) => handdleChangeParams(e)}
-                              isActive={params.page === totalPage}
-                            >
-                              {totalPage}
-                            </PaginationItem>
-                          </>
-                        )}
-                      </>
-                    )}
-                  </>
-                )}
-              </div>
-              <PaginationItem
-                disabled={params.page >= totalPage}
-                dataPage="next"
-                onClick={(e) => handdleChangeParams(e)}
-              >
-                <BiChevronsRight />
-              </PaginationItem>
-            </Pagination>
+            <Pagination
+              className="grow-0 w-full justify-center md:w-max"
+              totalPage={totalPage}
+              currentPage={params.page}
+              onClick={handdleChangeParams}
+            />
           </div>
         </article>
       </div >

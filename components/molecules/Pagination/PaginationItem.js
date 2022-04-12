@@ -10,9 +10,6 @@ const PaginationItem = ({ className, isActive, children, onClick, dataPage, disa
 			disabled={disabled}
 		>
 			<span>{children || "..."}</span>
-			{/* <Link href={href}>
-				<span>{children}</span>
-			</Link> */}
 		</button>
 	);
 };

@@ -7,13 +7,14 @@ export default (req, res) => {
       "Set-Cookie",
       [cookie.serialize("tokenAdmin", req.body.token, {
         secure: process.env.NODE_ENV !== "development",
-        maxAge: req.body.expires,
+        maxAge: 1800,
         sameSite: "strict",
         path: "/",
       }),
       cookie.serialize("refreshAdmin", req.body.refresh_token, {
         httpOnly: true,
         secure: process.env.NODE_ENV !== "development",
+        // maxAge: req.body.expires,
         maxAge: req.body.expires,
         sameSite: "strict",
         path: "/",
