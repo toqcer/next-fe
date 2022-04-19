@@ -31,10 +31,6 @@ function Dashboard() {
       );
       const data = response.data.data;
       setData(data);
-      // setTimeout(() => {
-      // 	setIsLoading(false);
-      // }, 2000);
-      console.log(data);
     } catch (e) {
       const status = e.response?.status;
       if (status === 403) {
@@ -76,7 +72,7 @@ function Dashboard() {
         />
       </div>
       <div className="w-full">
-        <div class="flex gap-4 flex-col xl:flex-row w-full">
+        <div className="flex gap-4 flex-col xl:flex-row w-full">
           <div
             className={`bg-midnight-blue p-4 h-96 shadow-md shadow-primary md:h-[550px] xl:w-2/3 lg:px-10 lg:py-5 mb-6 rounded-lg`}
           >

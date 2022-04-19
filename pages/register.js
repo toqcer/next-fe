@@ -1,8 +1,5 @@
-import Card from "@components/Card";
-import Input from "@components/Input";
-import Button from "@components/atoms/Button/Button";
-import Footer from "@components/Footer";
-import Link from "next/link";
+import { AuthLink, Input, Button } from "@components/atoms";
+import { Form, Footer } from "@components/molecules";
 import Head from "next/head"
 
 function Register() {
@@ -17,7 +14,7 @@ function Register() {
                 <h1 className="text-orange font-bold text-4xl my-14">ToqCer</h1>
                 {/* Form */}
                 <div className="max-w-xl w-full">
-                    <Card title="Sign Up">
+                    <Form title="Sign Up">
                         <Input
                             label="name"
                             placeholder="Name"
@@ -34,11 +31,10 @@ function Register() {
                             type="password"
                             required />
                         <Button>Sign in</Button>
-                    </Card>
+                    </Form>
                     <div className="flex justify-between text-sm px-2 py-3 text-muted ">
-                        <Link href='./login' passHref>
-                            <a className="hover:text-white">Sign In</a>
-                        </Link>
+
+                        <AuthLink href="/login" title="Sign in" />
                     </div>
                 </div>
                 {/* Form End */}
