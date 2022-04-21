@@ -1,32 +1,14 @@
+import { useState, useEffect } from "react";
+
+import getDataProduct from "src/api/getDataProduct";
+
 import AdminTemplates from "@components/templates/admin/AdminTemplates";
 import { Search, Table } from "@components/molecules/";
-import { useState, useEffect } from "react";
-import axios from "axios";
 import Pagination from "@components/molecules/Pagination/Pagination";
 import {
   BiChevronUp,
   BiChevronDown,
 } from "react-icons/bi";
-
-const fetchDataProduct = async (params, search) => {
-  const sortType = ["ASC", "DESC"];
-  try {
-    let { order_by, sort_type, page, size } = params;
-    search = `search=${search}&`;
-    order_by = `order_by=${order_by}&`;
-    sort_type = `sort_type=${sortType[sort_type]}&`;
-    const response = await axios.get(
-      `v1/product/?${search}${order_by}${sort_type}page=${page}&size=${size}`,
-      {
-        baseURL: "https://staging-api.toqcer.uloy.dev/",
-      }
-    );
-    const data = response.data;
-    return data;
-  } catch (err) {
-    throw err;
-  }
-};
 
 function ProductList() {
   const labels = [
@@ -54,16 +36,12 @@ function ProductList() {
     size: 10,
   });
 
-  const getDataProduct = async () => {
-    try {
-      const json = await fetchDataProduct(params, search.post);
-      const { total } = json.pagination;
-      const data = json.data;
-      setTotalPage(total <= 0 ? 1 : Math.ceil(total / params.size));
-      setDatas(data);
-    } catch (err) {
-      console.log(err);
-    }
+  const fetchDataProduct = async () => {
+    const result = await Promise.any([getDataProduct(params, search.current)])
+    const { data } = result;
+    const { total } = result.pagination;
+    setTotalPage(total <= 0 ? 1 : Math.ceil(total / params.size));
+    setDatas(data);
   };
 
   const handleOnSearch = () => {
@@ -76,7 +54,7 @@ function ProductList() {
       ...params,
       page: 1,
     });
-    getDataProduct();
+    fetchDataProduct();
   };
 
   const handdleChangeParams = (e) => {
@@ -117,7 +95,7 @@ function ProductList() {
   };
 
   useEffect(() => {
-    getDataProduct();
+    fetchDataProduct();
   }, [params]);
 
   return (
@@ -130,9 +108,7 @@ function ProductList() {
               className="text-black mx-2 px-3 py-1 rounded"
               value={params.size}
               data-params="size"
-              onChange={(e) => {
-                handdleChangeParams(e);
-              }}
+              onChange={handdleChangeParams}
             >
               <option value="10">10</option>
               <option value="20">20</option>

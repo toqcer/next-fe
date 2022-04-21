@@ -29,7 +29,7 @@ export async function middleware(req) {
     const setCookie = [
       response.cookie("tokenAdmin", token, {
         secure: process.env.NODE_ENV !== "development",
-        maxAge: 36000,
+        maxAge: 1800,
         sameSite: "strict",
         path: "/",
       }),

@@ -1,29 +1,7 @@
 import { BxChevronUp, BxChevronDown } from "public/icons/";
 import { useState } from "react";
 import { BiShow } from "react-icons/bi";
-
-const formatter = (num) => {
-  if (num / 1e6 >= 1) return `${(num / 1e6).toFixed(1)}M`.replace(".", ",");
-  if (num / 1e3 >= 1) return `${(num / 1e3).toFixed(1)}K`.replace(".", ",");
-  return num;
-};
-
-const tooltipFormatter = (num) => {
-  let res = "";
-  let str = String(num);
-  let len = str.length;
-
-  if (len <= 3) return str;
-
-  for (let i = 1; i <= len; i++) {
-    if (i % 3 === 0 && len - i !== 0) {
-      res = `.${str[len - i].concat(res)}`;
-      continue;
-    }
-    res = str[len - i].concat(res);
-  }
-  return res;
-};
+import { numberFormatter, numberWithDot } from './../../../src/helpers/numberFormatter';
 
 function DashboardCard({ title, value, valueLastWeek, Icon, bgIcon }) {
   const [isShown, setIsShown] = useState(false);
@@ -35,9 +13,8 @@ function DashboardCard({ title, value, valueLastWeek, Icon, bgIcon }) {
           <h3 className="text-muted text-sm font-bold uppercase">
             {title}
             <BiShow
-              className={`ml-4 lg:hidden ${
-                isShown && "fill-orange-500"
-              } align-middle scale-105 cursor-pointer`}
+              className={`ml-4 lg:hidden ${isShown && "fill-orange-500"
+                } align-middle scale-105 cursor-pointer`}
               onClick={() => setIsShown(!isShown)}
             />
           </h3>
@@ -46,13 +23,12 @@ function DashboardCard({ title, value, valueLastWeek, Icon, bgIcon }) {
             onMouseEnter={() => setIsShown(true)}
             onMouseLeave={() => setIsShown(false)}
           >
-            {formatter(value)}
+            {numberFormatter(value)}
             {/* Tooltip */}
             <div
               before=""
-              className={`absolute ${
-                isShown ? "opacity-100 visible" : "opacity-0 invisible"
-              } 
+              className={`absolute ${isShown ? "opacity-100 visible" : "opacity-0 invisible"
+                } 
                         transition-opacity ease-in-out font-normal delay-150 w-max h-max px-2 py-1 z-20 
                         text-xs border-muted border-2 text-black bg-white rounded-md 
                         before:-top-[5.5px] before:left-2 before:w-1.5 before:h-1.5 before:bg-white 
@@ -60,25 +36,23 @@ function DashboardCard({ title, value, valueLastWeek, Icon, bgIcon }) {
                         before:border-l-muted before:rotate-45 before:z-30 before:absolute 
                          before:rounded-tl-sm`}
             >
-              <span className="z-30">{tooltipFormatter(value)}</span>
+              <span className="z-30">{numberWithDot(value)}</span>
             </div>
           </span>
         </div>
         {/* Right */}
         {/* Icons */}
         <div
-          className={`ml-auto ${
-            bgIcon ? bgIcon : "bg-orange"
-          } shadow-md text-white flex justify-center items-center rounded-full w-12 h-12`}
+          className={`ml-auto ${bgIcon ? bgIcon : "bg-orange"
+            } shadow-md text-white flex justify-center items-center rounded-full w-12 h-12`}
         >
           {Icon}
         </div>
       </div>
       <div className="flex items-center">
         <span
-          className={`text-success text-sm flex items-center ${
-            isShown && "scale-0"
-          } transition-all ease-in-out delay-75 z-0`}
+          className={`text-success text-sm flex items-center ${isShown && "scale-0"
+            } transition-all ease-in-out delay-75 z-0`}
         >
           <BxChevronUp className="-ml-1 scale-75 fill-success" />
           <span>{valueLastWeek}</span>

@@ -1,11 +1,10 @@
-import axios from "axios";
 import { DashboardCard } from "@components/molecules";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Cookie from "js-cookie";
 import MyChart from "lib/ChartJs";
-import styles from "styles/Dashboard.module.scss";
 import AdminTemplates from "@components/templates/admin/AdminTemplates";
+import getSummary from "src/api/getSummary";
 import {
   BiBarChart,
   BiPieChart,
@@ -18,25 +17,14 @@ function Dashboard() {
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState([]);
 
-  useEffect(async () => {
+  const getDataChart = async () => {
     const token = Cookie.get("tokenAdmin");
-    try {
-      const response = await axios.get(
-        "https://staging-api.toqcer.uloy.dev/v1/admin/summary",
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      const data = response.data.data;
-      setData(data);
-    } catch (e) {
-      const status = e.response?.status;
-      if (status === 403) {
-        router.reload();
-      }
-    }
+    const result = await Promise.any([getSummary(token)]);
+    setData(result.data);
+  }
+
+  useEffect(() => {
+    getDataChart();
   }, []);
 
   return (

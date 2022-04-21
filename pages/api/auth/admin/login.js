@@ -23,7 +23,6 @@ export default (req, res) => {
     res.statusCode = 200,
       res.json({ success: true })
   } catch (e) {
-    console.log(e)
     res.statusCode = 500,
       res.json({ failed: e })
   }

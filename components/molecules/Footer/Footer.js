@@ -1,4 +1,4 @@
-import { getCurrentYear } from "lib/helper";
+import { getCurrentYear } from "src/helpers/getCurrentYear";
 
 function Footer() {
 	return (
