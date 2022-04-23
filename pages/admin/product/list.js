@@ -1,14 +1,11 @@
 import { useState, useEffect } from "react";
+import { BiChevronUp, BiChevronDown } from "react-icons/bi";
+
+import { TableCell } from "@components/atoms";
+import { Search, Table, Pagination } from "@components/molecules/";
+import AdminTemplates from "@components/templates/admin/AdminTemplates";
 
 import getDataProduct from "src/api/getDataProduct";
-
-import AdminTemplates from "@components/templates/admin/AdminTemplates";
-import { Search, Table } from "@components/molecules/";
-import Pagination from "@components/molecules/Pagination/Pagination";
-import {
-  BiChevronUp,
-  BiChevronDown,
-} from "react-icons/bi";
 
 function ProductList() {
   const labels = [
@@ -23,38 +20,23 @@ function ProductList() {
     "description",
   ];
   const labelConditions = ["supplier", "description", "code"];
-  const [search, setSearch] = useState({
-    current: "",
-    post: "",
-  });
+  const [search, setSearch] = useState('');
   const [datas, setDatas] = useState([]);
   const [totalPage, setTotalPage] = useState(0);
   const [params, setParams] = useState({
-    order_by: "id",
+    order_by: 'id',
     sort_type: 0,
     page: 1,
     size: 10,
+    search: '',
   });
 
-  const fetchDataProduct = async () => {
-    const result = await Promise.any([getDataProduct(params, search.current)])
-    const { data } = result;
-    const { total } = result.pagination;
-    setTotalPage(total <= 0 ? 1 : Math.ceil(total / params.size));
-    setDatas(data);
-  };
-
   const handleOnSearch = () => {
-    let tempSearch = search.current;
-    setSearch({
-      ...search,
-      post: tempSearch,
-    });
     setParams({
       ...params,
       page: 1,
+      search,
     });
-    fetchDataProduct();
   };
 
   const handdleChangeParams = (e) => {
@@ -95,6 +77,14 @@ function ProductList() {
   };
 
   useEffect(() => {
+    const fetchDataProduct = async () => {
+      const result = await Promise.any([getDataProduct(params)])
+      const { data } = result;
+      const { total } = result.pagination;
+      setTotalPage(total <= 0 ? 1 : Math.ceil(total / params.size));
+      setDatas(data);
+    };
+
     fetchDataProduct();
   }, [params]);
 
@@ -118,13 +108,8 @@ function ProductList() {
           </div>
           <Search
             maxWidth="sm:max-w-[350px] xl:max-w-[450px] -order-1 sm:order-1"
-            value={search.current}
-            onChange={(e) => {
-              setSearch({
-                ...search,
-                current: e.target.value,
-              });
-            }}
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
             onClick={handleOnSearch}
           />
         </header>
@@ -134,13 +119,13 @@ function ProductList() {
             <Table className="table-fixed w-[1524px] border-collapse">
               <thead>
                 <tr>
-                  <th className="p-4 font-bold text-sm w-[2%] align-middle">
+                  <th className="py-4 pr-2 font-bold text-sm w-[4%] text-left">
                     No
                   </th>
                   {labels.map((label, index) => (
                     <th
                       key={index}
-                      className={`p-4 font-bold text-sm ${index === 0 || index === labels.length - 1
+                      className={`py-4 pr-2 font-bold text-sm ${index === 0 || index === labels.length - 1
                         ? "w-[15%]"
                         : "w-[10%]"
                         }`}
@@ -182,42 +167,16 @@ function ProductList() {
                 {datas.length !== 0 &&
                   datas.map((data, index) => (
                     <tr key={index}>
-                      <td className="font-bold text-dark-gray text-sm py-2 px-4 align-baseline border-gray-300/50 border-y-2">
-                        {(params.page - 1) * params.size + (index + 1)}
-                      </td>
-                      <td className="font-bold text-dark-gray text-sm py-2 px-4 align-baseline border-gray-300/50 border-y-2">
-                        <div className="h-24 overflow-y-hidden">
-                          {data.title}
-                        </div>
-                      </td>
-                      <td className="font-bold text-dark-gray text-sm py-3 px-4 align-baseline border-gray-300/50 border-y-2">
-                        {data.id}
-                      </td>
-                      <td className="font-bold text-dark-gray text-sm py-3 px-4 align-baseline border-gray-300/50 border-y-2">
-                        {data.code}
-                      </td>
-                      <td className="font-bold text-dark-gray text-sm py-3 px-4 align-baseline border-gray-300/50 border-y-2 ">
-                        {data.stock}
-                      </td>
-                      <td className="font-bold text-dark-gray text-sm py-3 px-4 align-baseline border-gray-300/50 border-y-2">
-                        {data.purchase_price}
-                      </td>
-                      <td className="font-bold text-dark-gray text-sm py-3 px-4 align-baseline border-gray-300/50 border-y-2">
-                        {data.price}
-                      </td>
-                      <td className="font-bold text-dark-gray text-sm py-3 px-4 align-baseline border-gray-300/50 border-y-2">
-                        {data.markup_price}
-                      </td>
-                      <td className="font-bold text-dark-gray text-sm py-3 px-4 align-baseline border-gray-300/50 border-y-2 overflow-hidden text-ellipsis ">
-                        <a href={data.supplier_url} className="font-normal ">
-                          {data.supplier_url}
-                        </a>
-                      </td>
-                      <td className="font-bold text-dark-gray text-sm py-3 px-4 align-baseline border-gray-300/50 border-y-2">
-                        <div className="h-24 overflow-y-hidden w-full">
-                          {data.description}
-                        </div>
-                      </td>
+                      <TableCell data={(params.page - 1) * params.size + (index + 1)} />
+                      <TableCell data={data.title} />
+                      <TableCell data={data.id} />
+                      <TableCell data={data.code} />
+                      <TableCell data={data.stock} />
+                      <TableCell data={data.purchase_price} />
+                      <TableCell data={data.price} />
+                      <TableCell data={data.markup_price} />
+                      <TableCell data={data.supplier_url} onClick={() => window.location.href = data.supplier_url} />
+                      <TableCell data={data.description} />
                     </tr>
                   ))}
               </tbody>

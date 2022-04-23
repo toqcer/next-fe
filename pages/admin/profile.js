@@ -40,6 +40,7 @@ const ProfileAdmin = (props) => {
       }
     }
   }, []);
+
   return (
     <AdminTemplates title="Profile">
       <div className="flex flex-wrap py-10 sm:py-20 gap-4">
@@ -114,7 +115,7 @@ const ProfileAdmin = (props) => {
           </div>
           <div className="w-1/3 relative">
             <div className="absolute top-1/2 w-[420px] h-full -translate-y-1/2 left-14">
-              <Image src="/dummy/avatar.svg" layout="fill" />
+              <Image src="/dummy/avatar.svg" layout="fill" alt="avatarpict" />
             </div>
           </div>
         </div>

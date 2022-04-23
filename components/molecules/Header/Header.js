@@ -15,12 +15,11 @@ function Header({ title }) {
       <h1 className="text-white font-bold text-xl capitalize">{title}</h1>
       <div className="relative" onClick={() => setShown(!shown)}>
         <div className="rounded-[50%] box-border w-14 h-14 overflow-hidden relative cursor-pointer">
-          <Image src="/dummy/avatar2.jpg" layout="fill" />
+          <Image src="/dummy/avatar2.jpg" layout="fill" alt="avatar" />
         </div>
         <ul
-          className={`${
-            shown ? "block" : "hidden"
-          } bg-white absolute w-48 right-0 rounded-sm text-center`}
+          className={`${shown ? "block" : "hidden"
+            } bg-white absolute w-48 right-0 rounded-sm text-center`}
         >
           <li
             className="hover:text-dark-gray py-1 hover:bg-slate-200 cursor-pointer border-b-2 border-dark-gray/20"

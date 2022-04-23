@@ -56,7 +56,7 @@ const Pagination = ({ className, currentPage = 1, totalPage = 1, onClick }) => {
 									</PaginationItem>
 									<PaginationItem disabled />
 									{totalPage - currentPage < 4 ?
-										generatePaginationItems(4, totalPage - 3)
+										generatePaginationItems(5, totalPage - 4)
 										: (
 											<>
 												{Array.from({ length: 3 }, (_, index) => (

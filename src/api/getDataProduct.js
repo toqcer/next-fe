@@ -4,8 +4,9 @@ const getDataProduct = async ({
     page,
     order_by,
     sort_type,
-    size
-}, search) => {
+    size,
+    search
+}) => {
     const sortType = ["ASC", "DESC"];
     const querySearch = search ? `search=${search}&` : "";
     const queryPage = page ? `page=${page}&` : "";

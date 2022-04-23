@@ -5,28 +5,18 @@ import MenuStyle from "/styles/Menu.module.scss";
 import { useRouter } from "next/router";
 
 function SidebarLink({ text, href, Icon, children, className }) {
-	// const refEl = useRef(null);
 	const router = useRouter();
 	const pathName = router.pathname;
-	// const [isActive, setIsActive] = useState(() => {
-	// 	return
-	// });
-	const [isOpen, setIsOpen] = useState(false);
-	useEffect(() => {
-		try {
-			pathName.includes(href) && setIsOpen(true);
-		} catch (e) {
-			console.error(e);
-		}
-	}, []);
+	const [isOpen, setIsOpen] = useState(() => {
+		if (pathName.includes(href)) return true;
+		return false;
+	});
 
 	return (
 		<>
 			{children ? (
 				<li
-					className={`uppercase font-semibold text-dark-gray rounded-sm list-none flex ${children && "flex-col"
-						}
-                 `}
+					className={`uppercase font-semibold text-dark-gray rounded-sm list-none flex ${children && "flex-col"}`}
 				>
 					<a
 						className={`${MenuStyle["sidebar-link"]} ${isOpen && MenuStyle["dropdown-close"]
