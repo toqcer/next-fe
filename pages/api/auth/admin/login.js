@@ -1,21 +1,27 @@
 import cookie from 'cookie';
+import adminLogin from 'src/api/adminLogin';
 
-export default (req, res) => {
+export default async (req, res) => {
   try {
-    res.setHeader('Authorization', 'asdasdasd');
+    const credentials = {
+      email: req.body.email,
+      password: req.body.password,
+    }
+    const response = await Promise.any([adminLogin(credentials)]);
+    const { token, refresh_token } = response.data;
+
     res.setHeader(
       "Set-Cookie",
-      [cookie.serialize("tokenAdmin", req.body.token, {
+      [cookie.serialize("tokenAdmin", token, {
         secure: process.env.NODE_ENV !== "development",
         maxAge: 1800,
         sameSite: "strict",
         path: "/",
       }),
-      cookie.serialize("refreshAdmin", req.body.refresh_token, {
+      cookie.serialize("refreshAdmin", refresh_token, {
         httpOnly: true,
         secure: process.env.NODE_ENV !== "development",
-        // maxAge: req.body.expires,
-        maxAge: req.body.expires,
+        maxAge: 36000,
         sameSite: "strict",
         path: "/",
       })]

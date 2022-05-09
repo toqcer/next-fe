@@ -1,8 +1,7 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import { DashboardCard } from "@components/molecules";
-import AdminTemplates from "@components/templates/admin/AdminTemplates";
+import Image from "next/image";
 import Cookie from "js-cookie";
 import {
   BiBarChart,
@@ -10,8 +9,10 @@ import {
   BiUserPlus,
   BiBadgeCheck,
 } from "react-icons/bi";
+
 import { Button, Input } from "@components/atoms";
-import Image from "next/image";
+import { DashboardCard } from "@components/molecules";
+import AdminTemplates from "@components/templates/admin/AdminTemplates";
 
 const ProfileAdmin = (props) => {
   const [data, setData] = useState("");

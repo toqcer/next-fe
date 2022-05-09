@@ -26,7 +26,7 @@ export async function middleware(req) {
     );
     const data = await fetchResponse.json();
     const { token, refresh_token } = data.data;
-    const setCookie = [
+    [
       response.cookie("tokenAdmin", token, {
         secure: process.env.NODE_ENV !== "development",
         maxAge: 1800,

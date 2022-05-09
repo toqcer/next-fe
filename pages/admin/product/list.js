@@ -78,7 +78,7 @@ function ProductList() {
 
   useEffect(() => {
     const fetchDataProduct = async () => {
-      const result = await Promise.any([getDataProduct(params)])
+      const result = await Promise.any([getDataProduct(params)]);
       const { data } = result;
       const { total } = result.pagination;
       setTotalPage(total <= 0 ? 1 : Math.ceil(total / params.size));
@@ -114,7 +114,6 @@ function ProductList() {
           />
         </header>
         <article className="bg-white px-6 py-2 mt-4 shadow-md rounded-lg shadow-gray-500">
-          {/* {search.post !== "" && <span>Search by {search.post}</span>} */}
           <div className="overflow-hidden overflow-x-scroll">
             <Table className="table-fixed w-[1524px] border-collapse">
               <thead>

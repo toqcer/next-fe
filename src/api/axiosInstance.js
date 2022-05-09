@@ -2,13 +2,13 @@ import axios from "axios";
 
 const apiURL = 'https://staging-api.toqcer.uloy.dev/v1/'
 
-const getInstance = (token) => {
+const getInstance = (token = '') => {
     const instance = axios.create({
         baseURL: apiURL,
         timeout: 60000,
     });
 
-    if (token) {
+    if (!!token) {
         instance.defaults.headers.common['Authorization'] = 'Bearer ' + token;
     }
 
@@ -21,6 +21,7 @@ const getInstance = (token) => {
 }
 
 const routes = {
+    adminLogin: "/admin/login",
     getSummarys: "/admin/summary",
     getDataProducts: (query = "") => `/product/?${query}`,
 }

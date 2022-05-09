@@ -1,9 +1,10 @@
-import { AuthLink, Input, Button, Gap } from "@components/atoms";
-import { Form, Footer } from "@components/molecules";
 import Head from "next/head";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
+
+import { AuthLink, Input, Button, Gap } from "@components/atoms";
+import { Form, Footer } from "@components/molecules";
 import ErrorMessage from "@components/molecules/ErrorMessage/ErrorMessage";
 
 function Login() {
@@ -42,21 +43,9 @@ function Login() {
   const login = async (email, password) => {
     const credentials = { email, password };
     try {
-      // Get Token From API
-      const response = await axios.post(
-        "https://staging-api.toqcer.uloy.dev/v1/admin/login",
-        credentials
-      );
-      const { token, refresh_token } = response.data.data;
-      const data = {
-        token,
-        refresh_token,
-        expires: 36000,
-      };
-      // Set Cookie to httpOnly
-      const setCookie = await axios.post(
+      await axios.post(
         "/api/auth/admin/login",
-        data
+        credentials
       );
       router.reload();
     } catch (e) {

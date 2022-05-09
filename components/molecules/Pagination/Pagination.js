@@ -1,8 +1,5 @@
 import PaginationItem from "@components/molecules/Pagination/PaginationItem";
-import {
-	BiChevronsLeft,
-	BiChevronsRight,
-} from "react-icons/bi";
+import { BiChevronsLeft, BiChevronsRight } from "react-icons/bi";
 
 const Pagination = ({ className, currentPage = 1, totalPage = 1, onClick }) => {
 

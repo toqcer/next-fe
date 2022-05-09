@@ -1,28 +1,71 @@
-import { Form, Footer } from "@components/molecules";
-import { AuthLink, Input, Button } from "@components/atoms";
 import Head from "next/head";
-import { useState, useEffect } from 'react';
+import { useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
 
+import { AuthLink, Input, Button, Gap } from "@components/atoms";
+import { Form, Footer } from "@components/molecules";
+import ErrorMessage from "@components/molecules/ErrorMessage/ErrorMessage";
+
 function Login() {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [field, setField] = useState({
+        email: "",
+        password: "",
+    });
+    const [errorMsg, setErrorMsg] = useState("");
     const router = useRouter();
 
-    // const login = () => {
-    //     axios.post('http://103.150.60.157:6969/v1/admin/login', {
-    //         password,
-    //         email,
-    //     }).then(res => {
-    //         console.log(res);
-    //         // router.push("./home");
-    //     }).catch(err => {
-    //         console.log(`message : ${err}`);
-    //     })
-    // }
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const { email, password } = field;
+        const validate = email !== "" && password !== "";
+        if (validate) {
+            return login(email, password);
+        }
+        return setErrorMsg("Email atau Password harus diisi!");
+    };
 
+    const handleChange = (e) => {
+        const data = e.target.getAttribute("data-field");
+        if (data === "email") {
+            setField({
+                ...field,
+                email: e.target.value,
+            });
+        } else {
+            setField({
+                ...field,
+                password: e.target.value,
+            });
+        }
+    };
+
+    const login = async (email, password) => {
+        const credentials = { email, password };
+        try {
+            // Get Token From API
+            const response = await axios.post(
+                "https://staging-api.toqcer.uloy.dev/v1/admin/login",
+                credentials
+            );
+            const { token, refresh_token } = response.data.data;
+            const data = {
+                token,
+                refresh_token,
+                expires: 36000,
+            };
+            // Set Cookie to httpOnly
+            const setCookie = await axios.post(
+                "/api/auth/admin/login",
+                data
+            );
+            router.reload();
+        } catch (e) {
+            console.log(e);
+        }
+    };
     return (
+        // TODO Styling tag SPAN if request status 403
         <div className="h-screen bg-primary text-white overflow-hidden flex flex-col">
             <Head>
                 <title>Toqcer | login</title>
@@ -33,29 +76,39 @@ function Login() {
                 <h1 className="text-orange font-bold text-4xl my-14">ToqCer</h1>
                 {/* Form */}
                 <div className="max-w-md w-full">
-                    <Form title="Sign In">
+                    <Form onSubmit={handleSubmit} title="Sign In">
+                        {/* styling error input in component Input*/}
                         <Input
                             label="email"
                             placeholder="Email"
-                            type="email"
-                            onChange={e => setEmail(e.target.value)} />
+                            value={field.email}
+                            type="text"
+                            data-field="email"
+                            onChange={(e) => handleChange(e)}
+                        />
+                        <Gap height={8} />
                         <Input
                             label="password"
                             placeholder="Password"
+                            value={field.password}
                             type="password"
-                            onChange={e => setPassword(e.target.value)} />
-                        <Button>Sign in</Button>
+                            data-field="password"
+                            onChange={(e) => handleChange(e)}
+                        />
+                        <Gap height={28} />
+                        <Button className="rounded-lg" type="submit">
+                            Sign in
+                        </Button>
+                        {errorMsg && <ErrorMessage msg={errorMsg} />}
                     </Form>
-                    <div className="flex justify-between text-sm px-2 py-3">
-                        <AuthLink href='#forgot' title='Forgot password ?' />
-                        <AuthLink href='./register' title='Create new account' />
+                    <div className="flex justify-between text-sm px-2 py-3 text-muted ">
+                        <AuthLink href="/" title="Forgot password ?" />
                     </div>
                 </div>
                 {/* Form End */}
             </div>
             <Footer />
         </div>
-    )
+    );
 }
-
-export default Login
+export default Login;
