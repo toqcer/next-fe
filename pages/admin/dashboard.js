@@ -1,16 +1,18 @@
-import { DashboardCard } from "@components/molecules";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Cookie from "js-cookie";
-import MyChart from "lib/ChartJs";
-import AdminTemplates from "@components/templates/admin/AdminTemplates";
-import getSummary from "src/api/getSummary";
 import {
   BiBarChart,
   BiPieChart,
   BiUserPlus,
   BiBadgeCheck,
 } from "react-icons/bi";
+
+import getSummary from "src/api/getSummary";
+import MyChart from "lib/ChartJs";
+
+import { DashboardCard } from "@components/molecules";
+import AdminTemplates from "@components/templates/admin/AdminTemplates";
 
 function Dashboard() {
   const router = useRouter();

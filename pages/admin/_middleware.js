@@ -11,8 +11,8 @@ export async function middleware(req) {
       return NextResponse.redirect(url);
     }
   }
-  //If user dont have a access cookie
-  //Then get a new access cookie and refresh cookie using previous refresh Cookie
+  //if user dont have a access cookie
+  //then get a new access cookie and refresh cookie using previous refresh Cookie
   else if (refreshAdmin) {
     const fetchResponse = await fetch(
       "https://staging-api.toqcer.uloy.dev/v1/token/refresh",

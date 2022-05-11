@@ -1,7 +1,7 @@
 .pagination {
     &__item {
-        width: 40px;
-        height: 40px;
+        width: 35px;
+        height: 35px;
         @apply rounded-full shrink-0 flex items-center justify-center border border-orange-500 text-orange-500 transition-all duration-300;
 
         &:hover {
