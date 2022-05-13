@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Head from "next/head";
 
 import { AuthLink, Input, Button, Gap } from "@components/atoms";
@@ -14,6 +14,10 @@ function checkConfirmPassword(thisConfirmPassword, passwordRelated) {
     }
 }
 
+function checkEmptyField(...rest){
+  return rest.some((item) => item === "");
+}
+
 function Register() {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
@@ -21,6 +25,11 @@ function Register() {
     const [password, setPassword] = useState("");
     const [validatePassword, setValidatePassword] = useState("");
     const [isError, setIsError] = useState(false);
+    const [isDisabled, setisDisabled] = useState(false);
+
+    useEffect(() => {
+      setisDisabled(checkEmptyField(name,email,telephone,password,validatePassword));
+    }, [name,email,telephone,password,validatePassword]);
 
     return (
         <div className="h-full min-h-screen bg-primary text-white flex flex-col">
@@ -121,7 +130,7 @@ function Register() {
                                 </small>
                             )}
                             <Gap height={25} />
-                            <Button className="rounded-lg">
+                            <Button className="rounded-lg" isDisabled={isDisabled}>
                                 Create account
                             </Button>
                         </div>
