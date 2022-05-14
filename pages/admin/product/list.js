@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import { BiChevronUp, BiChevronDown } from "react-icons/bi";
+import { BiChevronUp, BiChevronDown, BiTrashAlt, BiPencil} from "react-icons/bi";
 
-import { TableCell } from "@components/atoms";
+import { TableCell, TableCellParagraph } from "@components/atoms";
 import { Search, Table, Pagination } from "@components/molecules/";
 import AdminTemplates from "@components/templates/admin/AdminTemplates";
 
@@ -144,7 +144,7 @@ function ProductList() {
                               className={`${params.order_by === label &&
                                 params.sort_type === 1
                                 ? "text-orange"
-                                : "text-gay"
+                                : "text-gray-400"
                                 }`}
                             />
                             <BiChevronDown
@@ -152,7 +152,7 @@ function ProductList() {
                               className={`-mt-2.5 ${params.order_by === label &&
                                 params.sort_type === 0
                                 ? "text-orange"
-                                : "text-gay"
+                                : "text-gray-400"
                                 }`}
                             />
                           </div>
@@ -160,22 +160,33 @@ function ProductList() {
                       </div>
                     </th>
                   ))}
+                    <th className="py-4 pr-2 font-bold text-sm w-[10%]">Action</th>
                 </tr>
               </thead>
               <tbody>
                 {datas.length !== 0 &&
                   datas.map((data, index) => (
                     <tr key={index}>
-                      <TableCell data={(params.page - 1) * params.size + (index + 1)} />
-                      <TableCell data={data.title} />
-                      <TableCell data={data.id} />
-                      <TableCell data={data.code} />
-                      <TableCell data={data.stock} />
-                      <TableCell data={data.purchase_price} />
-                      <TableCell data={data.price} />
-                      <TableCell data={data.markup_price} />
-                      <TableCell data={data.supplier_url} onClick={() => window.location.href = data.supplier_url} />
-                      <TableCell data={data.description} />
+                      <TableCellParagraph data={(params.page - 1) * params.size + (index + 1)} />
+                      <TableCellParagraph data={data.title} />
+                      <TableCellParagraph data={data.id} />
+                      <TableCellParagraph data={data.code} />
+                      <TableCellParagraph data={data.stock} />
+                      <TableCellParagraph data={data.purchase_price} />
+                      <TableCellParagraph data={data.price} />
+                      <TableCellParagraph data={data.markup_price} />
+                      <TableCellParagraph data={data.supplier_url} onClick={() => window.location.href = data.supplier_url} />
+                      <TableCellParagraph data={data.description} />
+                      <TableCell>
+                        <div className="flex items-center justify-center space-x-4">
+                          <button className="h-10 w-10 bg-dark-gray rounded-sm hover:bg-red-600">
+                            <BiTrashAlt size={24} className="text-muted"/>
+                          </button>
+                          <button className="h-10 w-10 bg-dark-gray rounded-sm hover:bg-[#35D227]">
+                            <BiPencil size={24} className="text-muted"/>
+                          </button>
+                        </div>
+                      </TableCell>
                     </tr>
                   ))}
               </tbody>

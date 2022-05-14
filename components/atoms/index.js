@@ -4,6 +4,7 @@ import AuthLink from "./AuthLink/AuthLink";
 import Gap from './Gap/Gap';
 import SidebarLink from "./SidebarLink/SidebarLink";
 import SidebarSection from "./SidebarSection/SidebarSection";
+import TableCellParagraph from "./TableCell/TableCellParagraph";
 import TableCell from "./TableCell/TableCell";
 
-export { Button, Input, AuthLink, Gap, SidebarLink, SidebarSection, TableCell };
+export { Button, Input, AuthLink, Gap, SidebarLink, SidebarSection, TableCellParagraph, TableCell};
