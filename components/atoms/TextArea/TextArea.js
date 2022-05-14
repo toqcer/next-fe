@@ -2,8 +2,8 @@ const TextArea = ({className = "" , ...rest}) => {
   return (
     <textarea 
       cols="30" 
-      rows="10" 
-      className={`${className} bg-white outline-none h-full border-0 w-full py-2 px-4`}
+      rows="15"
+      className={`${className} bg-white outline-1 outline-muted border-0 w-full h-48 py-2 px-4`}
       {...rest}>
     </textarea>
   )

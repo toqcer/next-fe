@@ -7,7 +7,7 @@ import { Input, TextArea } from '@components/atoms';
 function ProductCreate() {
   return (
     <AdminTemplates title="product create">
-        <div className='bg-white mt-12 w-full px-7 py-8 rounded-lg'>
+        <div className='bg-white mt-12 w-full px-10 py-8 rounded-lg'>
             <h3 className='text-primary font-bold text-lg'>Product Photo</h3>
             <div className="flex space-x-2 my-6">
                 <div className='h-40 w-40 flex justify-center items-center border-dashed border-2 border-muted'>

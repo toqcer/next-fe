@@ -18,7 +18,7 @@ function Input({ label, type, className="", labelColor, ...rest }) {
                 </label>
             ) : (
                 <input
-                    className={`bg-white outline-none h-full border-0 w-full py-2 px-4 ${className}`}
+                    className={`bg-white outline-1 outline-muted h-full border-0 w-full py-2 px-4 ${className}`}
                     {...rest}
                 />
             )}
