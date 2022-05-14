@@ -6,5 +6,16 @@ import SidebarLink from "./SidebarLink/SidebarLink";
 import SidebarSection from "./SidebarSection/SidebarSection";
 import TableCellParagraph from "./TableCell/TableCellParagraph";
 import TableCell from "./TableCell/TableCell";
+import TextArea from "./TextArea/TextArea";
 
-export { Button, Input, AuthLink, Gap, SidebarLink, SidebarSection, TableCellParagraph, TableCell};
+export { 
+    Button, 
+    Input, 
+    AuthLink, 
+    Gap, 
+    SidebarLink, 
+    SidebarSection, 
+    TableCellParagraph, 
+    TableCell,
+    TextArea,
+};
