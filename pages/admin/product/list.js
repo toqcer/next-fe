@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
-import { BiChevronUp, BiChevronDown, BiTrashAlt, BiPencil} from "react-icons/bi";
+import { BiChevronUp, BiChevronDown, BiPencil, BiTrashAlt} from "react-icons/bi";
 
 import { TableCell, TableCellParagraph } from "@components/atoms";
-import { Search, Table, Pagination } from "@components/molecules/";
+import { Search, Table, Pagination, ActionButton } from "@components/molecules/";
 import AdminTemplates from "@components/templates/admin/AdminTemplates";
 
 import getDataProduct from "src/api/getDataProduct";
@@ -178,13 +178,17 @@ function ProductList() {
                       <TableCellParagraph data={data.supplier_url} onClick={() => window.location.href = data.supplier_url} />
                       <TableCellParagraph data={data.description} />
                       <TableCell>
-                        <div className="flex items-center justify-center space-x-4">
-                          <button className="h-10 w-10 bg-dark-gray rounded-sm hover:bg-red-600">
-                            <BiTrashAlt size={24} className="text-muted"/>
-                          </button>
-                          <button className="h-10 w-10 bg-dark-gray rounded-sm hover:bg-[#35D227]">
-                            <BiPencil size={24} className="text-muted"/>
-                          </button>
+                        <div className="flex items-center justify-center">
+                          <ActionButton 
+                            text="edit" 
+                            className="bg-light-orange hover:bg-orange rounded-tl-lg rounded-bl-lg"
+                            Icon={<BiPencil size={19}/>}
+                          />
+                          <ActionButton 
+                            text="Delete" 
+                            className="bg-light-danger hover:bg-danger rounded-tr-lg rounded-br-lg"
+                            Icon={<BiTrashAlt size={19}/>}
+                          />
                         </div>
                       </TableCell>
                     </tr>

@@ -7,6 +7,8 @@ import DropdownContainer from "./DropdownContainer/DropdownContainer";
 import DashboardCard from "./DashboardCard/DashboardCard";
 import Table from "./Table/Table";
 import Pagination from "./Pagination/Pagination";
+import Tooltip from "./Tooltip/Tooltip";
+import ActionButton from "./ActionButton/ActionButton";
 
 export {
     Form,
@@ -17,5 +19,7 @@ export {
     DropdownContainer,
     DashboardCard,
     Table,
-    Pagination
+    Pagination,
+    Tooltip,
+    ActionButton,
 }
