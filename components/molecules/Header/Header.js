@@ -6,10 +6,12 @@ import axios from "axios";
 function Header({ title }) {
   const [shown, setShown] = useState(false);
   const router = useRouter();
+
   const logOut = async () => {
     await axios.post("http://localhost:3000/api/auth/admin/logout");
     router.reload();
   };
+  
   return (
     <div className="flex items-center justify-between py-8">
       <h1 className="text-white font-bold text-xl capitalize">{title}</h1>
