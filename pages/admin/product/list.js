@@ -9,7 +9,6 @@ import getDataProduct from "src/api/getDataProduct";
 import { labels , labelConditions } from "consts/List/label";
 
 const reducer = (state , action) => {
-  console.log(action);
   switch (action.type) {
   case "NEXT":
     return { ...state, page: state.page + 1 };
