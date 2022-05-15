@@ -4,7 +4,6 @@ import Head from "next/head";
 import { AuthLink, Input, Button, Gap } from "@components/atoms";
 import { Form, Footer } from "@components/molecules";
 
-let inputInvalid = [];
 
 function checkConfirmPassword(thisConfirmPassword, passwordRelated) {
     const isPasswordNotSame = thisConfirmPassword !== passwordRelated;

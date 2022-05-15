@@ -7,8 +7,7 @@ const Pagination = ({ className, currentPage = 1, totalPage = 1, onClick }) => {
 		Array.from({ length: totalPage }, (_, index) => (
 			<PaginationItem
 				key={index}
-				dataPage={index + initialValue}
-				onClick={onClick}
+				onClick={() => onClick({type: "SET_PAGE", payload:{page: index + initialValue}})}
 				isActive={currentPage === index + initialValue}
 			>
 				{index + initialValue}
@@ -20,8 +19,7 @@ const Pagination = ({ className, currentPage = 1, totalPage = 1, onClick }) => {
 		<div className={`${className} flex gap-2`}>
 			<PaginationItem
 				disabled={currentPage <= 1}
-				dataPage="prev"
-				onClick={onClick}
+				onClick={()=> onClick({type:"PREV"})}
 			>
 				<BiChevronsLeft />
 			</PaginationItem>
@@ -35,8 +33,7 @@ const Pagination = ({ className, currentPage = 1, totalPage = 1, onClick }) => {
 									{generatePaginationItems(4)}
 									<PaginationItem disabled />
 									<PaginationItem
-										dataPage={totalPage}
-										onClick={onClick}
+										onClick={() => onClick({type: "SET_PAGE", payload:{page: totalPage}})}
 										isActive={currentPage === totalPage}
 									>
 										{totalPage}
@@ -45,8 +42,7 @@ const Pagination = ({ className, currentPage = 1, totalPage = 1, onClick }) => {
 							) : (
 								<>
 									<PaginationItem
-										dataPage={1}
-										onClick={onClick}
+										onClick={() => onClick({type: "SET_PAGE", payload:{page: 1}})}
 										isActive={currentPage === 1}
 									>
 										1
@@ -59,8 +55,7 @@ const Pagination = ({ className, currentPage = 1, totalPage = 1, onClick }) => {
 												{Array.from({ length: 3 }, (_, index) => (
 													<PaginationItem
 														key={index}
-														dataPage={currentPage - 1 + index}
-														onClick={onClick}
+														onClick={() => onClick({type: "SET_PAGE", payload:{page: currentPage - 1 + index}})}
 														isActive={currentPage === currentPage - 1 + index}
 													>
 														{currentPage - 1 + index}
@@ -68,8 +63,7 @@ const Pagination = ({ className, currentPage = 1, totalPage = 1, onClick }) => {
 												))}
 												<PaginationItem disabled />
 												<PaginationItem
-													dataPage={totalPage}
-													onClick={onClick}
+													onClick={() => onClick({type: "SET_PAGE", payload:{page: totalPage}})}
 													isActive={currentPage === totalPage}
 												>
 													{totalPage}
@@ -83,8 +77,7 @@ const Pagination = ({ className, currentPage = 1, totalPage = 1, onClick }) => {
 			</div>
 			<PaginationItem
 				disabled={currentPage >= totalPage}
-				dataPage="next"
-				onClick={onClick}
+				onClick={()=> onClick({type:"PREV"})}
 			>
 				<BiChevronsRight />
 			</PaginationItem>

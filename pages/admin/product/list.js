@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useReducer } from "react";
 import { BiChevronUp, BiChevronDown, BiPencil, BiTrashAlt} from "react-icons/bi";
 
 import { TableCell, TableCellParagraph } from "@components/atoms";
@@ -6,75 +6,50 @@ import { Search, Table, Pagination, ActionButton } from "@components/molecules/"
 import AdminTemplates from "@components/templates/admin/AdminTemplates";
 
 import getDataProduct from "src/api/getDataProduct";
+import { labels , labelConditions } from "consts/List/label";
+
+const reducer = (state , action) => {
+  console.log(action);
+  switch (action.type) {
+  case "NEXT":
+    return { ...state, page: state.page + 1 };
+  case "PREV":
+    return { ...state, page: state.page - 1 };
+  case "SET_PAGE":
+    return { ...state, page: action.payload.page };
+  case "SET_SEARCH":
+    return {...state, page: 1, search: action.payload.search };
+  case "SET_SIZE":
+    return {...state, page: 1, size: action.payload.size};
+  case "SET_ORDER":
+    return {...state, order_by: action.payload.order, sort_type: action.payload.sort}
+  default:
+    return state
+  }
+}
 
 function ProductList() {
-  const labels = [
-    "title",
-    "id",
-    "code",
-    "stock",
-    "purchase_price",
-    "price",
-    "markup_price",
-    "supplier",
-    "description",
-  ];
-  const labelConditions = ["supplier", "description", "code"];
-  const [search, setSearch] = useState('');
-  const [datas, setDatas] = useState([]);
-  const [totalPage, setTotalPage] = useState(0);
-  const [params, setParams] = useState({
+  const initialState = {
     order_by: 'id',
     sort_type: 0,
     page: 1,
     size: 10,
     search: '',
-  });
+  }
 
-  const handleOnSearch = () => {
-    setParams({
-      ...params,
-      page: 1,
-      search,
-    });
-  };
+  const [search, setSearch] = useState('');
+  const [datas, setDatas] = useState([]);
+  const [totalPage, setTotalPage] = useState(0);
+  const [params, dispatch] = useReducer(reducer,initialState);
 
-  const handdleChangeParams = (e) => {
-    const dataSize = e.target.dataset.params;
-    const dataOrder = e.currentTarget.dataset.order;
-    const dataPagination = e.currentTarget.dataset.page;
-    if (dataSize === "size") {
-      const value = e.target.value;
-      return setParams({
-        ...params,
-        page: 1,
-        size: value,
-      });
+  const handleChangeDataOrder = (e) => {
+    const { order } = e.currentTarget.dataset;
+    let sort_type = 0;
+    if (params.order_by === order) {
+      sort_type = Number(!params.sort_type);
     }
-    if (dataOrder) {
-      let sort_type = 0;
-      if (params.order_by === dataOrder) {
-        sort_type = Number(!params.sort_type);
-      }
-      return setParams({
-        ...params,
-        sort_type,
-        order_by: dataOrder,
-      });
-    }
-    if (dataPagination) {
-      if (dataPagination === "prev") {
-        dataPagination = params.page - 1;
-      }
-      if (dataPagination === "next") {
-        dataPagination = params.page + 1;
-      }
-      return setParams({
-        ...params,
-        page: Number(dataPagination),
-      });
-    }
-  };
+    return {type: "SET_ORDER", payload: {order: order, sort: sort_type}}
+  }
 
   useEffect(() => {
     const fetchDataProduct = async () => {
@@ -84,7 +59,6 @@ function ProductList() {
       setTotalPage(total <= 0 ? 1 : Math.ceil(total / params.size));
       setDatas(data);
     };
-
     fetchDataProduct();
   }, [params]);
 
@@ -97,8 +71,7 @@ function ProductList() {
             <select
               className="text-black mx-2 px-3 py-1 rounded"
               value={params.size}
-              data-params="size"
-              onChange={handdleChangeParams}
+              onChange={(e) => dispatch({type: "SET_SIZE", payload: {size: parseInt(e.target.value)}})}
             >
               <option value="10">10</option>
               <option value="20">20</option>
@@ -110,7 +83,7 @@ function ProductList() {
             maxWidth="sm:max-w-[350px] xl:max-w-[450px] -order-1 sm:order-1"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            onClick={handleOnSearch}
+            onClick={()=> dispatch({type: "SET_SEARCH", payload:{ search }})}
           />
         </header>
         <article className="bg-white px-6 py-2 mt-4 shadow-md rounded-lg shadow-gray-500">
@@ -136,7 +109,7 @@ function ProductList() {
                         {!labelConditions.some((el) => label.includes(el)) && (
                           <div
                             data-order={label}
-                            onClick={(e) => handdleChangeParams(e)}
+                            onClick={(e) => dispatch(handleChangeDataOrder(e))}
                             className="cursor-pointer flex flex-col"
                           >
                             <BiChevronUp
@@ -204,7 +177,7 @@ function ProductList() {
               className="grow-0 w-full justify-center md:w-max"
               totalPage={totalPage}
               currentPage={params.page}
-              onClick={handdleChangeParams}
+              onClick={dispatch}
             />
           </div>
         </article>

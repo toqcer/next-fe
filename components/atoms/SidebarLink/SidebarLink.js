@@ -1,8 +1,9 @@
+import { useState } from "react";
 import Link from "next/link";
-import { BiChevronRight } from "react-icons/bi";
-import { useState, useEffect, useRef } from "react";
-import MenuStyle from "/styles/Menu.module.scss";
 import { useRouter } from "next/router";
+import { BiChevronRight } from "react-icons/bi";
+
+import MenuStyle from "/styles/Menu.module.scss";
 
 function SidebarLink({ text, href, Icon, children, className }) {
 	const router = useRouter();
