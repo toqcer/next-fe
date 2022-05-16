@@ -1,7 +1,8 @@
-import { Gap, SidebarLink, SidebarSection } from "@components/atoms";
 import { useState } from "react";
-import sidebarProps from "consts/dashboard";
 import { Scrollbars } from "react-custom-scrollbars-2";
+
+import { Gap, SidebarLink, SidebarSection } from "@components/atoms";
+import sidebarProps from "consts/dashboard";
 
 function Sidebar() {
   // Responsive state
