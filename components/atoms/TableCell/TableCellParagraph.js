@@ -1,6 +1,6 @@
 import TableCell from "./TableCell"
 
-const TableCellParagraph = ({ onClick, data }) => {
+const TableCellParagraph = ({ onClick, text }) => {
     return (
         <TableCell>
             <div className="h-24">
@@ -8,7 +8,7 @@ const TableCellParagraph = ({ onClick, data }) => {
                     className={`${!!onClick ? 'cursor-pointer' : ''} overflow-hidden w-full h-full text-ellipsis`}
                     onClick={onClick}
                 >
-                    {data}
+                    {text}
                 </p>
             </div>
         </TableCell>

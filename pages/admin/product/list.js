@@ -41,13 +41,12 @@ function ProductList() {
   const [totalPage, setTotalPage] = useState(0);
   const [params, dispatch] = useReducer(reducer,initialState);
 
-  const handleChangeDataOrder = (e) => {
-    const { order } = e.currentTarget.dataset;
-    let sort_type = 0;
-    if (params.order_by === order) {
-      sort_type = Number(!params.sort_type);
+  const handleChangeDataOrder = (orderBy) => {
+    let sortType = 0;
+    if (params.order_by === orderBy) {
+      sortType = Number(!params.sort_type);
     }
-    return {type: "SET_ORDER", payload: {order: order, sort: sort_type}}
+    return {type: "SET_ORDER", payload: {order: orderBy, sort: sortType}}
   }
 
   useEffect(() => {
@@ -107,8 +106,7 @@ function ProductList() {
                         </span>
                         {!labelConditions.some((el) => label.includes(el)) && (
                           <div
-                            data-order={label}
-                            onClick={(e) => dispatch(handleChangeDataOrder(e))}
+                            onClick={() => dispatch(handleChangeDataOrder(label))}
                             className="cursor-pointer flex flex-col"
                           >
                             <BiChevronUp
@@ -139,16 +137,16 @@ function ProductList() {
                 {datas.length !== 0 &&
                   datas.map((data, index) => (
                     <tr key={index}>
-                      <TableCellParagraph data={(params.page - 1) * params.size + (index + 1)} />
-                      <TableCellParagraph data={data.title} />
-                      <TableCellParagraph data={data.id} />
-                      <TableCellParagraph data={data.code} />
-                      <TableCellParagraph data={data.stock} />
-                      <TableCellParagraph data={data.purchase_price} />
-                      <TableCellParagraph data={data.price} />
-                      <TableCellParagraph data={data.markup_price} />
-                      <TableCellParagraph data={data.supplier_url} onClick={() => window.location.href = data.supplier_url} />
-                      <TableCellParagraph data={data.description} />
+                      <TableCellParagraph text={(params.page - 1) * params.size + (index + 1)} />
+                      <TableCellParagraph text={data.title} />
+                      <TableCellParagraph text={data.id} />
+                      <TableCellParagraph text={data.code} />
+                      <TableCellParagraph text={data.stock} />
+                      <TableCellParagraph text={data.purchase_price} />
+                      <TableCellParagraph text={data.price} />
+                      <TableCellParagraph text={data.markup_price} />
+                      <TableCellParagraph text={data.supplier_url} onClick={() => window.location.href = data.supplier_url} />
+                      <TableCellParagraph text={data.description} />
                       <TableCell>
                         <div className="flex items-center justify-center">
                           <ActionButton 
