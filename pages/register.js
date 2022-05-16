@@ -25,6 +25,22 @@ function Register() {
     const [isError, setIsError] = useState(false);
     const [isDisabled, setisDisabled] = useState(false);
 
+    const [isLoading, setIsLoading] = useState(false);
+
+    const handleRegist = (e) => {
+        e.preventDefault();
+
+        setisDisabled(true);
+        setIsLoading(true);
+
+        //logic register here
+        setTimeout(() => {
+            setIsLoading(false);
+            setisDisabled(false);
+        }, 500);
+        //end of logic register here
+    };
+
     useEffect(() => {
         setisDisabled(
             checkEmptyField(name, email, telephone, password, validatePassword)
@@ -45,7 +61,11 @@ function Register() {
                 <h1 className="text-orange font-bold text-4xl my-14">ToqCer</h1>
                 {/* Form */}
                 <div className="max-w-2xl w-full">
-                    <Form title="Sign Up" autoComplete="off">
+                    <Form
+                        title="Sign Up"
+                        autoComplete="off"
+                        onSubmit={(e) => handleRegist(e)}
+                    >
                         <div className="px-2">
                             <Input
                                 label="name"
@@ -133,6 +153,7 @@ function Register() {
                             <Button
                                 className="rounded-lg"
                                 isDisabled={isDisabled || isError}
+                                isLoading={isLoading}
                             >
                                 Create account
                             </Button>

@@ -1,12 +1,24 @@
-function Button({ children, className, isDisabled = false, ...rest }) {
+import { BiLoaderAlt } from "react-icons/bi";
+
+function Button({
+    children,
+    className,
+    isDisabled = false,
+    isLoading = false,
+    ...rest
+}) {
     return (
         <button
             className={`uppercase w-full font-bold bg-orange py-2 px-2 hover:shadow-md hover:bg-amber-500 ${className} 
             ${isDisabled ? "opacity-50 cursor-not-allowed" : ""}`}
-            disabled={isDisabled}
+            disabled={isDisabled || isLoading}
             {...rest}
         >
-            {children}
+            {isLoading ? (
+                <BiLoaderAlt className="animate-spin" size={24} />
+            ) : (
+                children
+            )}
         </button>
     );
 }
