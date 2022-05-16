@@ -4,7 +4,6 @@ import Head from "next/head";
 import { AuthLink, Input, Button, Gap } from "@components/atoms";
 import { Form, Footer } from "@components/molecules";
 
-
 function checkConfirmPassword(thisConfirmPassword, passwordRelated) {
     const isPasswordNotSame = thisConfirmPassword !== passwordRelated;
 
@@ -13,8 +12,8 @@ function checkConfirmPassword(thisConfirmPassword, passwordRelated) {
     }
 }
 
-function checkEmptyField(...rest){
-  return rest.some((item) => item === "");
+function checkEmptyField(...rest) {
+    return rest.some((item) => item === "");
 }
 
 function Register() {
@@ -27,8 +26,10 @@ function Register() {
     const [isDisabled, setisDisabled] = useState(false);
 
     useEffect(() => {
-      setisDisabled(checkEmptyField(name,email,telephone,password,validatePassword));
-    }, [name,email,telephone,password,validatePassword]);
+        setisDisabled(
+            checkEmptyField(name, email, telephone, password, validatePassword)
+        );
+    }, [name, email, telephone, password, validatePassword]);
 
     return (
         <div className="h-full min-h-screen bg-primary text-white flex flex-col">
@@ -129,7 +130,10 @@ function Register() {
                                 </small>
                             )}
                             <Gap height={25} />
-                            <Button className="rounded-lg" isDisabled={isDisabled}>
+                            <Button
+                                className="rounded-lg"
+                                isDisabled={isDisabled || isError}
+                            >
                                 Create account
                             </Button>
                         </div>
