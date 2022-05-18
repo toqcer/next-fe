@@ -34,7 +34,7 @@ const MarketplaceList = () => {
     return {type: "SET_ORDER", payload: {order: orderBy, sort: sortType}}
   }
 
-  const deleteMarketplaceById = () =>{
+  const deleteMarketplaceById = async() =>{
     try{
       const result = await Promise.any([deleteMarketplaceList(deletedId)]);
       console.log(result);
