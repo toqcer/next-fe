@@ -1,15 +1,25 @@
 import TableCell from "./TableCell"
 
-const TableCellParagraph = ({ onClick, text }) => {
+const TableCellParagraph = ({ text, href }) => {
     return (
         <TableCell>
             <div className="h-24">
-                <p
-                    className={`${!!onClick ? 'cursor-pointer' : ''} overflow-hidden w-full h-full text-ellipsis`}
-                    onClick={onClick}
-                >
-                    {text}
-                </p>
+                {href ? (
+                    <a
+                        className='cursor-pointer overflow-hidden w-full h-full text-ellipsis'
+                        href={href}
+                        target="_blank"
+                    >
+                        {text}
+                    </a>
+                ):(
+                    <p
+                        className='overflow-hidden w-full h-full text-ellipsis'
+                    >
+                        {text}
+                    </p>
+                )}
+                
             </div>
         </TableCell>
     )

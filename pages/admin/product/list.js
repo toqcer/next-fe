@@ -7,25 +7,7 @@ import AdminTemplates from "@components/templates/admin/AdminTemplates";
 
 import getDataProduct from "src/api/getDataProduct";
 import { labels , labelConditions } from "consts/List/label";
-
-const reducer = (state , action) => {
-  switch (action.type) {
-  case "NEXT":
-    return { ...state, page: state.page + 1 };
-  case "PREV":
-    return { ...state, page: state.page - 1 };
-  case "SET_PAGE":
-    return { ...state, page: action.payload.page };
-  case "SET_SEARCH":
-    return {...state, page: 1, search: action.payload.search };
-  case "SET_SIZE":
-    return {...state, page: 1, size: action.payload.size};
-  case "SET_ORDER":
-    return {...state, order_by: action.payload.order, sort_type: action.payload.sort}
-  default:
-    return state
-  }
-}
+import { listReducer as reducer } from "@src/reducer/listReducer";
 
 function ProductList() {
   const initialState = {
@@ -37,6 +19,7 @@ function ProductList() {
   }
 
   const [search, setSearch] = useState('');
+  const [deletedId, setDeletedId] = useState('');
   const [datas, setDatas] = useState([]);
   const [totalPage, setTotalPage] = useState(0);
   const [params, dispatch] = useReducer(reducer,initialState);
@@ -145,7 +128,7 @@ function ProductList() {
                       <TableCellParagraph text={data.purchase_price} />
                       <TableCellParagraph text={data.price} />
                       <TableCellParagraph text={data.markup_price} />
-                      <TableCellParagraph text={data.supplier_url} onClick={() => window.location.href = data.supplier_url} />
+                      <TableCellParagraph text={data.supplier_url} href={data.supplier_url} />
                       <TableCellParagraph text={data.description} />
                       <TableCell>
                         <div className="flex items-center justify-center">
@@ -157,6 +140,7 @@ function ProductList() {
                           <ActionButton 
                             text="Delete" 
                             className="bg-light-danger hover:bg-danger rounded-tr-lg rounded-br-lg"
+                            onClick={()=>setDeletedId(data.id)}
                             Icon={<BiTrashAlt size={19}/>}
                           />
                         </div>

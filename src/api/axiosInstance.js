@@ -24,6 +24,8 @@ const routes = {
     adminLogin: "/admin/login",
     getSummarys: "/admin/summary",
     getDataProducts: (query = "") => `/product/?${query}`,
+    getMarketplaceList: (query = "") => `/marketplace/?${query}`,
+    deleteMarketplaceList: (marketplaceId) => `/marketplace/${marketplaceId}`,
 }
 
 export { getInstance, routes };
