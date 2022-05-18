@@ -27,7 +27,6 @@ function Sidebar() {
                   <SidebarLink
                     key={index}
                     text={level1.text}
-                    href={level1.href}
                     Icon={level1.icon()}
                   >
                     <ul

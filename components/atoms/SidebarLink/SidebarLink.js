@@ -19,7 +19,7 @@ function SidebarLink({ text, href, Icon, children, className }) {
 				<li
 					className={`uppercase font-semibold text-dark-gray rounded-sm list-none flex ${children && "flex-col"}`}
 				>
-					<a
+					<span
 						className={`${MenuStyle["sidebar-link"]} ${isOpen && MenuStyle["dropdown-close"]
 							} w-full px-6 py-3 cursor-pointer inline-flex gap-x-2 items-center hover:text-orange hover:bg-gay/30 `}
 						onClick={() => setIsOpen(!isOpen)}
@@ -31,7 +31,7 @@ function SidebarLink({ text, href, Icon, children, className }) {
 						>
 							<BiChevronRight />
 						</span>
-					</a>
+					</span>
 					{children}
 				</li>
 			) : (
