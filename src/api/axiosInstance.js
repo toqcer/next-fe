@@ -1,16 +1,22 @@
 import axios from "axios";
+import Cookie from "js-cookie";
 
 const apiURL = 'https://staging-api.toqcer.uloy.dev/v1/'
 
-const getInstance = (token = '') => {
+const getInstance = () => {
+    const token = Cookie.get("tokenAdmin");
+
     const instance = axios.create({
         baseURL: apiURL,
         timeout: 60000,
     });
 
-    if (!!token) {
-        instance.defaults.headers.common['Authorization'] = 'Bearer ' + token;
-    }
+    instance.interceptors.request.use(
+        (config) => {
+            config.headers.Authorization = token ? `Bearer ${token}` : '';
+            return config;
+        }
+    )
 
     instance.interceptors.response.use(
         (response) => response,

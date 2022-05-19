@@ -9,6 +9,7 @@ const TableCellParagraph = ({ text, href }) => {
                         className='cursor-pointer overflow-hidden w-full h-full text-ellipsis'
                         href={href}
                         target="_blank"
+                        rel="noreferrer"
                     >
                         {text}
                     </a>

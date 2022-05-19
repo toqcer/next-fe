@@ -24,6 +24,7 @@ const MarketplaceList = () => {
   const [datas, setDatas] = useState([]);
   const [deletedId, setDeletedId] = useState('');
   const [totalPage, setTotalPage] = useState(0);
+  const [modalShown, setModalShown] = useState(false);
   const [params, dispatch] = useReducer(reducer,initialState);
 
   const handleChangeDataOrder = (orderBy) => {
@@ -34,10 +35,19 @@ const MarketplaceList = () => {
     return {type: "SET_ORDER", payload: {order: orderBy, sort: sortType}}
   }
 
-  const deleteMarketplaceById = async() =>{
+  const fetchMarketplaceList = async () => {
+    const result = await Promise.any([getMarketplaceList(params)]);
+    const { data } = result;
+    const { total } = result.pagination;
+    setTotalPage(total <= 0 ? 1 : Math.ceil(total / params.size));
+    setDatas(data);
+  };
+
+  const deleteMarketplaceById = async(deletedId) =>{
     try{
       const result = await Promise.any([deleteMarketplaceList(deletedId)]);
       setDeletedId('');
+      fetchMarketplaceList();
       console.log(result);
     }
     catch(err){
@@ -46,19 +56,16 @@ const MarketplaceList = () => {
   }
 
   useEffect(() => {
-    const fetchMarketplaceList = async () => {
-      const result = await Promise.any([getMarketplaceList(params)]);
-      const { data } = result;
-      const { total } = result.pagination;
-      setTotalPage(total <= 0 ? 1 : Math.ceil(total / params.size));
-      setDatas(data);
-    };
     fetchMarketplaceList();
   }, [params]);
 
   return (
     <>
-      <DeletedModal/>
+      <DeletedModal 
+        isShown={modalShown} 
+        setModalShown={setModalShown}
+        cb={() => deleteMarketplaceById(deletedId)}
+      />
       <AdminTemplates title="marketplace list">
           <div className="py-8 sm:py-20 ">
           <header className="flex flex-col justify-between sm:flex-row sm:items-center gap-4">
@@ -146,7 +153,10 @@ const MarketplaceList = () => {
                             <ActionButton 
                               text="Delete" 
                               className="bg-light-danger hover:bg-danger rounded-tr-lg rounded-br-lg"
-                              onClick={()=>setDeletedId(data.id)}
+                              onClick={()=>{
+                                setDeletedId(data.id);
+                                setModalShown(true);
+                              }}
                               Icon={<BiTrashAlt size={19}/>}
                             />
                           </div>

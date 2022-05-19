@@ -3,15 +3,8 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import Cookie from "js-cookie";
-import {
-    BiBarChart,
-    BiPieChart,
-    BiUserPlus,
-    BiBadgeCheck,
-} from "react-icons/bi";
 
 import { Button, Input } from "@components/atoms";
-import { DashboardCard } from "@components/molecules";
 import AdminTemplates from "@components/templates/admin/AdminTemplates";
 
 const ProfileAdmin = (props) => {

@@ -1,8 +1,9 @@
 import { getInstance, routes } from "./axiosInstance";
 
-const getSummary = async (token) => {
+
+const getSummary = async () => {
     try {
-        const response = await getInstance(token).get(routes.getSummarys);
+        const response = await getInstance().get(routes.getSummarys);
         const { data } = response;
         return data;
     } catch (err) {

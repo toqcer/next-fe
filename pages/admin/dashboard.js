@@ -31,8 +31,7 @@ function Dashboard() {
   });
 
   const getDataChart = async () => {
-    const token = Cookie.get("tokenAdmin");
-    const result = await Promise.any([getSummary(token)]);
+    const result = await Promise.any([getSummary()]);
     setData(result.data);
   }
 
