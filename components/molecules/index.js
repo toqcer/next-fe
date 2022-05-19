@@ -9,6 +9,7 @@ import Table from "./Table/Table";
 import Pagination from "./Pagination/Pagination";
 import Tooltip from "./Tooltip/Tooltip";
 import ActionButton from "./ActionButton/ActionButton";
+import DeletedModal from "./Modal/DeletedModal";
 
 export {
     Form,
@@ -22,4 +23,5 @@ export {
     Pagination,
     Tooltip,
     ActionButton,
+    DeletedModal,
 }

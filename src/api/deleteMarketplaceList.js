@@ -2,7 +2,7 @@ import { getInstance, routes } from "./axiosInstance";
 
 const deleteMarketplaceList = async(marketplaceId) => {
     try{
-        const response = await getInstance().get(routes.deleteMarketplaceList(marketplaceId));
+        const response = await getInstance().delete(routes.deleteMarketplaceList(marketplaceId));
         const { data } = response;
         return data;
     }catch(err){
