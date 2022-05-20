@@ -12,6 +12,8 @@ const listReducer = (state , action) => {
       return {...state, page: 1, size: action.payload.size};
     case "SET_ORDER":
       return {...state, order_by: action.payload.order, sort_type: action.payload.sort}
+    case "ALL":
+      return {...state, ...action.payload}
     default:
       return state
     }

@@ -16,7 +16,7 @@ const DeletedModal = ({isShown = false, setModalShown, cb}) => {
             <div className='space-y-4 mb-28'>
                 <BiTrashAlt className='mx-auto block w-12 h-12 text-light-danger'/>
                 <h3 className='font-bold text-orange text-center text-xl'>DELETE CONFIRMATION</h3>
-                <p className='text-sm'>This product will permanently deleted and you won’t be able to see it again.</p>
+                <p className='text-sm font-medium'>This product will permanently deleted and you won’t be able to see it again.</p>
             </div>
             <div className="flex gap-4 mb-4">
                 <Button 

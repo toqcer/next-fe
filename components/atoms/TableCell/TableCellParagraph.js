@@ -3,10 +3,10 @@ import TableCell from "./TableCell"
 const TableCellParagraph = ({ text, href }) => {
     return (
         <TableCell>
-            <div className="h-24">
+            <div className="h-24 text-ellipsis overflow-hidden">
                 {href ? (
                     <a
-                        className='cursor-pointer overflow-hidden w-full h-full text-ellipsis'
+                        className='cursor-pointer w-full h-full '
                         href={href}
                         target="_blank"
                         rel="noreferrer"
@@ -15,7 +15,7 @@ const TableCellParagraph = ({ text, href }) => {
                     </a>
                 ):(
                     <p
-                        className='overflow-hidden w-full h-full text-ellipsis'
+                        className='overflow-hidden w-full h-full'
                     >
                         {text}
                     </p>

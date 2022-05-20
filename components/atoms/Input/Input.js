@@ -1,4 +1,4 @@
-function Input({ label, type, className="", labelColor, ...rest }) {
+function Input({ label, className="", labelColor, ...rest }) {
     return (
         <div className="w-full">
             {label ? (
@@ -11,7 +11,6 @@ function Input({ label, type, className="", labelColor, ...rest }) {
                         {label}
                     </span>
                     <input
-                        type={type}
                         className="outline-muted w-full py-2 px-4 rounded-md"
                         {...rest}
                     />

@@ -7,6 +7,7 @@ import SidebarSection from "./SidebarSection/SidebarSection";
 import TableCellParagraph from "./TableCell/TableCellParagraph";
 import TableCell from "./TableCell/TableCell";
 import TextArea from "./TextArea/TextArea";
+import Label from "./Label/Label";
 
 export { 
     Button, 
@@ -18,4 +19,5 @@ export {
     TableCellParagraph, 
     TableCell,
     TextArea,
+    Label
 };
