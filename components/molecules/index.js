@@ -10,18 +10,20 @@ import Pagination from "./Pagination/Pagination";
 import Tooltip from "./Tooltip/Tooltip";
 import ActionButton from "./ActionButton/ActionButton";
 import DeletedModal from "./Modal/DeletedModal";
+import ImgUpload from "./ImgUpload/ImgUpload";
 
 export {
-    Form,
-    Header,
-    Footer,
-    Sidebar,
-    Search,
-    DropdownContainer,
-    DashboardCard,
-    Table,
-    Pagination,
-    Tooltip,
-    ActionButton,
-    DeletedModal,
-}
+  Form,
+  Header,
+  Footer,
+  Sidebar,
+  Search,
+  DropdownContainer,
+  DashboardCard,
+  Table,
+  Pagination,
+  Tooltip,
+  ActionButton,
+  DeletedModal,
+  ImgUpload,
+};
