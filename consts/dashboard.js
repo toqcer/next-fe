@@ -44,6 +44,7 @@ const sidebarProps = [
       {
         text: "product",
         icon: () => <BiPackage />,
+        href: "/admin/product",
         children: [
           {
             text: "List",
@@ -52,7 +53,7 @@ const sidebarProps = [
           },
           {
             text: "Show",
-            href: "/admin/pruduct/show",
+            href: "/admin/product/show",
             icon: () => <BiShow />,
           },
           {
@@ -70,6 +71,7 @@ const sidebarProps = [
       {
         text: "marketplace",
         icon: () => <BiStore />,
+        href: "/admin/marketplace",
         children: [
           {
             text: "List",
@@ -81,7 +83,7 @@ const sidebarProps = [
             href: "/admin/marketplace/show",
             icon: () => <BiShow />,
           },
-        ]
+        ],
       },
     ],
   },

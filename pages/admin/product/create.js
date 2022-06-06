@@ -62,7 +62,6 @@ function ProductCreate() {
 
   const handleSubmit = async () => {
     const form = new FormData();
-    console.log("jere");
     imgDataList.forEach((item) => {
       form.append("files", item);
     });

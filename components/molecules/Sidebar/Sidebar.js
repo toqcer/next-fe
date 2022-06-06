@@ -28,6 +28,7 @@ function Sidebar() {
                     key={index}
                     text={level1.text}
                     Icon={level1.icon()}
+                    href={level1.href}
                   >
                     <ul
                       className={`m-0 transition-all duration-300 overflow-hidden`}
@@ -46,8 +47,8 @@ function Sidebar() {
                 ) : (
                   <SidebarLink
                     text={level1.text}
-                    key={Math.random()}
                     href={level1.href}
+                    key={Math.random()}
                     Icon={level1.icon()}
                     className="py-3"
                   />
