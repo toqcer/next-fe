@@ -55,7 +55,7 @@ function ProductList() {
     try {
       const result = await Promise.any([deleteProduct(deletedId)]);
       setDeletedId("");
-      setModalIsShown("");
+      setModalIsShown(false);
       dispatch({ type: "ALL", initialState });
     } catch (err) {
       console.log(err);
