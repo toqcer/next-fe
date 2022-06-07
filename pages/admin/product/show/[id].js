@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 
 import getProductDetail from "@src/api/getProductDetail";
-import getDataProduct from "@src/api/getDataProduct";
+
 import AdminTemplates from "@components/templates/admin/AdminTemplates";
 import { LiDash, Button } from "@components/atoms";
 
@@ -16,6 +16,9 @@ const numberFormatToIdr = (number) => {
 
 const ProductShow = ({ productDetail }) => {
   const { data } = productDetail;
+  if (!data) {
+    return <div>Hello</div>;
+  }
   const {
     code,
     price,
@@ -24,10 +27,8 @@ const ProductShow = ({ productDetail }) => {
     purchase_price: purchasePrice,
     title,
     description,
-  } = productDetail.data;
+  } = data;
 
-  console.log(data);
-  // return (<pre>{JSON.stringify(data, null, 2)}</pre>);
   return (
     <AdminTemplates title="product show">
       <div className="bg-white  mt-12 w-full px-10 py-8 rounded-lg">
@@ -109,23 +110,11 @@ const ProductShow = ({ productDetail }) => {
   );
 };
 
-export async function getStaticPaths() {
-  const { data } = await Promise.any([getDataProduct({})]);
-  const paths = data.map((product) => {
-    return { params: { id: `${product.id}` } };
-  });
-
-  return {
-    paths,
-    fallback: false,
-  };
-}
-
-export async function getStaticProps({ params }) {
-  const { data: productDetail } = await Promise.any([
-    getProductDetail(params.id),
-  ]);
-
+export async function getServerSideProps(ctx) {
+  const {
+    params: { id },
+  } = ctx;
+  const { data: productDetail } = await Promise.any([getProductDetail(id)]);
   return { props: { productDetail } };
 }
 
