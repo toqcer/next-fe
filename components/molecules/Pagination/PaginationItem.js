@@ -1,4 +1,4 @@
-import PaginationStyle from "styles/Pagination.module.scss";
+import PaginationStyle from 'styles/Pagination.module.scss';
 
 const PaginationItem = ({
   className,
@@ -10,12 +10,12 @@ const PaginationItem = ({
   return (
     <button
       className={`${PaginationStyle.pagination__item} ${
-        isActive ? PaginationStyle["pagination__item--active"] : ""
-      } ${className ? className : ""}`}
+        isActive ? PaginationStyle['pagination__item--active'] : ''
+      } ${className ? className : ''}`}
       onClick={onClick}
       disabled={disabled}
     >
-      <span>{children || "..."}</span>
+      <span>{children || '...'}</span>
     </button>
   );
 };

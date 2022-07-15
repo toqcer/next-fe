@@ -1,11 +1,11 @@
-import { Button, Input } from "@components/atoms";
-import { BiSearch } from "react-icons/bi";
+import { Button, Input } from '@components/atoms';
+import { BiSearch } from 'react-icons/bi';
 
 function Search({ onChange, onClick, value, maxWidth }) {
   return (
     <div
       className={`flex flex-1 bg-white rounded-sm overflow-hidden text-black ${
-        maxWidth ? maxWidth : ""
+        maxWidth ? maxWidth : ''
       }`}
     >
       <Input

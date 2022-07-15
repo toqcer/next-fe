@@ -1,4 +1,4 @@
-const TextArea = ({ className = "", ...rest }) => {
+const TextArea = ({ className = '', ...rest }) => {
   return (
     <textarea
       cols="30"

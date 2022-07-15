@@ -1,11 +1,11 @@
-function Input({ label, className = "", labelColor, ...rest }) {
+function Input({ label, className = '', labelColor, ...rest }) {
   return (
     <div className="w-full">
       {label ? (
         <label className="font-semibold text-lg text-black uppercase cursor-pointer">
           <span
             className={`mb-2 inline-block ${
-              labelColor ? labelColor : "text-black"
+              labelColor ? labelColor : 'text-black'
             }`}
           >
             {label}

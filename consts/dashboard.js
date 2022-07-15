@@ -10,29 +10,29 @@ import {
   BiShow,
   BiPencil,
   BiUpload,
-} from "react-icons/bi";
+} from 'react-icons/bi';
 
 const sidebarProps = [
   {
     children: [
       {
-        text: "dashboard",
-        href: "/admin/dashboard",
+        text: 'dashboard',
+        href: '/admin/dashboard',
         icon: () => <BiDesktop />,
       },
       {
-        text: "profile",
-        href: "/admin/profile",
+        text: 'profile',
+        href: '/admin/profile',
         icon: () => <BiCog />,
       },
       {
-        text: "Admin",
-        href: "/admin/manage",
+        text: 'Admin',
+        href: '/admin/manage',
         icon: () => <BiKey />,
       },
       {
-        text: "user",
-        href: "/admin/user",
+        text: 'user',
+        href: '/admin/user',
         icon: () => <BiUser />,
       },
     ],
@@ -42,45 +42,45 @@ const sidebarProps = [
   {
     children: [
       {
-        text: "product",
+        text: 'product',
         icon: () => <BiPackage />,
-        href: "/admin/product",
+        href: '/admin/product',
         children: [
           {
-            text: "List",
-            href: "/admin/product/list",
+            text: 'List',
+            href: '/admin/product/list',
             icon: () => <BiUser />,
           },
           {
-            text: "Show",
-            href: "/admin/product/show",
+            text: 'Show',
+            href: '/admin/product/show',
             icon: () => <BiShow />,
           },
           {
-            text: "Create",
-            href: "/admin/product/create",
+            text: 'Create',
+            href: '/admin/product/create',
             icon: () => <BiPencil />,
           },
           {
-            text: "Update",
-            href: "/admin/product/update",
+            text: 'Update',
+            href: '/admin/product/update',
             icon: () => <BiUpload />,
           },
         ],
       },
       {
-        text: "marketplace",
+        text: 'marketplace',
         icon: () => <BiStore />,
-        href: "/admin/marketplace",
+        href: '/admin/marketplace',
         children: [
           {
-            text: "List",
-            href: "/admin/marketplace/list",
+            text: 'List',
+            href: '/admin/marketplace/list',
             icon: () => <BiUser />,
           },
           {
-            text: "Show",
-            href: "/admin/marketplace/show",
+            text: 'Show',
+            href: '/admin/marketplace/show',
             icon: () => <BiShow />,
           },
         ],
@@ -90,13 +90,13 @@ const sidebarProps = [
   {
     children: [
       {
-        text: "order management",
-        href: "order",
+        text: 'order management',
+        href: 'order',
         icon: () => <BiCart />,
       },
       {
-        text: "faq management",
-        href: "faq",
+        text: 'faq management',
+        href: 'faq',
         icon: () => <BiQuestionMark />,
       },
     ],

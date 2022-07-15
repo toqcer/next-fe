@@ -1,38 +1,38 @@
-import { useState, useEffect, useReducer } from "react";
+import { useState, useEffect, useReducer } from 'react';
 import {
   BiChevronUp,
   BiChevronDown,
   BiPencil,
   BiTrashAlt,
-} from "react-icons/bi";
+} from 'react-icons/bi';
 
-import { listReducer as reducer } from "@src/reducer/listReducer";
-import getMarketplaceList from "@src/api/getMarketplaceList";
-import { labels } from "consts/marketplaceList";
+import { listReducer as reducer } from '@src/reducer/listReducer';
+import getMarketplaceList from '@src/api/getMarketplaceList';
+import { labels } from 'consts/marketplaceList';
 
-import AdminTemplates from "@components/templates/admin/AdminTemplates";
+import AdminTemplates from '@components/templates/admin/AdminTemplates';
 import {
   Search,
   Table,
   Pagination,
   ActionButton,
   DeletedModal,
-} from "@components/molecules";
-import { TableCellParagraph, TableCell } from "@components/atoms";
-import deleteMarketplaceList from "@src/api/deleteMarketplaceList";
+} from '@components/molecules';
+import { TableCellParagraph, TableCell } from '@components/atoms';
+import deleteMarketplaceList from '@src/api/deleteMarketplaceList';
 
 const MarketplaceList = () => {
   const initialState = {
-    order_by: "id",
+    order_by: 'id',
     sort_type: 0,
     page: 1,
     size: 10,
-    search: "",
+    search: '',
   };
 
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState('');
   const [datas, setDatas] = useState([]);
-  const [deletedId, setDeletedId] = useState("");
+  const [deletedId, setDeletedId] = useState('');
   const [totalPage, setTotalPage] = useState(0);
   const [modalShown, setModalShown] = useState(false);
   const [params, dispatch] = useReducer(reducer, initialState);
@@ -42,7 +42,7 @@ const MarketplaceList = () => {
     if (params.order_by === orderBy) {
       sortType = Number(!params.sort_type);
     }
-    return { type: "SET_ORDER", payload: { order: orderBy, sort: sortType } };
+    return { type: 'SET_ORDER', payload: { order: orderBy, sort: sortType } };
   };
 
   const fetchMarketplaceList = async () => {
@@ -56,7 +56,7 @@ const MarketplaceList = () => {
   const deleteMarketplaceById = async (deletedId) => {
     try {
       const result = await Promise.any([deleteMarketplaceList(deletedId)]);
-      setDeletedId("");
+      setDeletedId('');
       fetchMarketplaceList();
       console.log(result);
     } catch (err) {
@@ -85,7 +85,7 @@ const MarketplaceList = () => {
                 value={params.size}
                 onChange={(e) =>
                   dispatch({
-                    type: "SET_SIZE",
+                    type: 'SET_SIZE',
                     payload: { size: parseInt(e.target.value) },
                   })
                 }
@@ -101,7 +101,7 @@ const MarketplaceList = () => {
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               onClick={() =>
-                dispatch({ type: "SET_SEARCH", payload: { search } })
+                dispatch({ type: 'SET_SEARCH', payload: { search } })
               }
             />
           </header>
@@ -120,9 +120,9 @@ const MarketplaceList = () => {
                       >
                         <div className="flex items-center justify-between">
                           <span className="capitalize">
-                            {label.replace("_price", "")}
+                            {label.replace('_price', '')}
                           </span>
-                          {!label.includes("URL") && (
+                          {!label.includes('URL') && (
                             <div
                               onClick={() =>
                                 dispatch(handleChangeDataOrder(label))
@@ -134,8 +134,8 @@ const MarketplaceList = () => {
                                 className={`${
                                   params.order_by === label &&
                                   params.sort_type === 1
-                                    ? "text-orange"
-                                    : "text-gray-400"
+                                    ? 'text-orange'
+                                    : 'text-gray-400'
                                 }`}
                               />
                               <BiChevronDown
@@ -143,8 +143,8 @@ const MarketplaceList = () => {
                                 className={`-mt-2.5 ${
                                   params.order_by === label &&
                                   params.sort_type === 0
-                                    ? "text-orange"
-                                    : "text-gray-400"
+                                    ? 'text-orange'
+                                    : 'text-gray-400'
                                 }`}
                               />
                             </div>

@@ -1,8 +1,8 @@
-import { useState } from "react";
-import { Scrollbars } from "react-custom-scrollbars-2";
+import { useState } from 'react';
+import { Scrollbars } from 'react-custom-scrollbars-2';
 
-import { SidebarLink, SidebarSection } from "@components/atoms";
-import sidebarProps from "consts/dashboard";
+import { SidebarLink, SidebarSection } from '@components/atoms';
+import sidebarProps from 'consts/dashboard';
 
 function Sidebar() {
   // Responsive state
@@ -52,7 +52,7 @@ function Sidebar() {
                     Icon={level1.icon()}
                     className="py-3"
                   />
-                )
+                ),
               )}
             </SidebarSection>
           ))}

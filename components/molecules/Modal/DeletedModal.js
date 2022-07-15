@@ -1,13 +1,13 @@
-import { BiChevronLeft, BiTrashAlt } from "react-icons/bi";
-import propTypes from "prop-types";
+import { BiChevronLeft, BiTrashAlt } from 'react-icons/bi';
+import propTypes from 'prop-types';
 
-import { Button } from "@components/atoms";
+import { Button } from '@components/atoms';
 
 const DeletedModal = ({ isShown = false, setModalShown, cb }) => {
   return (
     <div
       className={`z-[999] fixed ${
-        isShown ? "flex " : "hidden "
+        isShown ? 'flex ' : 'hidden '
       }items-center justify-center top-0 left-0 w-full h-full bg-black/50`}
       onClick={() => setModalShown(false)}
     >

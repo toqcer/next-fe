@@ -1,38 +1,38 @@
-import { useState, useEffect, useReducer } from "react";
+import { useState, useEffect, useReducer } from 'react';
 import {
   BiChevronUp,
   BiChevronDown,
   BiPencil,
   BiTrashAlt,
-} from "react-icons/bi";
+} from 'react-icons/bi';
 
-import { TableCell, TableCellParagraph } from "@components/atoms";
+import { TableCell, TableCellParagraph } from '@components/atoms';
 import {
   Search,
   Table,
   Pagination,
   ActionButton,
   DeletedModal,
-} from "@components/molecules/";
-import AdminTemplates from "@components/templates/admin/AdminTemplates";
+} from '@components/molecules/';
+import AdminTemplates from '@components/templates/admin/AdminTemplates';
 
-import getDataProduct from "@src/api/getDataProduct";
-import { labels, labelConditions } from "consts/List/label";
-import { listReducer as reducer } from "@src/reducer/listReducer";
-import deleteProduct from "@src/api/deleteProduct";
-import { useRouter } from "next/router";
+import getDataProduct from '@src/api/getDataProduct';
+import { labels, labelConditions } from 'consts/List/label';
+import { listReducer as reducer } from '@src/reducer/listReducer';
+import deleteProduct from '@src/api/deleteProduct';
+import { useRouter } from 'next/router';
 
 function ProductList() {
   const initialState = {
-    order_by: "id",
+    order_by: 'id',
     sort_type: 0,
     page: 1,
     size: 10,
-    search: "",
+    search: '',
   };
 
-  const [search, setSearch] = useState("");
-  const [deletedId, setDeletedId] = useState("");
+  const [search, setSearch] = useState('');
+  const [deletedId, setDeletedId] = useState('');
   const [modalIsShown, setModalIsShown] = useState(false);
   const [datas, setDatas] = useState([]);
   const [totalPage, setTotalPage] = useState(0);
@@ -44,7 +44,7 @@ function ProductList() {
     if (params.order_by === orderBy) {
       sortType = Number(!params.sort_type);
     }
-    return { type: "SET_ORDER", payload: { order: orderBy, sort: sortType } };
+    return { type: 'SET_ORDER', payload: { order: orderBy, sort: sortType } };
   };
 
   const redirectToProductShow = (id) => {
@@ -54,9 +54,9 @@ function ProductList() {
   const deleteProductList = async () => {
     try {
       const result = await Promise.any([deleteProduct(deletedId)]);
-      setDeletedId("");
+      setDeletedId('');
       setModalIsShown(false);
-      dispatch({ type: "ALL", initialState });
+      dispatch({ type: 'ALL', initialState });
     } catch (err) {
       console.log(err);
     }
@@ -90,7 +90,7 @@ function ProductList() {
                 value={params.size}
                 onChange={(e) =>
                   dispatch({
-                    type: "SET_SIZE",
+                    type: 'SET_SIZE',
                     payload: { size: parseInt(e.target.value) },
                   })
                 }
@@ -106,7 +106,7 @@ function ProductList() {
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               onClick={() =>
-                dispatch({ type: "SET_SEARCH", payload: { search } })
+                dispatch({ type: 'SET_SEARCH', payload: { search } })
               }
             />
           </header>
@@ -123,16 +123,16 @@ function ProductList() {
                         key={index}
                         className={`py-4 pr-2 font-bold text-sm ${
                           index === 0 || index === labels.length - 1
-                            ? "w-[15%]"
-                            : "w-[10%]"
+                            ? 'w-[15%]'
+                            : 'w-[10%]'
                         }`}
                       >
                         <div className="flex items-center justify-between">
                           <span className="capitalize">
-                            {label.replace("_price", "")}
+                            {label.replace('_price', '')}
                           </span>
                           {!labelConditions.some((el) =>
-                            label.includes(el)
+                            label.includes(el),
                           ) && (
                             <div
                               onClick={() =>
@@ -145,8 +145,8 @@ function ProductList() {
                                 className={`${
                                   params.order_by === label &&
                                   params.sort_type === 1
-                                    ? "text-orange"
-                                    : "text-gray-400"
+                                    ? 'text-orange'
+                                    : 'text-gray-400'
                                 }`}
                               />
                               <BiChevronDown
@@ -154,8 +154,8 @@ function ProductList() {
                                 className={`-mt-2.5 ${
                                   params.order_by === label &&
                                   params.sort_type === 0
-                                    ? "text-orange"
-                                    : "text-gray-400"
+                                    ? 'text-orange'
+                                    : 'text-gray-400'
                                 }`}
                               />
                             </div>

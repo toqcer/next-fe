@@ -1,4 +1,4 @@
-import propTypes from "prop-types";
+import propTypes from 'prop-types';
 
 function Gap({ width, height }) {
   return <div style={{ width, height }}></div>;

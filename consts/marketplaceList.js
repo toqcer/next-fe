@@ -1,1 +1,1 @@
-export const labels = ["name", "URL", "id"];
+export const labels = ['name', 'URL', 'id'];

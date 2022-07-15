@@ -1,36 +1,36 @@
-import Head from "next/head";
-import { useState } from "react";
-import axios from "axios";
-import { useRouter } from "next/router";
+import Head from 'next/head';
+import { useState } from 'react';
+import axios from 'axios';
+import { useRouter } from 'next/router';
 
-import { AuthLink, Input, Button, Gap } from "@components/atoms";
-import { Form, Footer } from "@components/molecules";
-import ErrorMessage from "@components/molecules/ErrorMessage/ErrorMessage";
+import { AuthLink, Input, Button, Gap } from '@components/atoms';
+import { Form, Footer } from '@components/molecules';
+import ErrorMessage from '@components/molecules/ErrorMessage/ErrorMessage';
 
 function Login() {
   const [field, setField] = useState({
-    email: "",
-    password: "",
+    email: '',
+    password: '',
   });
 
   const [isLoading, setIsLoading] = useState(false);
 
-  const [errorMsg, setErrorMsg] = useState("");
+  const [errorMsg, setErrorMsg] = useState('');
   const router = useRouter();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const { email, password } = field;
-    const validate = email !== "" && password !== "";
+    const validate = email !== '' && password !== '';
     if (validate) {
       return login(email, password);
     }
-    return setErrorMsg("Email atau Password harus diisi!");
+    return setErrorMsg('Email atau Password harus diisi!');
   };
 
   const handleChange = (e) => {
-    const data = e.target.getAttribute("data-field");
-    if (data === "email") {
+    const data = e.target.getAttribute('data-field');
+    if (data === 'email') {
       setField({
         ...field,
         email: e.target.value,
@@ -47,12 +47,12 @@ function Login() {
     const credentials = { email, password };
     try {
       setIsLoading(true);
-      await axios.post("/api/auth/admin/login", credentials);
+      await axios.post('/api/auth/admin/login', credentials);
 
       router.reload();
     } catch (e) {
       setIsLoading(false);
-      setErrorMsg("Sedang ada masalah, harap dicoba lagi");
+      setErrorMsg('Sedang ada masalah, harap dicoba lagi');
 
       console.log(e);
     }

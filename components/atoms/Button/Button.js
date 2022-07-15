@@ -1,9 +1,9 @@
-import { BiLoaderAlt } from "react-icons/bi";
-import propTypes from "prop-types";
+import { BiLoaderAlt } from 'react-icons/bi';
+import propTypes from 'prop-types';
 
 function Button({
   children,
-  color = "bg-orange",
+  color = 'bg-orange',
   className,
   isDisabled = false,
   isLoading = false,
@@ -12,7 +12,7 @@ function Button({
   return (
     <button
       className={`uppercase w-full font-bold py-2 px-2 hover:shadow-md ${color} ${className} hover:brightness-90
-            ${isDisabled ? "opacity-50 cursor-not-allowed" : ""}`}
+            ${isDisabled ? 'opacity-50 cursor-not-allowed' : ''}`}
       disabled={isDisabled || isLoading}
       {...rest}
     >

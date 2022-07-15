@@ -1,5 +1,5 @@
-import cookie from "cookie";
-import adminLogin from "src/api/adminLogin";
+import cookie from 'cookie';
+import adminLogin from 'src/api/adminLogin';
 
 export default async (req, res) => {
   try {
@@ -10,19 +10,19 @@ export default async (req, res) => {
     const response = await Promise.any([adminLogin(credentials)]);
     const { token, refresh_token } = response.data;
 
-    res.setHeader("Set-Cookie", [
-      cookie.serialize("tokenAdmin", token, {
-        secure: process.env.NODE_ENV !== "development",
+    res.setHeader('Set-Cookie', [
+      cookie.serialize('tokenAdmin', token, {
+        secure: process.env.NODE_ENV !== 'development',
         maxAge: 1800,
-        sameSite: "strict",
-        path: "/",
+        sameSite: 'strict',
+        path: '/',
       }),
-      cookie.serialize("refreshAdmin", refresh_token, {
+      cookie.serialize('refreshAdmin', refresh_token, {
         httpOnly: true,
-        secure: process.env.NODE_ENV !== "development",
+        secure: process.env.NODE_ENV !== 'development',
         maxAge: 36000,
-        sameSite: "strict",
-        path: "/",
+        sameSite: 'strict',
+        path: '/',
       }),
     ]);
     (res.statusCode = 200), res.json({ success: true });

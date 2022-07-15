@@ -1,4 +1,4 @@
-import { getInstance, routes } from "./axiosInstance";
+import { getInstance, routes } from './axiosInstance';
 
 const adminLogin = async (credentials = {}) => {
   try {

@@ -1,14 +1,14 @@
-import React, { useState } from "react";
-import { useRouter } from "next/router";
-import Image from "next/image";
+import React, { useState } from 'react';
+import { useRouter } from 'next/router';
+import Image from 'next/image';
 
-import getProductDetail from "@src/api/getProductDetail";
-import deleteProduct from "@src/api/deleteProduct";
-import { numberFormatToIdr } from "@src/helpers/numberFormatter";
+import getProductDetail from '@src/api/getProductDetail';
+import deleteProduct from '@src/api/deleteProduct';
+import { numberFormatToIdr } from '@src/helpers/numberFormatter';
 
-import AdminTemplates from "@components/templates/admin/AdminTemplates";
-import { LiDash, Button } from "@components/atoms";
-import { DeletedModal } from "@components/molecules";
+import AdminTemplates from '@components/templates/admin/AdminTemplates';
+import { LiDash, Button } from '@components/atoms';
+import { DeletedModal } from '@components/molecules';
 
 const ProductShow = ({ productDetail }) => {
   const router = useRouter();
@@ -30,7 +30,7 @@ const ProductShow = ({ productDetail }) => {
     // do something here
     try {
       const response = await Promise.any([deleteProduct(id)]);
-      router.push("/admin/product/list");
+      router.push('/admin/product/list');
     } catch (err) {
       // handle error later !!
       console.error(err);
@@ -63,13 +63,13 @@ const ProductShow = ({ productDetail }) => {
                 </h1>
                 <div className="ml-8">
                   <p className="text-sm leading-4">
-                    Purchase{" "}
+                    Purchase{' '}
                     <span className="font-bold">
                       {numberFormatToIdr(purchasePrice)}
                     </span>
                   </p>
                   <p className="text-sm leading-4">
-                    Markup{" "}
+                    Markup{' '}
                     <span className="font-bold">
                       {numberFormatToIdr(markupPrice)}
                     </span>

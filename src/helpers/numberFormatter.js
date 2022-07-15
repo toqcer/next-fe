@@ -1,20 +1,20 @@
 const numberFormatter = (num) => {
   // 1000 -> 1k etc
-  if (num / 1e6 >= 1) return `${(num / 1e6).toFixed(1)}M`.replace(".", ",");
-  if (num / 1e3 >= 1) return `${(num / 1e3).toFixed(1)}K`.replace(".", ",");
+  if (num / 1e6 >= 1) return `${(num / 1e6).toFixed(1)}M`.replace('.', ',');
+  if (num / 1e3 >= 1) return `${(num / 1e3).toFixed(1)}K`.replace('.', ',');
   return num;
 };
 
 const numberFormatToIdr = (number) => {
-  return new Intl.NumberFormat("id-ID", {
-    style: "currency",
-    currency: "IDR",
+  return new Intl.NumberFormat('id-ID', {
+    style: 'currency',
+    currency: 'IDR',
     maximumFractionDigits: 0,
   }).format(number);
 };
 
 const numberWithDot = (num) => {
-  let res = "";
+  let res = '';
   let str = String(num);
   let len = str.length;
 

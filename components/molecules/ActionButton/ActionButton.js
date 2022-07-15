@@ -1,7 +1,7 @@
-import { useState } from "react";
-import { Tooltip } from "@components/molecules";
+import { useState } from 'react';
+import { Tooltip } from '@components/molecules';
 
-const ActionButton = ({ className = "", Icon, text = "", onClick }) => {
+const ActionButton = ({ className = '', Icon, text = '', onClick }) => {
   const [isShown, setIsShown] = useState(false);
   return (
     <button

@@ -1,4 +1,4 @@
-import { Sidebar, Header, Footer } from "@components/molecules";
+import { Sidebar, Header, Footer } from '@components/molecules';
 
 export default function AdminTemplates({ title, children }) {
   return (

@@ -1,18 +1,18 @@
-import { useState, useEffect } from "react";
-import { useRouter } from "next/router";
-import Cookie from "js-cookie";
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
+import Cookie from 'js-cookie';
 import {
   BiBarChart,
   BiPieChart,
   BiUserPlus,
   BiBadgeCheck,
-} from "react-icons/bi";
+} from 'react-icons/bi';
 
-import getSummary from "src/api/getSummary";
-import MyChart from "lib/ChartJs";
+import getSummary from 'src/api/getSummary';
+import MyChart from 'lib/ChartJs';
 
-import { DashboardCard } from "@components/molecules";
-import AdminTemplates from "@components/templates/admin/AdminTemplates";
+import { DashboardCard } from '@components/molecules';
+import AdminTemplates from '@components/templates/admin/AdminTemplates';
 
 function Dashboard() {
   const router = useRouter();
@@ -88,8 +88,8 @@ function Dashboard() {
             <MyChart
               type="bar"
               tickColor="#000000"
-              bgColor={{ y: "#313A55" }}
-              borderColor={{ y: "#313A55" }}
+              bgColor={{ y: '#313A55' }}
+              borderColor={{ y: '#313A55' }}
               datas={data.order_chart}
               title="Order Chart"
               gridColor="rgba(20, 33, 61, 0.5)"
@@ -175,7 +175,7 @@ function Dashboard() {
           <div className="text-right">
             <span
               className=" hover:text-dark-gray text-right text-muted cursor-pointer"
-              onClick={() => router.push("/admin/product/list")}
+              onClick={() => router.push('/admin/product/list')}
             >
               Show More
             </span>

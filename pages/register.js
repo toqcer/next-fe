@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
-import Head from "next/head";
+import React, { useState, useEffect } from 'react';
+import Head from 'next/head';
 
-import { AuthLink, Input, Button, Gap } from "@components/atoms";
-import { Form, Footer } from "@components/molecules";
+import { AuthLink, Input, Button, Gap } from '@components/atoms';
+import { Form, Footer } from '@components/molecules';
 
 function checkConfirmPassword(thisConfirmPassword, passwordRelated) {
   const isPasswordNotSame = thisConfirmPassword !== passwordRelated;
@@ -13,15 +13,15 @@ function checkConfirmPassword(thisConfirmPassword, passwordRelated) {
 }
 
 function checkEmptyField(...rest) {
-  return rest.some((item) => item === "");
+  return rest.some((item) => item === '');
 }
 
 function Register() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [telephone, setTelephone] = useState("");
-  const [password, setPassword] = useState("");
-  const [validatePassword, setValidatePassword] = useState("");
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [telephone, setTelephone] = useState('');
+  const [password, setPassword] = useState('');
+  const [validatePassword, setValidatePassword] = useState('');
   const [isError, setIsError] = useState(false);
   const [isDisabled, setisDisabled] = useState(false);
 
@@ -43,7 +43,7 @@ function Register() {
 
   useEffect(() => {
     setisDisabled(
-      checkEmptyField(name, email, telephone, password, validatePassword)
+      checkEmptyField(name, email, telephone, password, validatePassword),
     );
   }, [name, email, telephone, password, validatePassword]);
 
@@ -90,8 +90,8 @@ function Register() {
                 value={telephone}
                 onInput={(e) => {
                   e.target.value = e.target.value
-                    .replace(/[^0-9.]/g, "")
-                    .replace(/(\..*?)\..*/g, "$1");
+                    .replace(/[^0-9.]/g, '')
+                    .replace(/(\..*?)\..*/g, '$1');
                   setTelephone(e.target.value);
                 }}
                 required

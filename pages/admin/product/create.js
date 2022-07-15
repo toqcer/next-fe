@@ -1,18 +1,18 @@
-import { useState } from "react";
-import { BiCamera } from "react-icons/bi";
-import axios from "axios";
+import { useState } from 'react';
+import { BiCamera } from 'react-icons/bi';
+import axios from 'axios';
 
-import { ImgUpload } from "@components/molecules";
-import AdminTemplates from "@components/templates/admin/AdminTemplates";
-import { Button, Input, Label, TextArea } from "@components/atoms";
+import { ImgUpload } from '@components/molecules';
+import AdminTemplates from '@components/templates/admin/AdminTemplates';
+import { Button, Input, Label, TextArea } from '@components/atoms';
 
 function ProductCreate() {
   const [imgDataList, setImgDataList] = useState([]);
   const [imgPreviews, setImgPreviews] = useState([]);
-  const [productCode, setProductCode] = useState("");
-  const [title, setTitle] = useState("");
-  const [supplier, setSupplier] = useState("");
-  const [description, setDescription] = useState("");
+  const [productCode, setProductCode] = useState('');
+  const [title, setTitle] = useState('');
+  const [supplier, setSupplier] = useState('');
+  const [description, setDescription] = useState('');
   const [purchase, setPurchase] = useState(0);
   const [price, setPrice] = useState(0);
   const [markup, setMarkup] = useState(0);
@@ -63,23 +63,23 @@ function ProductCreate() {
   const handleSubmit = async () => {
     const form = new FormData();
     imgDataList.forEach((item) => {
-      form.append("files", item);
+      form.append('files', item);
     });
-    form.append("code", productCode);
-    form.append("title", title);
-    form.append("supplier", supplier);
-    form.append("description", description);
-    form.append("purchase", purchase);
-    form.append("stock", stock);
-    form.append("price", price);
+    form.append('code', productCode);
+    form.append('title', title);
+    form.append('supplier', supplier);
+    form.append('description', description);
+    form.append('purchase', purchase);
+    form.append('stock', stock);
+    form.append('price', price);
 
     const config = {
       headers: {
-        "content-type": "multipart/form-data",
+        'content-type': 'multipart/form-data',
       },
     };
     try {
-      const response = await axios.post("/api/posts/products", form, config);
+      const response = await axios.post('/api/posts/products', form, config);
       console.log(response);
     } catch (err) {
       console.log(err);

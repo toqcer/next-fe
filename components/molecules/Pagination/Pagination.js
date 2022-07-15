@@ -1,5 +1,5 @@
-import PaginationItem from "@components/molecules/Pagination/PaginationItem";
-import { BiChevronsLeft, BiChevronsRight } from "react-icons/bi";
+import PaginationItem from '@components/molecules/Pagination/PaginationItem';
+import { BiChevronsLeft, BiChevronsRight } from 'react-icons/bi';
 
 const Pagination = ({ className, currentPage = 1, totalPage = 1, onClick }) => {
   const generatePaginationItems = (totalPage, initialValue = 1) =>
@@ -7,7 +7,7 @@ const Pagination = ({ className, currentPage = 1, totalPage = 1, onClick }) => {
       <PaginationItem
         key={index}
         onClick={() =>
-          onClick({ type: "SET_PAGE", payload: { page: index + initialValue } })
+          onClick({ type: 'SET_PAGE', payload: { page: index + initialValue } })
         }
         isActive={currentPage === index + initialValue}
       >
@@ -27,26 +27,26 @@ const Pagination = ({ className, currentPage = 1, totalPage = 1, onClick }) => {
           <PaginationItem disabled />
           <PaginationItem
             onClick={() =>
-              onClick({ type: "SET_PAGE", payload: { page: totalPage } })
+              onClick({ type: 'SET_PAGE', payload: { page: totalPage } })
             }
             isActive={currentPage === totalPage}
           >
             {totalPage}
           </PaginationItem>
-        </>
+        </>,
       );
       return Buffer;
     }
     Buffer.push(
       <>
         <PaginationItem
-          onClick={() => onClick({ type: "SET_PAGE", payload: { page: 1 } })}
+          onClick={() => onClick({ type: 'SET_PAGE', payload: { page: 1 } })}
           isActive={currentPage === 1}
         >
           1
         </PaginationItem>
         <PaginationItem disabled />
-      </>
+      </>,
     );
 
     if (totalPage - currentPage < 4) {
@@ -59,7 +59,7 @@ const Pagination = ({ className, currentPage = 1, totalPage = 1, onClick }) => {
               key={index}
               onClick={() =>
                 onClick({
-                  type: "SET_PAGE",
+                  type: 'SET_PAGE',
                   payload: { page: currentPage - 1 + index },
                 })
               }
@@ -71,13 +71,13 @@ const Pagination = ({ className, currentPage = 1, totalPage = 1, onClick }) => {
           <PaginationItem disabled />
           <PaginationItem
             onClick={() =>
-              onClick({ type: "SET_PAGE", payload: { page: totalPage } })
+              onClick({ type: 'SET_PAGE', payload: { page: totalPage } })
             }
             isActive={currentPage === totalPage}
           >
             {totalPage}
           </PaginationItem>
-        </>
+        </>,
       );
     }
     return Buffer;
@@ -87,7 +87,7 @@ const Pagination = ({ className, currentPage = 1, totalPage = 1, onClick }) => {
     <div className={`${className} flex gap-2`}>
       <PaginationItem
         disabled={currentPage <= 1}
-        onClick={() => onClick({ type: "PREV" })}
+        onClick={() => onClick({ type: 'PREV' })}
       >
         <BiChevronsLeft />
       </PaginationItem>
@@ -96,7 +96,7 @@ const Pagination = ({ className, currentPage = 1, totalPage = 1, onClick }) => {
       </div>
       <PaginationItem
         disabled={currentPage >= totalPage}
-        onClick={() => onClick({ type: "NEXT" })}
+        onClick={() => onClick({ type: 'NEXT' })}
       >
         <BiChevronsRight />
       </PaginationItem>

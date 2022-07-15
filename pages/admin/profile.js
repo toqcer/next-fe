@@ -1,29 +1,29 @@
-import axios from "axios";
-import { useState, useEffect } from "react";
-import { useRouter } from "next/router";
-import Image from "next/image";
-import Cookie from "js-cookie";
+import axios from 'axios';
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
+import Image from 'next/image';
+import Cookie from 'js-cookie';
 
-import { Button, Input } from "@components/atoms";
-import AdminTemplates from "@components/templates/admin/AdminTemplates";
+import { Button, Input } from '@components/atoms';
+import AdminTemplates from '@components/templates/admin/AdminTemplates';
 
 const ProfileAdmin = (props) => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [data, setData] = useState({ name: "", email: "" });
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [data, setData] = useState({ name: '', email: '' });
   const router = useRouter();
 
   useEffect(async () => {
-    const token = Cookie.get("tokenAdmin");
+    const token = Cookie.get('tokenAdmin');
     try {
       //dummy api
       const response = await axios.get(
-        "https://jsonplaceholder.typicode.com/users/1",
+        'https://jsonplaceholder.typicode.com/users/1',
         {
           headers: {
             Authorization: `Bearer ${token}`,
           },
-        }
+        },
       );
       const data = response.data;
       setData(data);

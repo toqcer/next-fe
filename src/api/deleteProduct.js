@@ -1,9 +1,9 @@
-import { getInstance, routes } from "./axiosInstance";
+import { getInstance, routes } from './axiosInstance';
 
 const deleteProduct = async (productId) => {
   try {
     const response = await getInstance().delete(
-      routes.deleteProduct(productId)
+      routes.deleteProduct(productId),
     );
     return response;
   } catch (err) {

@@ -2,7 +2,7 @@ const Tooltip = ({ isShown, text }) => {
   return (
     <div
       className={`absolute ${
-        isShown ? "opacity-100 visible" : "opacity-0 invisible"
+        isShown ? 'opacity-100 visible' : 'opacity-0 invisible'
       } 
                     transition-opacity ease-in-out font-normal delay-150 w-max h-max px-2 py-1 z-20 
                     text-xs border-muted border-2 text-black bg-white rounded-md 

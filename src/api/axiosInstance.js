@@ -1,10 +1,10 @@
-import axios from "axios";
-import Cookie from "js-cookie";
+import axios from 'axios';
+import Cookie from 'js-cookie';
 
-const apiURL = "https://staging-api.toqcer.uloy.dev/v1/";
+const apiURL = 'https://staging-api.toqcer.uloy.dev/v1/';
 
 const getInstance = () => {
-  const token = Cookie.get("tokenAdmin");
+  const token = Cookie.get('tokenAdmin');
 
   const instance = axios.create({
     baseURL: apiURL,
@@ -12,13 +12,13 @@ const getInstance = () => {
   });
 
   instance.interceptors.request.use((config) => {
-    config.headers.Authorization = token ? `Bearer ${token}` : "";
+    config.headers.Authorization = token ? `Bearer ${token}` : '';
     return config;
   });
 
   instance.interceptors.response.use(
     (response) => response,
-    (err) => Promise.reject(err)
+    (err) => Promise.reject(err),
   );
 
   // axios interceptors for refresh token for later
@@ -39,13 +39,13 @@ const getInstance = () => {
 };
 
 const routes = {
-  adminLogin: "/admin/login",
-  getSummarys: "/admin/summary",
-  postDataProduct: "/product",
-  getDataProducts: (query = "") => `/product/?${query}`,
-  getProductDetail: (path = "") => `/product/${path}`,
-  deleteProduct: (productId = "") => `/product/${productId}`,
-  getMarketplaceList: (query = "") => `/marketplace/?${query}`,
+  adminLogin: '/admin/login',
+  getSummarys: '/admin/summary',
+  postDataProduct: '/product',
+  getDataProducts: (query = '') => `/product/?${query}`,
+  getProductDetail: (path = '') => `/product/${path}`,
+  deleteProduct: (productId = '') => `/product/${productId}`,
+  getMarketplaceList: (query = '') => `/marketplace/?${query}`,
   deleteMarketplaceList: (marketplaceId) => `/marketplace/${marketplaceId}`,
 };
 

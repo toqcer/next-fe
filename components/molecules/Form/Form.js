@@ -1,4 +1,4 @@
-function Form({ title, children, onSubmit, autoComplete = "off" }) {
+function Form({ title, children, onSubmit, autoComplete = 'off' }) {
   return (
     <form
       className="w-full bg-gay text-black p-8 rounded-lg"

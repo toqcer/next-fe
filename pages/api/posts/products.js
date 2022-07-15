@@ -1,4 +1,4 @@
-import multiparty from "multiparty";
+import multiparty from 'multiparty';
 
 export const config = {
   api: {
@@ -8,13 +8,13 @@ export const config = {
 
 export default async (req, res) => {
   const form = new multiparty.Form({
-    uploadDir: "./public/images/upload",
+    uploadDir: './public/images/upload',
   });
   try {
     const data = await new Promise((resolve, reject) => {
       form.parse(req, (err, fields, files) => {
         const filesChecker = Object.keys(files).length > 0;
-        if (err || !filesChecker) return reject(err || "files harus diisi");
+        if (err || !filesChecker) return reject(err || 'files harus diisi');
         return resolve({ fields: fields, files: files });
       });
     });

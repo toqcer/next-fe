@@ -1,4 +1,4 @@
-import TableCell from "./TableCell";
+import TableCell from './TableCell';
 
 const TableCellParagraph = ({ text, href }) => {
   return (

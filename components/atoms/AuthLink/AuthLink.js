@@ -1,5 +1,5 @@
-import Link from "next/link";
-import propTypes from "prop-types";
+import Link from 'next/link';
+import propTypes from 'prop-types';
 
 function AuthLink({ href, title }) {
   return (
