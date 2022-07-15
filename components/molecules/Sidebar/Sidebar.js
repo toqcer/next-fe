@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Scrollbars } from "react-custom-scrollbars-2";
 
-import { Gap, SidebarLink, SidebarSection } from "@components/atoms";
+import { SidebarLink, SidebarSection } from "@components/atoms";
 import sidebarProps from "consts/dashboard";
 
 function Sidebar() {

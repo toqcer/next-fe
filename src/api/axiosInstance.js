@@ -21,6 +21,21 @@ const getInstance = () => {
     (err) => Promise.reject(err)
   );
 
+
+  // axios interceptors for refresh token for later
+  // instance.interceptors.response.use((response) => {
+  //   return response
+  // }, async function (error) {
+  //   const originalRequest = error.config;
+  //   if (error.response.status === 403 && !originalRequest._retry) {
+  //     originalRequest._retry = true;
+  //     const access_token = await refreshAccessToken();            
+  //     axios.defaults.headers.common['Authorization'] = 'Bearer ' + access_token;
+  //     return instance(originalRequest);
+  //   }
+  //   return Promise.reject(error);
+  // });
+
   return instance;
 };
 

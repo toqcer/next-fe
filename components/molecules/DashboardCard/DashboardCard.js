@@ -1,8 +1,8 @@
 import { BxChevronUp, BxChevronDown } from "public/icons/";
 import { useState } from "react";
 import { BiShow } from "react-icons/bi";
-import { numberFormatter, numberWithDot } from '@src/helpers/numberFormatter';
-import { Tooltip } from '@components/molecules';
+import { numberFormatter, numberWithDot } from "@src/helpers/numberFormatter";
+import { Tooltip } from "@components/molecules";
 
 function DashboardCard({ title, value, valueLastWeek, Icon, bgIcon }) {
   const [isShown, setIsShown] = useState(false);
@@ -15,8 +15,9 @@ function DashboardCard({ title, value, valueLastWeek, Icon, bgIcon }) {
           <h3 className="text-muted text-sm font-bold uppercase">
             {title}
             <BiShow
-              className={`ml-4 lg:hidden ${isShown && "fill-orange-500"
-                } align-middle scale-105 cursor-pointer`}
+              className={`ml-4 lg:hidden ${
+                isShown && "fill-orange-500"
+              } align-middle scale-105 cursor-pointer`}
               onClick={() => setIsShown(!isShown)}
             />
           </h3>
@@ -26,22 +27,24 @@ function DashboardCard({ title, value, valueLastWeek, Icon, bgIcon }) {
             onMouseLeave={() => setIsShown(false)}
           >
             {numberFormatter(value)}
-            <Tooltip isShown={isShown} text={numberWithDot(value)}/>
+            <Tooltip isShown={isShown} text={numberWithDot(value)} />
           </span>
         </div>
         {/* Right */}
         {/* Icons */}
         <div
-          className={`ml-auto ${bgIcon ? bgIcon : "bg-orange"
-            } shadow-md text-white flex justify-center items-center rounded-full w-12 h-12`}
+          className={`ml-auto ${
+            bgIcon ? bgIcon : "bg-orange"
+          } shadow-md text-white flex justify-center items-center rounded-full w-12 h-12`}
         >
           {Icon}
         </div>
       </div>
       <div className="flex items-center">
         <span
-          className={`text-success text-sm flex items-center ${isShown && "scale-0"
-            } transition-all ease-in-out delay-75 z-0`}
+          className={`text-success text-sm flex items-center ${
+            isShown && "scale-0"
+          } transition-all ease-in-out delay-75 z-0`}
         >
           <BxChevronUp className="-ml-1 scale-75 fill-success" />
           <span>{valueLastWeek}</span>

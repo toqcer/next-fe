@@ -3,12 +3,12 @@ import { useRouter } from "next/router";
 import Image from "next/image";
 
 import getProductDetail from "@src/api/getProductDetail";
+import deleteProduct from "@src/api/deleteProduct";
 import { numberFormatToIdr } from "@src/helpers/numberFormatter";
 
 import AdminTemplates from "@components/templates/admin/AdminTemplates";
 import { LiDash, Button } from "@components/atoms";
 import { DeletedModal } from "@components/molecules";
-import deleteProduct from "@src/api/deleteProduct";
 
 const ProductShow = ({ productDetail }) => {
   const router = useRouter();
