@@ -18,22 +18,22 @@ function Dashboard() {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState({
-    total_order : 0,
-    total_order_completed : 0,
-    total_sales : 0,
-    sales_last_week : 0,
-    sales_chart : [],
-    order_chart : [],
-    order_last_week : 0,
+    total_order: 0,
+    total_order_completed: 0,
+    total_sales: 0,
+    sales_last_week: 0,
+    sales_chart: [],
+    order_chart: [],
+    order_last_week: 0,
     order_completed_last_week: 0,
-    total_user : 0,
-    user_last_week : 0,
+    total_user: 0,
+    user_last_week: 0,
   });
 
   const getDataChart = async () => {
     const result = await Promise.any([getSummary()]);
     setData(result.data);
-  }
+  };
 
   useEffect(() => {
     getDataChart();

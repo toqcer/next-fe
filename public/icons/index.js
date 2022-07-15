@@ -1,4 +1,4 @@
-import BxChevronDown from './BxChevronDown/BxChevronDown';
-import BxChevronUp from './BxChevronUp/BxChevronUp';
+import BxChevronDown from "./BxChevronDown/BxChevronDown";
+import BxChevronUp from "./BxChevronUp/BxChevronUp";
 
-export { BxChevronDown, BxChevronUp }
+export { BxChevronDown, BxChevronUp };

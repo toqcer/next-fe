@@ -1,15 +1,15 @@
 .pagination {
-    &__item {
-        width: 35px;
-        height: 35px;
-        @apply rounded-full shrink-0 flex items-center justify-center border border-orange-500 text-orange-500 transition-all duration-300;
+  &__item {
+    width: 35px;
+    height: 35px;
+    @apply rounded-full shrink-0 flex items-center justify-center border border-orange-500 text-orange-500 transition-all duration-300;
 
-        &:hover {
-            @apply bg-orange-500 text-white;
-        }
-
-        &--active {
-            @apply bg-orange-500 text-white;
-        }
+    &:hover {
+      @apply bg-orange-500 text-white;
     }
+
+    &--active {
+      @apply bg-orange-500 text-white;
+    }
+  }
 }
