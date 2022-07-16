@@ -8,11 +8,11 @@ import {
   BiBadgeCheck,
 } from 'react-icons/bi';
 
-import getSummary from 'src/api/getSummary';
-import MyChart from 'lib/ChartJs';
+import getSummary from 'utils/api/getSummary';
+import MyChart from '@components/ChartJs';
 
 import { DashboardCard } from '@components/molecules';
-import AdminTemplates from '@components/templates/admin/AdminTemplates';
+import AdminTemplates from 'layouts/AdminTemplates';
 
 function Dashboard() {
   const router = useRouter();

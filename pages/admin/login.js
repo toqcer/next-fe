@@ -7,7 +7,9 @@ import { AuthLink, Input, Button, Gap } from '@components/atoms';
 import { Form, Footer } from '@components/molecules';
 import ErrorMessage from '@components/molecules/ErrorMessage/ErrorMessage';
 
-function Login() {
+// <----------------------------------------------------------------
+
+export default function Login() {
   const [field, setField] = useState({
     email: '',
     password: '',
@@ -109,4 +111,3 @@ function Login() {
     </div>
   );
 }
-export default Login;

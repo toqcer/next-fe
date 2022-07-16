@@ -1,25 +1,11 @@
-import Button from './Button/Button';
-import Input from './Input/Input';
-import AuthLink from './AuthLink/AuthLink';
-import Gap from './Gap/Gap';
-import SidebarLink from './SidebarLink/SidebarLink';
-import SidebarSection from './SidebarSection/SidebarSection';
-import TableCellParagraph from './TableCell/TableCellParagraph';
-import TableCell from './TableCell/TableCell';
-import TextArea from './TextArea/TextArea';
-import Label from './Label/Label';
-import LiDash from './Li/LiDash';
-
-export {
-  Button,
-  Input,
-  AuthLink,
-  Gap,
-  SidebarLink,
-  SidebarSection,
-  TableCellParagraph,
-  TableCell,
-  TextArea,
-  Label,
-  LiDash,
-};
+export { default as Button } from './Button';
+export { default as Input } from './Input';
+export { default as AuthLink } from './AuthLink';
+export { default as Gap } from './Gap';
+export { default as SidebarLink } from './SidebarLink';
+export { default as SidebarSection } from './SidebarSection';
+export { default as TableCellParagraph } from './TableCellParagraph';
+export { default as TableCell } from './TableCell';
+export { default as TextArea } from './TextArea';
+export { default as Label } from './Label';
+export { default as LiDash } from './LiDash';

@@ -3,10 +3,10 @@ import { BiCamera } from 'react-icons/bi';
 import axios from 'axios';
 
 import { ImgUpload } from '@components/molecules';
-import AdminTemplates from '@components/templates/admin/AdminTemplates';
+import AdminTemplates from 'layouts/AdminTemplates';
 import { Button, Input, Label, TextArea } from '@components/atoms';
 
-function ProductCreate() {
+export default function ProductCreate() {
   const [imgDataList, setImgDataList] = useState([]);
   const [imgPreviews, setImgPreviews] = useState([]);
   const [productCode, setProductCode] = useState('');
@@ -204,5 +204,3 @@ function ProductCreate() {
     </AdminTemplates>
   );
 }
-
-export default ProductCreate;

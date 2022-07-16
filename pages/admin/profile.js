@@ -7,13 +7,12 @@ import Cookie from 'js-cookie';
 import { Button, Input } from '@components/atoms';
 import AdminTemplates from '@components/templates/admin/AdminTemplates';
 
-const ProfileAdmin = (props) => {
+export default function ProfileAdmin(props) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [data, setData] = useState({ name: '', email: '' });
   const router = useRouter();
-
-  useEffect(async () => {
+  const getProfileData = async () => {
     const token = Cookie.get('tokenAdmin');
     try {
       //dummy api
@@ -35,6 +34,12 @@ const ProfileAdmin = (props) => {
         router.reload();
       }
     }
+  };
+
+  const fetcher = useRef(getProfileData);
+
+  useEffect(() => {
+    fetcher.current();
   }, []);
 
   useEffect(() => {
@@ -91,9 +96,7 @@ const ProfileAdmin = (props) => {
       </div>
     </AdminTemplates>
   );
-};
-
-export default ProfileAdmin;
+}
 
 // export async function getServerSideProps(ctx) {
 //     const cookie = ctx.req ? ctx.req.cookies.tokenAdmin : null;

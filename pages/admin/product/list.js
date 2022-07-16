@@ -16,13 +16,15 @@ import {
 } from '@components/molecules/';
 import AdminTemplates from '@components/templates/admin/AdminTemplates';
 
-import getDataProduct from '@src/api/getDataProduct';
+import getDataProduct from 'utils/api/getDataProduct';
 import { labels, labelConditions } from 'consts/List/label';
-import { listReducer as reducer } from '@src/reducer/listReducer';
-import deleteProduct from '@src/api/deleteProduct';
+import { listReducer as reducer } from 'reducer/listReducer';
+import deleteProduct from 'utils/api/deleteProduct';
 import { useRouter } from 'next/router';
 
-function ProductList() {
+// <----------------------------------------------------------------
+
+export default function ProductList() {
   const initialState = {
     order_by: 'id',
     sort_type: 0,
@@ -228,5 +230,3 @@ function ProductList() {
     </>
   );
 }
-
-export default ProductList;

@@ -6,8 +6,8 @@ import {
   BiTrashAlt,
 } from 'react-icons/bi';
 
-import { listReducer as reducer } from '@src/reducer/listReducer';
-import getMarketplaceList from '@src/api/getMarketplaceList';
+import { listReducer as reducer } from 'reducer/listReducer';
+import getMarketplaceList from 'utils/api/getMarketplaceList';
 import { labels } from 'consts/marketplaceList';
 
 import AdminTemplates from '@components/templates/admin/AdminTemplates';
@@ -19,7 +19,9 @@ import {
   DeletedModal,
 } from '@components/molecules';
 import { TableCellParagraph, TableCell } from '@components/atoms';
-import deleteMarketplaceList from '@src/api/deleteMarketplaceList';
+import deleteMarketplaceList from 'utils/api/deleteMarketplaceList';
+
+// <-----------------------------------------------------------------
 
 const MarketplaceList = () => {
   const initialState = {

@@ -2,15 +2,17 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 
-import getProductDetail from '@src/api/getProductDetail';
-import deleteProduct from '@src/api/deleteProduct';
+import getProductDetail from 'utils/api/getProductDetail';
+import deleteProduct from 'utils/api/deleteProduct';
 import { numberFormatToIdr } from '@src/helpers/numberFormatter';
 
-import AdminTemplates from '@components/templates/admin/AdminTemplates';
+import AdminTemplates from 'layouts/AdminTemplates';
 import { LiDash, Button } from '@components/atoms';
 import { DeletedModal } from '@components/molecules';
 
-const ProductShow = ({ productDetail }) => {
+// <-------------------------------------------------------------------
+
+export default function ProductShow({ productDetail }) {
   const router = useRouter();
   const { data } = productDetail;
   const [isShown, setIsShown] = useState(false);
@@ -29,7 +31,7 @@ const ProductShow = ({ productDetail }) => {
   const handleDeleteProduct = async () => {
     // do something here
     try {
-      const response = await Promise.any([deleteProduct(id)]);
+      await Promise.any([deleteProduct(id)]);
       router.push('/admin/product/list');
     } catch (err) {
       // handle error later !!
@@ -129,7 +131,7 @@ const ProductShow = ({ productDetail }) => {
       </AdminTemplates>
     </>
   );
-};
+}
 
 export async function getServerSideProps(ctx) {
   const {
@@ -144,5 +146,3 @@ export async function getServerSideProps(ctx) {
 
   return { props: { productDetail } };
 }
-
-export default ProductShow;

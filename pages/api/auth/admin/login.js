@@ -1,7 +1,7 @@
 import cookie from 'cookie';
-import adminLogin from 'src/api/adminLogin';
+import adminLogin from 'utils/api/adminLogin';
 
-export default async (req, res) => {
+export default async function handler(req, res) {
   try {
     const credentials = {
       email: req.body.email,
@@ -29,4 +29,4 @@ export default async (req, res) => {
   } catch (e) {
     (res.statusCode = 500), res.json({ failed: e });
   }
-};
+}
