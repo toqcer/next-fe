@@ -1,4 +1,4 @@
-import { useState, useEffect, useReducer } from 'react';
+import { useState, useEffect, useReducer, useRef } from 'react';
 import {
   BiChevronUp,
   BiChevronDown,
@@ -10,7 +10,7 @@ import { listReducer as reducer } from 'reducer/listReducer';
 import getMarketplaceList from 'utils/api/getMarketplaceList';
 import { labels } from 'consts/marketplaceList';
 
-import AdminTemplates from '@components/templates/admin/AdminTemplates';
+import AdminTemplates from 'layouts/AdminTemplates';
 import {
   Search,
   Table,
@@ -23,7 +23,8 @@ import deleteMarketplaceList from 'utils/api/deleteMarketplaceList';
 
 // <-----------------------------------------------------------------
 
-const MarketplaceList = () => {
+export default function MarketplaceList() {
+  // declare initialState to avoid partial errors
   const initialState = {
     order_by: 'id',
     sort_type: 0,
@@ -55,6 +56,8 @@ const MarketplaceList = () => {
     setDatas(data);
   };
 
+  const fetcher = useRef(fetchMarketplaceList);
+
   const deleteMarketplaceById = async (deletedId) => {
     try {
       const result = await Promise.any([deleteMarketplaceList(deletedId)]);
@@ -67,8 +70,8 @@ const MarketplaceList = () => {
   };
 
   useEffect(() => {
-    fetchMarketplaceList();
-  }, [params]);
+    fetcher.current();
+  }, []);
 
   return (
     <>
@@ -208,6 +211,4 @@ const MarketplaceList = () => {
       </AdminTemplates>
     </>
   );
-};
-
-export default MarketplaceList;
+}

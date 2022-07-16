@@ -14,7 +14,7 @@ import {
   ActionButton,
   DeletedModal,
 } from '@components/molecules/';
-import AdminTemplates from '@components/templates/admin/AdminTemplates';
+import AdminTemplates from 'layouts/AdminTemplates';
 
 import getDataProduct from 'utils/api/getDataProduct';
 import { labels, labelConditions } from 'consts/List/label';

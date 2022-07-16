@@ -1,10 +1,16 @@
 import { BxChevronUp, BxChevronDown } from 'public/icons/';
 import { useState } from 'react';
 import { BiShow } from 'react-icons/bi';
-import { numberFormatter, numberWithDot } from '@src/helpers/numberFormatter';
-import { Tooltip } from '@components/molecules';
+import { numberFormatter, numberWithDot } from 'utils/numberFormatter';
+import Tooltip from '../Tooltip/Tooltip';
 
-function DashboardCard({ title, value, valueLastWeek, Icon, bgIcon }) {
+export default function DashboardCard({
+  title,
+  value,
+  valueLastWeek,
+  Icon,
+  bgIcon,
+}) {
   const [isShown, setIsShown] = useState(false);
 
   return (
@@ -54,5 +60,3 @@ function DashboardCard({ title, value, valueLastWeek, Icon, bgIcon }) {
     </div>
   );
 }
-
-export default DashboardCard;

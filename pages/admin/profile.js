@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Cookie from 'js-cookie';
 
 import { Button, Input } from '@components/atoms';
-import AdminTemplates from '@components/templates/admin/AdminTemplates';
+import AdminTemplates from 'layouts/AdminTemplates';
 
 export default function ProfileAdmin(props) {
   const [name, setName] = useState('');
