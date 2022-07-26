@@ -1,29 +1,39 @@
-import { useState, useEffect } from "react";
-import { useRouter } from "next/router";
-import Cookie from "js-cookie";
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
+import Cookie from 'js-cookie';
 import {
   BiBarChart,
   BiPieChart,
   BiUserPlus,
   BiBadgeCheck,
-} from "react-icons/bi";
+} from 'react-icons/bi';
 
-import getSummary from "src/api/getSummary";
-import MyChart from "lib/ChartJs";
+import getSummary from 'utils/api/getSummary';
+import MyChart from '@components/ChartJs';
 
-import { DashboardCard } from "@components/molecules";
-import AdminTemplates from "@components/templates/admin/AdminTemplates";
+import { DashboardCard } from '@components/molecules';
+import AdminTemplates from 'layouts/AdminTemplates';
 
 function Dashboard() {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(true);
-  const [data, setData] = useState([]);
+  const [data, setData] = useState({
+    total_order: 0,
+    total_order_completed: 0,
+    total_sales: 0,
+    sales_last_week: 0,
+    sales_chart: [],
+    order_chart: [],
+    order_last_week: 0,
+    order_completed_last_week: 0,
+    total_user: 0,
+    user_last_week: 0,
+  });
 
   const getDataChart = async () => {
-    const token = Cookie.get("tokenAdmin");
-    const result = await Promise.any([getSummary(token)]);
+    const result = await Promise.any([getSummary()]);
     setData(result.data);
-  }
+  };
 
   useEffect(() => {
     getDataChart();
@@ -78,8 +88,8 @@ function Dashboard() {
             <MyChart
               type="bar"
               tickColor="#000000"
-              bgColor={{ y: "#313A55" }}
-              borderColor={{ y: "#313A55" }}
+              bgColor={{ y: '#313A55' }}
+              borderColor={{ y: '#313A55' }}
               datas={data.order_chart}
               title="Order Chart"
               gridColor="rgba(20, 33, 61, 0.5)"
@@ -165,7 +175,7 @@ function Dashboard() {
           <div className="text-right">
             <span
               className=" hover:text-dark-gray text-right text-muted cursor-pointer"
-              onClick={() => router.push("/admin/product/list")}
+              onClick={() => router.push('/admin/product/list')}
             >
               Show More
             </span>

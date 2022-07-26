@@ -1,7 +1,5 @@
 function Internalservererror() {
-  return (
-    <div>500</div>
-  )
+  return <div>500</div>;
 }
 
-export default Internalservererror
+export default Internalservererror;

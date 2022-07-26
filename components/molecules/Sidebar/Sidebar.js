@@ -1,7 +1,8 @@
-import { Gap, SidebarLink, SidebarSection } from "@components/atoms";
-import { useState } from "react";
-import sidebarProps from "consts/dashboard";
-import { Scrollbars } from "react-custom-scrollbars-2";
+import { useState } from 'react';
+import { Scrollbars } from 'react-custom-scrollbars-2';
+
+import { SidebarLink, SidebarSection } from '@components/atoms';
+import sidebarProps from 'consts/dashboard';
 
 function Sidebar() {
   // Responsive state
@@ -26,8 +27,8 @@ function Sidebar() {
                   <SidebarLink
                     key={index}
                     text={level1.text}
-                    href={level1.href}
                     Icon={level1.icon()}
+                    href={level1.href}
                   >
                     <ul
                       className={`m-0 transition-all duration-300 overflow-hidden`}
@@ -46,12 +47,12 @@ function Sidebar() {
                 ) : (
                   <SidebarLink
                     text={level1.text}
-                    key={Math.random()}
                     href={level1.href}
+                    key={Math.random()}
                     Icon={level1.icon()}
                     className="py-3"
                   />
-                )
+                ),
               )}
             </SidebarSection>
           ))}

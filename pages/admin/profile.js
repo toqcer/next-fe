@@ -1,50 +1,54 @@
-import axios from "axios";
-import { useState, useEffect } from "react";
-import { useRouter } from "next/router";
-import Image from "next/image";
-import Cookie from "js-cookie";
-import {
-  BiBarChart,
-  BiPieChart,
-  BiUserPlus,
-  BiBadgeCheck,
-} from "react-icons/bi";
+import axios from 'axios';
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
+import Image from 'next/image';
+import Cookie from 'js-cookie';
 
-import { Button, Input } from "@components/atoms";
-import { DashboardCard } from "@components/molecules";
-import AdminTemplates from "@components/templates/admin/AdminTemplates";
+import { Button, Input } from '@components/atoms';
+import AdminTemplates from 'layouts/AdminTemplates';
 
-const ProfileAdmin = (props) => {
-  const [data, setData] = useState("");
+export default function ProfileAdmin(props) {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [data, setData] = useState({ name: '', email: '' });
   const router = useRouter();
-
-  useEffect(async () => {
-    const token = Cookie.get("tokenAdmin");
+  const getProfileData = async () => {
+    const token = Cookie.get('tokenAdmin');
     try {
+      //dummy api
       const response = await axios.get(
-        "https://staging-api.toqcer.uloy.dev/v1/admin/summary",
+        'https://jsonplaceholder.typicode.com/users/1',
         {
           headers: {
             Authorization: `Bearer ${token}`,
           },
-        }
+        },
       );
-      const data = response.data.data;
+      const data = response.data;
       setData(data);
-      // setTimeout(() => {
-      // 	setIsLoading(false);
-      // }, 2000);
+
+      console.log(data);
     } catch (e) {
       const status = e.response?.status;
       if (status === 403) {
         router.reload();
       }
     }
+  };
+
+  const fetcher = useRef(getProfileData);
+
+  useEffect(() => {
+    fetcher.current();
   }, []);
+
+  useEffect(() => {
+    setName(data.name);
+    setEmail(data.email);
+  }, [data]);
 
   return (
     <AdminTemplates title="Profile">
-      
       <div className="mt-12 ">
         <div className="min-w[400px] flex w-[70%] justify-between bg-midnight-blue text-white p-5 rounded-lg">
           <div className="flex-1 mb-5">
@@ -58,8 +62,11 @@ const ProfileAdmin = (props) => {
               <div>
                 <Input
                   label="name"
+                  name="name"
                   labelColor="text-white"
                   placeholder="Nama"
+                  onChange={(e) => setName(e.target.value)}
+                  value={name}
                 />
               </div>
               <div className="flex gap-x-2 mt-4">
@@ -67,16 +74,11 @@ const ProfileAdmin = (props) => {
                   <Input
                     label="Email"
                     type="email"
+                    name="email"
                     labelColor="text-white"
                     placeholder="Email"
-                  />
-                </div>
-                <div className="flex-1">
-                  <Input
-                    label="password"
-                    type="password"
-                    labelColor="text-white"
-                    placeholder="Password"
+                    onChange={(e) => setEmail(e.target.email)}
+                    value={email}
                   />
                 </div>
               </div>
@@ -94,9 +96,7 @@ const ProfileAdmin = (props) => {
       </div>
     </AdminTemplates>
   );
-};
-
-export default ProfileAdmin;
+}
 
 // export async function getServerSideProps(ctx) {
 //     const cookie = ctx.req ? ctx.req.cookies.tokenAdmin : null;
